@@ -22,35 +22,35 @@ import com.google.firebase.auth.FirebaseAuth;
 
 import java.util.regex.Pattern;
 
-public class LoginCustomerActivity extends AppCompatActivity {
+public class LoginOwnerActivity extends AppCompatActivity {
 
-    EditText edtEmail, edtPassword;
-    Button btnLogin, btnSignUp;
-    Switch swtchtoOwnerMode;
-    CheckBox showpassword;
+    private EditText edtEmail, edtPassword;
+    private Button btnLogin, btnSignUp;
+    private Switch swtchtoCustomerMode;
+    private CheckBox showpassword;
     public static final Pattern VALID_EMAIL_ADDRESS_REGEX = Pattern.compile("^[A-Z0-9._%+-]+@[A-Z0-9.-]+\\.[A-Z]{2,6}$", Pattern.CASE_INSENSITIVE);
 
     FirebaseAuth mAuth;
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_login_customer);
+        setContentView(R.layout.activity_login_owner);
 
-        mAuth = FirebaseAuth.getInstance(); //  Initialize Firebase Authentication
-        edtEmail = findViewById(R.id.edtTxtEmailAddress_customerlogin);
-        edtPassword = findViewById(R.id.edtTxtPassword_customerlogin);
-        btnLogin = findViewById(R.id.btnLogin_customerlogin);
-        btnSignUp = findViewById(R.id.btnSignIn_customerlogin);
-        showpassword = findViewById(R.id.showpassword_login);
-        swtchtoOwnerMode = findViewById(R.id.switchtoOwnerMode);
+        mAuth = FirebaseAuth.getInstance();
 
-        swtchtoOwnerMode.setOnClickListener(new View.OnClickListener() {
+        edtEmail = findViewById(R.id.edtTxtEmailAddress_ownerlogin);
+        edtPassword =findViewById(R.id.edtTxtPassword_ownerlogin);
+        btnLogin = findViewById(R.id.btnLogin_ownerlogin);
+        showpassword = findViewById(R.id.showpassword_login_owner);
+        swtchtoCustomerMode = findViewById(R.id.switchtoOwnerMode);
+        btnSignUp = findViewById(R.id.btnSignIn_ownerlogin);
+
+        swtchtoCustomerMode.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (swtchtoOwnerMode.isChecked()){
-                    Intent intent = new Intent(LoginCustomerActivity.this, LoginOwnerActivity.class );
+                if (!swtchtoCustomerMode.isChecked()){
+                    Intent intent = new Intent(LoginOwnerActivity.this, LoginCustomerActivity.class );
                     startActivity(intent);
                     overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
                 }
@@ -59,7 +59,7 @@ public class LoginCustomerActivity extends AppCompatActivity {
         showpassword.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(((CompoundButton) view).isChecked()){
+                if (((CompoundButton) view).isChecked()) {
                     edtPassword.setTransformationMethod(null);
                 } else {
                     edtPassword.setTransformationMethod(new PasswordTransformationMethod());
@@ -67,55 +67,57 @@ public class LoginCustomerActivity extends AppCompatActivity {
             }
         });
 
-        // btnLogin When clicked -> It will take  MainActivity
+        // btnSignUp When clicked -> It will take you to SignInOwnerActivity
+        btnSignUp.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(LoginOwnerActivity.this,SignInOwnerActivity.class);
+                startActivity(intent);
+                overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
+            }
+        });
+        // btnLogin When clicked  -> It will take you to MainActivityOwner
         btnLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                String email = edtEmail.getText().toString();
-                String password = edtPassword.getText().toString();
+                String email = edtEmail.getText().toString().trim();
+                String password = edtPassword.getText().toString().trim();
                 //check if stings are empty
 
                 //Email
                 if(TextUtils.isEmpty(email)){ //email is empty
-                    Toast.makeText(LoginCustomerActivity.this, "Please enter email", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(LoginOwnerActivity.this, "Please enter email", Toast.LENGTH_SHORT).show();
                     return;
                 }       else if (!VALID_EMAIL_ADDRESS_REGEX.matcher(email).find()){
-                    Toast.makeText(LoginCustomerActivity.this, "Please enter a valid email", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(LoginOwnerActivity.this, "Please enter a valid email", Toast.LENGTH_SHORT).show();
                     return;
                 }
 
                 //Password
                 if(TextUtils.isEmpty(password)){ //password is empty
-                    Toast.makeText(LoginCustomerActivity.this, "Enter Password", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(LoginOwnerActivity.this, "Enter Password", Toast.LENGTH_SHORT).show();
                     return;
                 }
 
                 // If entered Correctly then Login
+                System.out.println("============================="+email+password+ "=============================");
                 login(email, password);
-            }
-        });
-
-        // btnLogin When clicked -> It will take to SignInCustomerActivity
-        btnSignUp.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(LoginCustomerActivity.this,SignInCustomerActivity.class);
-                startActivity(intent);
-                overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
             }
         });
     }
 
-    // Firebase Authentication
     private void login(String email, String password) {
         //https://firebase.google.com/docs/auth/android/password-auth#java_3
+        System.out.println("============================="+email+password+ "=============================");
+
         mAuth.signInWithEmailAndPassword(email, password)
                 .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
                             // Login in success, Move to MainActivity
-                            Intent intent = new Intent(LoginCustomerActivity.this, MainActivity.class);
+                            // TODO --> Check if its an Owner or not
+                            Intent intent = new Intent(LoginOwnerActivity.this, MainActivity_Owner.class);
                             startActivity(intent);
                             overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
                         } else {
@@ -126,6 +128,8 @@ public class LoginCustomerActivity extends AppCompatActivity {
                     }
                 });
     }
+
+
     @Override
     public void finish() {
         super.finish();

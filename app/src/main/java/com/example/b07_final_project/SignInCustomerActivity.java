@@ -27,10 +27,10 @@ import java.util.regex.Pattern;
 
 public class SignInCustomerActivity extends AppCompatActivity {
 
-    EditText edtName, edtEmail, edtPassword, edtConfirmPassword;
-    Button btnSignUp;
-    Switch swtchtoOwnerMode;
-    CheckBox showpassword;
+    private EditText edtName, edtEmail, edtPassword, edtConfirmPassword;
+    private Button btnSignUp;
+    private Switch swtchtoOwnerMode;
+    private CheckBox showpassword;
     public static final Pattern VALID_EMAIL_ADDRESS_REGEX = Pattern.compile("^[A-Z0-9._%+-]+@[A-Z0-9.-]+\\.[A-Z]{2,6}$", Pattern.CASE_INSENSITIVE);
 
 
@@ -56,7 +56,6 @@ public class SignInCustomerActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 if(((CompoundButton) view).isChecked()){
-                    //TODO
                     edtConfirmPassword.setTransformationMethod(null);
                     edtPassword.setTransformationMethod(null);
                 } else {
@@ -65,7 +64,16 @@ public class SignInCustomerActivity extends AppCompatActivity {
                 }
             }
         });
-
+        swtchtoOwnerMode.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (swtchtoOwnerMode.isChecked()){
+                    Intent intent = new Intent(SignInCustomerActivity.this, LoginOwnerActivity.class );
+                    startActivity(intent);
+                    overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
+                }
+            }
+        });
 
         btnSignUp.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -108,6 +116,7 @@ public class SignInCustomerActivity extends AppCompatActivity {
                 }
 
                 signIn(email, password);
+
             }
         });
     }
@@ -125,11 +134,18 @@ public class SignInCustomerActivity extends AppCompatActivity {
                             Toast.makeText(SignInCustomerActivity.this,"Account Created",Toast.LENGTH_LONG).show();
                             finish();
                             startActivity(new Intent(SignInCustomerActivity.this, MainActivity.class));
+                            overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
                         } else {
                             // If sign in fails, display a message to the user.
-                            Toast.makeText(getApplicationContext(), "Error", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(getApplicationContext(), task.getException().getLocalizedMessage(), Toast.LENGTH_SHORT).show();
+                            System.out.println("onComplete: " + task.getException().getMessage());
                         }
                     }
                 });
+    }
+    @Override
+    public void finish() {
+        super.finish();
+        overridePendingTransition(R.anim.slide_in_left,R.anim.slide_out_right);
     }
 }

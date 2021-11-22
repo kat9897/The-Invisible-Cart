@@ -8,14 +8,26 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:usesCleartextTraffic="true"
-        android:theme="@style/Theme.B07finalproject">
+        android:theme="@style/Theme.B07finalproject"
+        android:usesCleartextTraffic="true">
+        <activity
+            android:name=".SignInOwnerActivity"
+            android:exported="false" />
+        <activity
+            android:name=".SignInOwnerActivity1"
+            android:exported="false" />
+        <activity
+            android:name=".LoginOwnerActivity"
+            android:exported="false" />
+        <activity
+            android:name=".MainActivity_Owner"
+            android:exported="false" />
         <activity
             android:name=".SignInCustomerActivity"
             android:exported="false" />
         <activity
             android:name=".MainActivity"
-            android:exported="false"/>
+            android:exported="false" />
         <activity
             android:name=".LoginCustomerActivity"
             android:exported="true">
