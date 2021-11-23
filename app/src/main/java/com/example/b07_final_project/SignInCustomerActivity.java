@@ -22,6 +22,8 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.regex.Pattern;
 
@@ -32,10 +34,11 @@ public class SignInCustomerActivity extends AppCompatActivity {
     private Switch swtchtoOwnerMode;
     private CheckBox showpassword;
     public static final Pattern VALID_EMAIL_ADDRESS_REGEX = Pattern.compile("^[A-Z0-9._%+-]+@[A-Z0-9.-]+\\.[A-Z]{2,6}$", Pattern.CASE_INSENSITIVE);
-
+    private String name;
 
 
     FirebaseAuth mAuth;
+    DatabaseReference firebaseDatabase;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -81,7 +84,7 @@ public class SignInCustomerActivity extends AppCompatActivity {
                 String email = edtEmail.getText().toString().trim();
                 String password = edtPassword.getText().toString().trim();
                 String confirmpassword = edtConfirmPassword.getText().toString().trim();
-                String name = edtName.getText().toString().trim();
+                name = edtName.getText().toString().trim();
 
                 //check if stings are empty using TextUtils
                 //Name
@@ -129,6 +132,24 @@ public class SignInCustomerActivity extends AppCompatActivity {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
+
+                            String uid = task.getResult().getUser().getUid();
+                            Users u = new Users(0,uid,name,"",email,password);
+                            firebaseDatabase = FirebaseDatabase.getInstance().getReference().child("Owner").child(uid);
+
+                            firebaseDatabase.child(mAuth.getCurrentUser().getUid()).setValue(u)
+                                    .addOnCompleteListener(new OnCompleteListener<Void>() {
+                                        @Override
+                                        public void onComplete(@NonNull Task<Void> task) {
+                                            if (task.isSuccessful()) {
+                                                Toast.makeText(SignInCustomerActivity.this, "User registered to database", Toast.LENGTH_SHORT).show();
+                                            } else {
+                                                System.out.println("onComplete: " + task.getException().getMessage());
+                                            }
+                                        }
+                                    });
+
+
                             // Sign in success, Move to MainActivity
                             FirebaseUser user = mAuth.getCurrentUser();
                             Toast.makeText(SignInCustomerActivity.this,"Account Created",Toast.LENGTH_LONG).show();

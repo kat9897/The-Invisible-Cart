@@ -49,11 +49,11 @@ public class SignInOwnerActivity1 extends AppCompatActivity {
         mAuth = FirebaseAuth.getInstance(); // Initialize Firebase Authentication
 
         // TODO --> Fix Not showing up (on Firebase)
-        firebaseDatabase = FirebaseDatabase.getInstance().getReference();
+//        firebaseDatabase = FirebaseDatabase.getInstance().getReference();
 
-        //TODO
-        db= FirebaseDatabase.getInstance();
-        db.getReference().child("Node").setValue("Val");
+//        //TODO
+//        db= FirebaseDatabase.getInstance();
+//        db.getReference().child("Node").setValue("Val");
 
         edtEmail = findViewById(R.id.edtTxtEmail_signinowner1);
         edtPassword = findViewById(R.id.edtTxtPassword_signinowner1);
@@ -130,24 +130,19 @@ public class SignInOwnerActivity1 extends AppCompatActivity {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
-                            //TODO
-                            Users u = new Users(name,phn,email,password);
-//                            firebaseDatabase.child("Owner").child("Users").setValue(u);
 
                             // Add user to Firebase
-                            firebaseDatabase = FirebaseDatabase.getInstance().getReference().child("Owner").child("Users");
-//                            firebaseDatabase.child(task.getResult().getUser().getUid()).setValue(u).addOnCompleteListener(new OnCompleteListener<Void>() {
-//                                    @Override
-//                                    public void onComplete(@NonNull Task<Void> task) {
-//                                        Toast.makeText(SignInOwnerActivity1.this, "User registred to database", Toast.LENGTH_SHORT).show();
-//                                    }
-//                                });
+
+                            String uid = task.getResult().getUser().getUid();
+                            Users u = new Users(1,uid,name,phn,email,password);
+                            firebaseDatabase = FirebaseDatabase.getInstance().getReference().child("Owner").child(uid);
+
                             firebaseDatabase.child(mAuth.getCurrentUser().getUid()).setValue(u)
                                     .addOnCompleteListener(new OnCompleteListener<Void>() {
                                         @Override
                                         public void onComplete(@NonNull Task<Void> task) {
                                             if (task.isSuccessful()) {
-                                                Toast.makeText(SignInOwnerActivity1.this, "User registred to database", Toast.LENGTH_SHORT).show();
+                                                Toast.makeText(SignInOwnerActivity1.this, "User registered to database", Toast.LENGTH_SHORT).show();
                                             } else {
                                                 System.out.println("onComplete: " + task.getException().getMessage());
                                             }
