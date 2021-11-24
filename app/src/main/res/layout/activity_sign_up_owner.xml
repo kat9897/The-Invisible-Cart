@@ -4,14 +4,26 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".SignInCustomerActivity">
-
+    tools:context=".SignUpOwnerActivity">
 
     <EditText
-        android:id="@+id/edtTxtName_signincustomer"
+        android:id="@+id/edtphn_signinowner"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="270dp"
+        android:layout_marginTop="20dp"
+        android:ems="10"
+        android:hint="Phone Number"
+        android:inputType="phone"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.502"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/edtTxtName_signinOwner" />
+
+    <EditText
+        android:id="@+id/edtTxtName_signinOwner"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="232dp"
         android:ems="10"
         android:hint="Name"
         android:inputType="textEmailAddress"
@@ -21,7 +33,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
-        android:id="@+id/edtTxtEmail_signincustomer"
+        android:id="@+id/edtTxtEmail_signinowner1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
@@ -29,11 +41,12 @@
         android:hint="Email"
         android:inputType="textEmailAddress"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/edtTxtName_signincustomer" />
+        app:layout_constraintTop_toBottomOf="@+id/edtphn_signinowner" />
 
     <EditText
-        android:id="@+id/edtTxtPassword_signincustomer"
+        android:id="@+id/edtTxtPassword_signinowner1"
         android:hint="Password"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -42,10 +55,10 @@
         android:inputType="textPassword"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/edtTxtEmail_signincustomer" />
+        app:layout_constraintTop_toBottomOf="@+id/edtTxtEmail_signinowner1" />
 
     <EditText
-        android:id="@+id/edtTxtConfirmPassword_signincustomer"
+        android:id="@+id/edtTxtConfirmPassword_signinowner1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
@@ -54,37 +67,25 @@
         android:inputType="textPassword"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/edtTxtPassword_signincustomer"></EditText>
+        app:layout_constraintTop_toBottomOf="@+id/edtTxtPassword_signinowner1"></EditText>
 
 
     <Button
-        android:id="@+id/btnsignIn_signincustomer"
+        android:id="@+id/btnsignIn_signinowner1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="80dp"
-        android:text="SIGN IN"
+        android:background="@drawable/btn_background"
+        android:text="SIGN UP"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/showpassword"
+        app:layout_constraintTop_toBottomOf="@+id/showpassword_signinowner1"
         app:layout_constraintVertical_bias="1.0" />
 
-    <Switch
-        android:id="@+id/switch1_signincustomer"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="309dp"
-        android:layout_marginBottom="570dp"
-        android:text="Store Owner"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
     <CheckBox
-        android:id="@+id/showpassword"
+        android:id="@+id/showpassword_signinowner1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
@@ -92,7 +93,6 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.363"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/edtTxtConfirmPassword_signincustomer" />
-
+        app:layout_constraintTop_toBottomOf="@+id/edtTxtConfirmPassword_signinowner1" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

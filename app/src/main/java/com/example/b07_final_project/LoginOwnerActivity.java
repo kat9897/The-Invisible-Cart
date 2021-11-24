@@ -19,6 +19,11 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.util.regex.Pattern;
 
@@ -31,6 +36,7 @@ public class LoginOwnerActivity extends AppCompatActivity {
     public static final Pattern VALID_EMAIL_ADDRESS_REGEX = Pattern.compile("^[A-Z0-9._%+-]+@[A-Z0-9.-]+\\.[A-Z]{2,6}$", Pattern.CASE_INSENSITIVE);
 
     FirebaseAuth mAuth;
+    DatabaseReference firebaseDatabase;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -67,11 +73,11 @@ public class LoginOwnerActivity extends AppCompatActivity {
             }
         });
 
-        // btnSignUp When clicked -> It will take you to SignInOwnerActivity
+        // btnSignUp When clicked -> It will take you to SignUpOwnerActivity
         btnSignUp.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(LoginOwnerActivity.this,SignInOwnerActivity.class);
+                Intent intent = new Intent(LoginOwnerActivity.this, SignUpOwnerActivity.class);
                 startActivity(intent);
                 overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
             }
@@ -100,7 +106,6 @@ public class LoginOwnerActivity extends AppCompatActivity {
                 }
 
                 // If entered Correctly then Login
-                System.out.println("============================="+email+password+ "=============================");
                 login(email, password);
             }
         });
@@ -108,7 +113,6 @@ public class LoginOwnerActivity extends AppCompatActivity {
 
     private void login(String email, String password) {
         //https://firebase.google.com/docs/auth/android/password-auth#java_3
-        System.out.println("============================="+email+password+ "=============================");
 
         mAuth.signInWithEmailAndPassword(email, password)
                 .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
@@ -116,10 +120,35 @@ public class LoginOwnerActivity extends AppCompatActivity {
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
                             // Login in success, Move to MainActivity
-                            // TODO --> Check if its an Owner or not
-                            Intent intent = new Intent(LoginOwnerActivity.this, MainActivity_Owner.class);
-                            startActivity(intent);
-                            overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
+
+                            String uid = task.getResult().getUser().getUid();
+
+                            firebaseDatabase = FirebaseDatabase.getInstance().getReference();
+                            firebaseDatabase.child("Users").child("Owner").child(uid).child(uid).child("userType").addListenerForSingleValueEvent(new ValueEventListener() {
+                                @Override
+                                public void onDataChange(@NonNull DataSnapshot snapshot) {
+                                    int usertype = snapshot.getValue(Integer.class);
+
+                                    if (usertype == 1){
+
+                                        Intent intent = new Intent(LoginOwnerActivity.this, MainActivity_Owner.class);
+                                        intent.putExtra("Ownerid", uid);
+
+                                        startActivity(intent);
+                                        overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
+                                    }
+                                    else {
+                                        Toast.makeText(getApplicationContext(), "Login in as customer", Toast.LENGTH_SHORT).show();
+                                    }
+                                }
+
+                                @Override
+                                public void onCancelled(@NonNull DatabaseError error) {
+
+                                }
+                            });
+
+
                         } else {
                             // If sign in fails, display a message to the user.
                             Toast.makeText(getApplicationContext(), task.getException().getLocalizedMessage(), Toast.LENGTH_SHORT).show();

@@ -25,11 +25,14 @@ import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.regex.Pattern;
 
-public class SignInOwnerActivity1 extends AppCompatActivity {
+public class SignUpOwnerActivity extends AppCompatActivity {
 
     private EditText edtEmail, edtPassword, edtConfirmPassword;
+
+    private EditText edtName, edtphn;
+    private Button btnNext;
+
     private Button btnSignUp;
-    private Switch swtchtoCustomerMode;
     private CheckBox showpassword;
     private String name,phn;
     public static final Pattern VALID_EMAIL_ADDRESS_REGEX = Pattern.compile("^[A-Z0-9._%+-]+@[A-Z0-9.-]+\\.[A-Z]{2,6}$", Pattern.CASE_INSENSITIVE);
@@ -41,38 +44,24 @@ public class SignInOwnerActivity1 extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_sign_in_owner1);
-        Intent intent = getIntent();
-        name = intent.getStringExtra("name").trim();
-        phn = intent.getStringExtra("phn").trim();
+        setContentView(R.layout.activity_sign_up_owner);
+//        Intent intent = getIntent();
+//        name = intent.getStringExtra("name").trim();
+//        phn = intent.getStringExtra("phn").trim();
 
         mAuth = FirebaseAuth.getInstance(); // Initialize Firebase Authentication
 
-        // TODO --> Fix Not showing up (on Firebase)
-        firebaseDatabase = FirebaseDatabase.getInstance().getReference();
 
-        //TODO
-        db= FirebaseDatabase.getInstance();
-        db.getReference().child("Node").setValue("Val");
-
+        edtName = findViewById(R.id.edtTxtName_signinOwner);
+        edtphn = findViewById(R.id.edtphn_signinowner);
         edtEmail = findViewById(R.id.edtTxtEmail_signinowner1);
         edtPassword = findViewById(R.id.edtTxtPassword_signinowner1);
         edtConfirmPassword = findViewById(R.id.edtTxtConfirmPassword_signinowner1);
         btnSignUp = findViewById(R.id.btnsignIn_signinowner1);
         showpassword = findViewById(R.id.showpassword_signinowner1);
-        swtchtoCustomerMode = findViewById(R.id.switch1_signinOwner1);
 
 
-        swtchtoCustomerMode.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if (!swtchtoCustomerMode.isChecked()){
-                    Intent intent = new Intent(SignInOwnerActivity1.this, LoginCustomerActivity.class );
-                    startActivity(intent);
-                    overridePendingTransition(R.anim.slide_in_left,R.anim.slide_out_right);
-                }
-            }
-        });
+
         showpassword.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -88,6 +77,8 @@ public class SignInOwnerActivity1 extends AppCompatActivity {
         btnSignUp.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                name = edtName.getText().toString().trim();
+                phn = edtphn.getText().toString().trim();
                 String email = edtEmail.getText().toString().trim();
                 String password = edtPassword.getText().toString().trim();
                 String confirmpassword = edtConfirmPassword.getText().toString().trim();
@@ -95,25 +86,25 @@ public class SignInOwnerActivity1 extends AppCompatActivity {
                 //check if stings are empty using TextUtils
                 //Email
                 if (TextUtils.isEmpty(email)) { //email is empty
-                    Toast.makeText(SignInOwnerActivity1.this, "Please enter email", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(SignUpOwnerActivity.this, "Please enter email", Toast.LENGTH_SHORT).show();
                     return;
                 } else if (!VALID_EMAIL_ADDRESS_REGEX.matcher(email).find()) {
-                    Toast.makeText(SignInOwnerActivity1.this, "Please enter a valid email", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(SignUpOwnerActivity.this, "Please enter a valid email", Toast.LENGTH_SHORT).show();
                     return;
                 }
 
                 //Password
                 if (TextUtils.isEmpty(password)) { //password is empty
-                    Toast.makeText(SignInOwnerActivity1.this, "Please enter Password", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(SignUpOwnerActivity.this, "Please enter Password", Toast.LENGTH_SHORT).show();
                     return;
                 } else if (password.length() < 8) {
-                    Toast.makeText(SignInOwnerActivity1.this, "Password must have at least 8 characters", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(SignUpOwnerActivity.this, "Password must have at least 8 characters", Toast.LENGTH_SHORT).show();
                     return;
                 }
 
                 //Confirm Password
                 if (!password.equals(confirmpassword)) {
-                    Toast.makeText(SignInOwnerActivity1.this, "Your passwords do not match", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(SignUpOwnerActivity.this, "Your passwords do not match", Toast.LENGTH_SHORT).show();
                     return;
                 }
 
@@ -130,24 +121,20 @@ public class SignInOwnerActivity1 extends AppCompatActivity {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
-                            //TODO
-                            Users u = new Users(name,phn,email,password);
-//                            firebaseDatabase.child("Owner").child("Users").setValue(u);
 
                             // Add user to Firebase
-                            firebaseDatabase = FirebaseDatabase.getInstance().getReference().child("Owner").child("Users");
-//                            firebaseDatabase.child(task.getResult().getUser().getUid()).setValue(u).addOnCompleteListener(new OnCompleteListener<Void>() {
-//                                    @Override
-//                                    public void onComplete(@NonNull Task<Void> task) {
-//                                        Toast.makeText(SignInOwnerActivity1.this, "User registred to database", Toast.LENGTH_SHORT).show();
-//                                    }
-//                                });
+
+                            String uid = task.getResult().getUser().getUid();
+                            Owners u = new Owners(uid,name,phn,email,password);
+
+                            firebaseDatabase = FirebaseDatabase.getInstance().getReference().child("Users").child("Owner").child(uid);
+
                             firebaseDatabase.child(mAuth.getCurrentUser().getUid()).setValue(u)
                                     .addOnCompleteListener(new OnCompleteListener<Void>() {
                                         @Override
                                         public void onComplete(@NonNull Task<Void> task) {
                                             if (task.isSuccessful()) {
-                                                Toast.makeText(SignInOwnerActivity1.this, "User registred to database", Toast.LENGTH_SHORT).show();
+                                                Toast.makeText(SignUpOwnerActivity.this, "User registered to database", Toast.LENGTH_SHORT).show();
                                             } else {
                                                 System.out.println("onComplete: " + task.getException().getMessage());
                                             }
@@ -156,9 +143,9 @@ public class SignInOwnerActivity1 extends AppCompatActivity {
 
                             // Sign in success, Move to MainActivity_owner
                             FirebaseUser user = mAuth.getCurrentUser();
-                            Toast.makeText(SignInOwnerActivity1.this,"Account Created",Toast.LENGTH_LONG).show();
+                            Toast.makeText(SignUpOwnerActivity.this,"Account Created",Toast.LENGTH_LONG).show();
                             finish();
-                            startActivity(new Intent(SignInOwnerActivity1.this, MainActivity_Owner.class));
+                            startActivity(new Intent(SignUpOwnerActivity.this, MainActivity_Owner.class));
                             overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
                         } else {
                             // If sign in fails, display a message to the user.

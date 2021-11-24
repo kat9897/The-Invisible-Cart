@@ -4,10 +4,13 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.text.method.PasswordTransformationMethod;
 import android.view.View;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
@@ -19,6 +22,11 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.util.regex.Pattern;
 
@@ -31,12 +39,15 @@ public class LoginCustomerActivity extends AppCompatActivity {
     public static final Pattern VALID_EMAIL_ADDRESS_REGEX = Pattern.compile("^[A-Z0-9._%+-]+@[A-Z0-9.-]+\\.[A-Z]{2,6}$", Pattern.CASE_INSENSITIVE);
 
     FirebaseAuth mAuth;
+    DatabaseReference firebaseDatabase;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login_customer);
+        // Hide TitleBar
+        getSupportActionBar().hide();
 
         mAuth = FirebaseAuth.getInstance(); //  Initialize Firebase Authentication
         edtEmail = findViewById(R.id.edtTxtEmailAddress_customerlogin);
@@ -99,7 +110,7 @@ public class LoginCustomerActivity extends AppCompatActivity {
         btnSignUp.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(LoginCustomerActivity.this,SignInCustomerActivity.class);
+                Intent intent = new Intent(LoginCustomerActivity.this,SignUpCustomerActivity.class);
                 startActivity(intent);
                 overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
             }
@@ -114,11 +125,32 @@ public class LoginCustomerActivity extends AppCompatActivity {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
-                            // Login in success, Move to MainActivity
-                            Intent intent = new Intent(LoginCustomerActivity.this, MainActivity.class);
-                            startActivity(intent);
-                            overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
-                        } else {
+                            String uid = task.getResult().getUser().getUid();
+
+                            firebaseDatabase = FirebaseDatabase.getInstance().getReference();
+                            firebaseDatabase.child("Users").child("Customer").child(uid).child(uid).child("userType").addListenerForSingleValueEvent(new ValueEventListener() {
+                                @Override
+                                public void onDataChange(@NonNull DataSnapshot snapshot) {
+                                    int usertype = snapshot.getValue(Integer.class);
+
+                                    if (usertype == 0) {
+                                        // Login in success, Move to MainActivity
+                                        Intent intent = new Intent(LoginCustomerActivity.this, MainActivity.class);
+                                        startActivity(intent);
+                                        overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
+                                    }else {
+                                        Toast.makeText(getApplicationContext(), "Login in as Admin account", Toast.LENGTH_SHORT).show();
+                                    }
+                                }
+
+                                @Override
+                                public void onCancelled(@NonNull DatabaseError error) {
+
+                                }
+                            });
+
+
+                                } else {
                             // If sign in fails, display a message to the user.
                             Toast.makeText(getApplicationContext(), task.getException().getLocalizedMessage(), Toast.LENGTH_SHORT).show();
                             System.out.println("onComplete: " + task.getException().getMessage());
