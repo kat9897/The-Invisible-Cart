@@ -4,10 +4,13 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.text.method.PasswordTransformationMethod;
 import android.view.View;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
@@ -43,6 +46,8 @@ public class LoginCustomerActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login_customer);
+        // Hide TitleBar
+        getSupportActionBar().hide();
 
         mAuth = FirebaseAuth.getInstance(); //  Initialize Firebase Authentication
         edtEmail = findViewById(R.id.edtTxtEmailAddress_customerlogin);
@@ -105,7 +110,7 @@ public class LoginCustomerActivity extends AppCompatActivity {
         btnSignUp.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(LoginCustomerActivity.this,SignInCustomerActivity.class);
+                Intent intent = new Intent(LoginCustomerActivity.this,SignUpCustomerActivity.class);
                 startActivity(intent);
                 overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
             }
@@ -123,7 +128,7 @@ public class LoginCustomerActivity extends AppCompatActivity {
                             String uid = task.getResult().getUser().getUid();
 
                             firebaseDatabase = FirebaseDatabase.getInstance().getReference();
-                            firebaseDatabase.child("Owner").child(uid).child(uid).child("userType").addListenerForSingleValueEvent(new ValueEventListener() {
+                            firebaseDatabase.child("Users").child("Customer").child(uid).child(uid).child("userType").addListenerForSingleValueEvent(new ValueEventListener() {
                                 @Override
                                 public void onDataChange(@NonNull DataSnapshot snapshot) {
                                     int usertype = snapshot.getValue(Integer.class);

@@ -64,7 +64,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
         android:layout_marginBottom="70dp"
-        android:text="Sign in as an Owner"
+        android:text="Sign up as an Owner"
         android:background="@drawable/btn_background"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

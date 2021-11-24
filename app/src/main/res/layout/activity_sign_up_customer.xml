@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".SignInCustomerActivity">
+    tools:context=".SignUpCustomerActivity">
 
 
     <EditText
@@ -63,26 +63,13 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="80dp"
         android:background="@drawable/btn_background"
-        android:text="SIGN IN"
+        android:text="SIGN UP"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/showpassword"
         app:layout_constraintVertical_bias="1.0" />
-
-    <Switch
-        android:id="@+id/switch1_signincustomer"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="259dp"
-        android:layout_marginBottom="570dp"
-        android:text="Store Owner"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
 
     <CheckBox
         android:id="@+id/showpassword"

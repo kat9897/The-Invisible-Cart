@@ -8,14 +8,17 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:windowSoftInputMode="adjustResize"
         android:theme="@style/Theme.B07finalproject"
-        android:usesCleartextTraffic="true">
+        android:usesCleartextTraffic="true"
+        android:windowSoftInputMode="adjustResize">
         <activity
-            android:name=".SignInOwnerActivity"
+            android:name=".All_orders_owner"
             android:exported="false" />
         <activity
-            android:name=".SignInOwnerActivity1"
+            android:name=".Add_new_product_owner"
+            android:exported="false" />
+        <activity
+            android:name=".SignUpOwnerActivity"
             android:exported="false" />
         <activity
             android:name=".LoginOwnerActivity"
@@ -24,7 +27,7 @@
             android:name=".MainActivity_Owner"
             android:exported="false" />
         <activity
-            android:name=".SignInCustomerActivity"
+            android:name=".SignUpCustomerActivity"
             android:exported="false" />
         <activity
             android:name=".MainActivity"

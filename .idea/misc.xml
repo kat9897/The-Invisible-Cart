@@ -7,11 +7,18 @@
         <entry key="..\:/Users/Yashank/OneDrive - University of Toronto/Desktop/Project/app/src/main/res/drawable/edt_background.xml" value="0.23958333333333334" />
         <entry key="..\:/Users/Yashank/OneDrive - University of Toronto/Desktop/Project/app/src/main/res/drawable/pick_out_line.xml" value="0.23958333333333334" />
         <entry key="..\:/Users/Yashank/OneDrive - University of Toronto/Desktop/Project/app/src/main/res/drawable/toggle_widget_background.xml" value="0.23958333333333334" />
+        <entry key="..\:/Users/Yashank/OneDrive - University of Toronto/Desktop/Project/app/src/main/res/layout/activity_add_new_product_owner.xml" value="0.21927083333333333" />
+        <entry key="..\:/Users/Yashank/OneDrive - University of Toronto/Desktop/Project/app/src/main/res/layout/activity_all_orders_owner.xml" value="0.21927083333333333" />
         <entry key="..\:/Users/Yashank/OneDrive - University of Toronto/Desktop/Project/app/src/main/res/layout/activity_login_customer.xml" value="0.21927083333333333" />
-        <entry key="..\:/Users/Yashank/OneDrive - University of Toronto/Desktop/Project/app/src/main/res/layout/activity_login_owner.xml" value="0.21927083333333333" />
+        <entry key="..\:/Users/Yashank/OneDrive - University of Toronto/Desktop/Project/app/src/main/res/layout/activity_login_owner.xml" value="0.17113821138211383" />
+        <entry key="..\:/Users/Yashank/OneDrive - University of Toronto/Desktop/Project/app/src/main/res/layout/activity_main.xml" value="0.21481481481481482" />
+        <entry key="..\:/Users/Yashank/OneDrive - University of Toronto/Desktop/Project/app/src/main/res/layout/activity_main_owner.xml" value="0.21927083333333333" />
         <entry key="..\:/Users/Yashank/OneDrive - University of Toronto/Desktop/Project/app/src/main/res/layout/activity_sign_in_customer.xml" value="0.21927083333333333" />
         <entry key="..\:/Users/Yashank/OneDrive - University of Toronto/Desktop/Project/app/src/main/res/layout/activity_sign_in_owner.xml" value="0.21927083333333333" />
         <entry key="..\:/Users/Yashank/OneDrive - University of Toronto/Desktop/Project/app/src/main/res/layout/activity_sign_in_owner1.xml" value="0.21927083333333333" />
+        <entry key="..\:/Users/Yashank/OneDrive - University of Toronto/Desktop/Project/app/src/main/res/layout/activity_sign_up_customer.xml" value="0.21927083333333333" />
+        <entry key="..\:/Users/Yashank/OneDrive - University of Toronto/Desktop/Project/app/src/main/res/layout/activity_sign_up_owner.xml" value="0.2" />
+        <entry key="..\:/Users/Yashank/OneDrive - University of Toronto/Desktop/Project/app/src/main/res/layout/activity_sign_up_owner1.xml" value="0.21927083333333333" />
       </map>
     </option>
   </component>

@@ -73,11 +73,11 @@ public class LoginOwnerActivity extends AppCompatActivity {
             }
         });
 
-        // btnSignUp When clicked -> It will take you to SignInOwnerActivity
+        // btnSignUp When clicked -> It will take you to SignUpOwnerActivity
         btnSignUp.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(LoginOwnerActivity.this,SignInOwnerActivity.class);
+                Intent intent = new Intent(LoginOwnerActivity.this, SignUpOwnerActivity.class);
                 startActivity(intent);
                 overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
             }
@@ -120,18 +120,20 @@ public class LoginOwnerActivity extends AppCompatActivity {
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
                             // Login in success, Move to MainActivity
-                            // TODO --> Check if its an Owner or not
 
                             String uid = task.getResult().getUser().getUid();
 
                             firebaseDatabase = FirebaseDatabase.getInstance().getReference();
-                            firebaseDatabase.child("Owner").child(uid).child(uid).child("userType").addListenerForSingleValueEvent(new ValueEventListener() {
+                            firebaseDatabase.child("Users").child("Owner").child(uid).child(uid).child("userType").addListenerForSingleValueEvent(new ValueEventListener() {
                                 @Override
                                 public void onDataChange(@NonNull DataSnapshot snapshot) {
                                     int usertype = snapshot.getValue(Integer.class);
 
                                     if (usertype == 1){
+
                                         Intent intent = new Intent(LoginOwnerActivity.this, MainActivity_Owner.class);
+                                        intent.putExtra("Ownerid", uid);
+
                                         startActivity(intent);
                                         overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
                                     }
