@@ -29,15 +29,15 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="220dp"
         android:ems="10"
+        android:hint="@string/add_product_name_hint"
         android:inputType="textPersonName"
-        android:hint="Product Name"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.199"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/heading_add_new_product" />
 
     <EditText
-        android:id="@+id/editPrice"
+        android:id="@+id/editBrand"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
@@ -50,7 +50,7 @@
         app:layout_constraintTop_toBottomOf="@+id/editName" />
 
     <EditText
-        android:id="@+id/editBrand"
+        android:id="@+id/editPrice"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
@@ -60,7 +60,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.199"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editPrice" />
+        app:layout_constraintTop_toBottomOf="@+id/editBrand" />
 
     <Button
         android:id="@+id/button_add_product"
@@ -68,12 +68,12 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="80dp"
         android:background="@drawable/btn_background"
-        android:text="Add"
         android:onClick="sendNewProduct"
+        android:text="Add"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editBrand" />
+        app:layout_constraintTop_toBottomOf="@+id/editPrice" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

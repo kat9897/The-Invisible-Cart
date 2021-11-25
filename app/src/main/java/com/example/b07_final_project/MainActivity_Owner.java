@@ -61,7 +61,7 @@ public class MainActivity_Owner extends AppCompatActivity {
             public void onClick(View view) {
                 // Open up another activity
                 Intent intent1 = new Intent(MainActivity_Owner.this, Add_new_product_owner.class);
-                intent1.putExtra("Ownerid", uid);
+                //intent1.putExtra("Ownerid", uid);
                 // send this ownerid to the activity
                 startActivity(intent1);
             }
