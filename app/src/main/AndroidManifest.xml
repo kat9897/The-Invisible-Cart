@@ -15,9 +15,6 @@
             android:name=".My_products_owner"
             android:exported="false" />
         <activity
-            android:name=".All_orders_owner"
-            android:exported="false" />
-        <activity
             android:name=".Add_new_product_owner"
             android:exported="false" />
         <activity
