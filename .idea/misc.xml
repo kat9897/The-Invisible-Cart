@@ -1,5 +1,24 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="DesignSurface">
+    <option name="filePathToZoomLevelMap">
+      <map>
+        <entry key="..\:/University/2021 Fall Courses/CSCB07 - Software Design/Project/cscb07-group-project-TUT02/app/src/main/res/layout/activity_add_new_product_owner.xml" value="0.275" />
+        <entry key="..\:/University/2021 Fall Courses/CSCB07 - Software Design/Project/cscb07-group-project-TUT02/app/src/main/res/layout/activity_display_new_product.xml" value="0.1" />
+        <entry key="..\:/University/2021 Fall Courses/CSCB07 - Software Design/Project/cscb07-group-project-TUT02/app/src/main/res/layout/activity_main.xml" value="0.2" />
+        <entry key="..\:/University/2021 Fall Courses/CSCB07 - Software Design/Project/cscb07-group-project-TUT02/app/src/main/res/layout/activity_my_products_owner.xml" value="0.275" />
+        <entry key="..\:/Users/Yashank/OneDrive - University of Toronto/Desktop/Project/app/src/main/res/drawable/btn_background.xml" value="0.23958333333333334" />
+        <entry key="..\:/Users/Yashank/OneDrive - University of Toronto/Desktop/Project/app/src/main/res/drawable/edt_background.xml" value="0.23958333333333334" />
+        <entry key="..\:/Users/Yashank/OneDrive - University of Toronto/Desktop/Project/app/src/main/res/drawable/pick_out_line.xml" value="0.23958333333333334" />
+        <entry key="..\:/Users/Yashank/OneDrive - University of Toronto/Desktop/Project/app/src/main/res/drawable/toggle_widget_background.xml" value="0.23958333333333334" />
+        <entry key="..\:/Users/Yashank/OneDrive - University of Toronto/Desktop/Project/app/src/main/res/layout/activity_login_customer.xml" value="0.21927083333333333" />
+        <entry key="..\:/Users/Yashank/OneDrive - University of Toronto/Desktop/Project/app/src/main/res/layout/activity_login_owner.xml" value="0.21927083333333333" />
+        <entry key="..\:/Users/Yashank/OneDrive - University of Toronto/Desktop/Project/app/src/main/res/layout/activity_sign_in_customer.xml" value="0.21927083333333333" />
+        <entry key="..\:/Users/Yashank/OneDrive - University of Toronto/Desktop/Project/app/src/main/res/layout/activity_sign_in_owner.xml" value="0.21927083333333333" />
+        <entry key="..\:/Users/Yashank/OneDrive - University of Toronto/Desktop/Project/app/src/main/res/layout/activity_sign_in_owner1.xml" value="0.21927083333333333" />
+      </map>
+    </option>
+  </component>
   <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="1.8" project-jdk-type="JavaSDK">
     <output url="file://$PROJECT_DIR$/build/classes" />
   </component>
