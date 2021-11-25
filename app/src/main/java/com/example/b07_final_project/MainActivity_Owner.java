@@ -40,38 +40,36 @@ public class MainActivity_Owner extends AppCompatActivity {
                 Intent intent1 = new Intent(MainActivity_Owner.this, All_orders_owner.class);
                 // send this ownerid to the activity
                 intent1.putExtra("Ownerid", uid);
-                startActivity(intent);
+                startActivity(intent1);
             }
         });
+
+
 
         btn_products.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 // Open up another activity
-                Intent intent1 = new Intent(MainActivity_Owner.this, All_orders_owner.class);
+                Intent intent1 = new Intent(MainActivity_Owner.this, My_products_owner.class);
                 intent1.putExtra("Ownerid", uid);
                 // send this ownerid to the activity
-                startActivity(intent);
+                startActivity(intent1);
             }
         });
         btn_add_new_product.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 // Open up another activity
-                Intent intent1 = new Intent(MainActivity_Owner.this, All_orders_owner.class);
+                Intent intent1 = new Intent(MainActivity_Owner.this, Add_new_product_owner.class);
                 intent1.putExtra("Ownerid", uid);
                 // send this ownerid to the activity
-                startActivity(intent);
+                startActivity(intent1);
             }
         });
 
 
 
     }
-
-
-
-
 
     @Override
     public void finish() {

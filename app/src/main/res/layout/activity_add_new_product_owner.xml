@@ -24,7 +24,7 @@
         app:layout_constraintVertical_bias="0.0" />
 
     <EditText
-        android:id="@+id/editText_product_name"
+        android:id="@+id/editName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="220dp"
@@ -37,7 +37,7 @@
         app:layout_constraintTop_toBottomOf="@+id/heading_add_new_product" />
 
     <EditText
-        android:id="@+id/editText_brand_name"
+        android:id="@+id/editPrice"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
@@ -47,10 +47,10 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.199"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editText_product_name" />
+        app:layout_constraintTop_toBottomOf="@+id/editName" />
 
     <EditText
-        android:id="@+id/editText_product_price"
+        android:id="@+id/editBrand"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
@@ -60,19 +60,20 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.199"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editText_brand_name" />
+        app:layout_constraintTop_toBottomOf="@+id/editPrice" />
 
     <Button
         android:id="@+id/button_add_product"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="80dp"
-        android:text="Add"
-        app:layout_constraintBottom_toBottomOf="parent"
         android:background="@drawable/btn_background"
+        android:text="Add"
+        android:onClick="sendNewProduct"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editText_product_price" />
+        app:layout_constraintTop_toBottomOf="@+id/editBrand" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -140,6 +140,8 @@ public class LoginCustomerActivity extends AppCompatActivity {
                                         if (usertype == 0) {
                                             // Login in success, Move to MainActivity
                                             Intent intent = new Intent(LoginCustomerActivity.this, MainActivity.class);
+                                            intent.putExtra("Userid", uid);
+
                                             startActivity(intent);
                                             overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
                                         } else {
