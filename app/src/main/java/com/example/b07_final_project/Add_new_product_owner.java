@@ -15,6 +15,8 @@ public class Add_new_product_owner extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_new_product_owner);
+        // Hide TitleBar
+        getSupportActionBar().hide();
 
         prdName = findViewById(R.id.editText_product_name);
         brandName = findViewById(R.id.editText_brand_name);

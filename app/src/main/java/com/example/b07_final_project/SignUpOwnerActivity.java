@@ -30,12 +30,12 @@ public class SignUpOwnerActivity extends AppCompatActivity {
     private EditText edtEmail, edtPassword, edtConfirmPassword;
 
     private EditText edtName, edtphn;
-    private Button btnNext;
 
     private Button btnSignUp;
     private CheckBox showpassword;
     private String name,phn;
     public static final Pattern VALID_EMAIL_ADDRESS_REGEX = Pattern.compile("^[A-Z0-9._%+-]+@[A-Z0-9.-]+\\.[A-Z]{2,6}$", Pattern.CASE_INSENSITIVE);
+    public static final Pattern VALID_PHNNUMBER_REGEX = Pattern.compile("\\d{10}");
 
     FirebaseAuth mAuth;
     DatabaseReference firebaseDatabase;
@@ -45,9 +45,8 @@ public class SignUpOwnerActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sign_up_owner);
-//        Intent intent = getIntent();
-//        name = intent.getStringExtra("name").trim();
-//        phn = intent.getStringExtra("phn").trim();
+        // Hide TitleBar
+        getSupportActionBar().hide();
 
         mAuth = FirebaseAuth.getInstance(); // Initialize Firebase Authentication
 
@@ -90,6 +89,14 @@ public class SignUpOwnerActivity extends AppCompatActivity {
                     return;
                 } else if (!VALID_EMAIL_ADDRESS_REGEX.matcher(email).find()) {
                     Toast.makeText(SignUpOwnerActivity.this, "Please enter a valid email", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+                //Phone
+                if (TextUtils.isEmpty(email)) { //email is empty
+                    Toast.makeText(SignUpOwnerActivity.this, "Please enter Phone number", Toast.LENGTH_SHORT).show();
+                    return;
+                } else if (!VALID_PHNNUMBER_REGEX.matcher(phn).find()) {
+                    Toast.makeText(SignUpOwnerActivity.this, "Please enter a valid Phone Number", Toast.LENGTH_SHORT).show();
                     return;
                 }
 

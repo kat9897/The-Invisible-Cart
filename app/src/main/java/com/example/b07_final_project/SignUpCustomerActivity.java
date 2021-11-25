@@ -41,7 +41,8 @@ public class SignUpCustomerActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sign_up_customer);
-
+        // Hide TitleBar
+        getSupportActionBar().hide();
         mAuth = FirebaseAuth.getInstance(); // Initialize Firebase Authentication
         edtName = findViewById(R.id.edtTxtName_signincustomer);
         edtEmail = findViewById(R.id.edtTxtEmail_signincustomer);

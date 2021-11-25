@@ -42,6 +42,8 @@ public class LoginOwnerActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login_owner);
+        // Hide TitleBar
+        getSupportActionBar().hide();
 
         mAuth = FirebaseAuth.getInstance();
 
@@ -127,18 +129,22 @@ public class LoginOwnerActivity extends AppCompatActivity {
                             firebaseDatabase.child("Users").child("Owner").child(uid).child(uid).child("userType").addListenerForSingleValueEvent(new ValueEventListener() {
                                 @Override
                                 public void onDataChange(@NonNull DataSnapshot snapshot) {
-                                    int usertype = snapshot.getValue(Integer.class);
-
-                                    if (usertype == 1){
-
-                                        Intent intent = new Intent(LoginOwnerActivity.this, MainActivity_Owner.class);
-                                        intent.putExtra("Ownerid", uid);
-
-                                        startActivity(intent);
-                                        overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
+                                    if (snapshot.getValue(Integer.class) == null){
+                                        Toast.makeText(getApplicationContext(), "Login in as Admin account", Toast.LENGTH_SHORT).show();
                                     }
                                     else {
-                                        Toast.makeText(getApplicationContext(), "Login in as customer", Toast.LENGTH_SHORT).show();
+                                        int usertype = snapshot.getValue(Integer.class);
+
+                                        if (usertype == 1) {
+
+                                            Intent intent = new Intent(LoginOwnerActivity.this, MainActivity_Owner.class);
+                                            intent.putExtra("Ownerid", uid);
+
+                                            startActivity(intent);
+                                            overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
+                                        } else {
+                                            Toast.makeText(getApplicationContext(), "Login in as customer", Toast.LENGTH_SHORT).show();
+                                        }
                                     }
                                 }
 

@@ -4,20 +4,13 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
 
-public class MainActivity extends AppCompatActivity {
+public class My_products_owner extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_my_products_owner);
         // Hide TitleBar
         getSupportActionBar().hide();
-
-        //hello test for git
-    }
-    @Override
-    public void finish() {
-        super.finish();
-        overridePendingTransition(R.anim.slide_in_left,R.anim.slide_out_right);
     }
 }

@@ -131,15 +131,20 @@ public class LoginCustomerActivity extends AppCompatActivity {
                             firebaseDatabase.child("Users").child("Customer").child(uid).child(uid).child("userType").addListenerForSingleValueEvent(new ValueEventListener() {
                                 @Override
                                 public void onDataChange(@NonNull DataSnapshot snapshot) {
-                                    int usertype = snapshot.getValue(Integer.class);
-
-                                    if (usertype == 0) {
-                                        // Login in success, Move to MainActivity
-                                        Intent intent = new Intent(LoginCustomerActivity.this, MainActivity.class);
-                                        startActivity(intent);
-                                        overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
-                                    }else {
+                                    if (snapshot.getValue(Integer.class) == null){
                                         Toast.makeText(getApplicationContext(), "Login in as Admin account", Toast.LENGTH_SHORT).show();
+                                    }
+                                    else {
+                                        int usertype = snapshot.getValue(Integer.class);
+
+                                        if (usertype == 0) {
+                                            // Login in success, Move to MainActivity
+                                            Intent intent = new Intent(LoginCustomerActivity.this, MainActivity.class);
+                                            startActivity(intent);
+                                            overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
+                                        } else {
+                                            Toast.makeText(getApplicationContext(), "Login in as Admin account", Toast.LENGTH_SHORT).show();
+                                        }
                                     }
                                 }
 

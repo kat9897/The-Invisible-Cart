@@ -24,6 +24,8 @@ public class All_orders_owner extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_all_orders_owner);
+        // Hide TitleBar
+        getSupportActionBar().hide();
 //        Get Owner ID
         Intent intent = getIntent();
         String uid = intent.getExtras().getString("Ownerid");
@@ -53,8 +55,8 @@ public class All_orders_owner extends AppCompatActivity {
 
             }
         });
-        ArrayAdapter arrayAdapter = new ArrayAdapter(this, android.R.layout.simple_list_item_1,orders);
-        listview_all_orders.setAdapter(arrayAdapter);
+//        ArrayAdapter arrayAdapter = new ArrayAdapter(this, android.R.layout.simple_list_item_1,orders);
+//        listview_all_orders.setAdapter(arrayAdapter);
 
     }
 }
