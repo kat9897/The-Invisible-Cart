@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">b07-final-project</string>
+    <string name="Orders">Orders</string>
+    <string name="CustomerName">Customer Name</string>
+    <string name="OrderNumber">Order #</string>
+    <string name="DateAndTime">Date and Time</string>
 </resources>

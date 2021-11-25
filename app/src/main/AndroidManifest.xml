@@ -10,6 +10,15 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.B07finalproject">
         <activity
+            android:name=".OrderPage"
+            android:exported="false"
+            android:label="@string/OrderNumber"
+            android:parentActivityName=".OrderListActivity" />
+        <activity
+            android:name=".OrderListActivity"
+            android:label="@string/Orders"
+            android:parentActivityName=".MainActivity" />
+        <activity
             android:name=".MainActivity"
             android:exported="true">
             <intent-filter>
