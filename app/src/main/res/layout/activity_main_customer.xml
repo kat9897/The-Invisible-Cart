@@ -19,7 +19,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/Customer_Order_Button"
+        android:id="@+id/customer_order_button"
         android:layout_width="280dp"
         android:layout_height="111dp"
         android:layout_marginTop="76dp"
@@ -27,7 +27,7 @@
         android:text="My Orders"
         android:textAlignment="center"
         android:textSize="60sp"
-        app:layout_constraintBottom_toTopOf="@+id/Customer_Shop_Button"
+        app:layout_constraintBottom_toTopOf="@+id/customer_shop_button"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.503"
         app:layout_constraintStart_toStartOf="parent"
@@ -35,7 +35,7 @@
         app:layout_constraintVertical_bias="0.0" />
 
     <TextView
-        android:id="@+id/Customer_Shop_Button"
+        android:id="@+id/customer_shop_button"
         android:layout_width="281dp"
         android:layout_height="109dp"
         android:text="Shop"
