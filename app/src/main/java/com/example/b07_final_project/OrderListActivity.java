@@ -24,7 +24,7 @@ public class OrderListActivity extends AppCompatActivity {
 
         ArrayList<String> orderList = new ArrayList<>();
 
-        //orderList = Singleton.getOrders();
+        //orderList = Singleton.getOrders(); Should return a arraylist of order numbers
         orderList.add("Order #1");
 
 

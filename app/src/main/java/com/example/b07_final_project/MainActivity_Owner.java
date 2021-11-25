@@ -37,7 +37,7 @@ public class MainActivity_Owner extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 // Open up another activity
-                Intent intent1 = new Intent(MainActivity_Owner.this, All_orders_owner.class);
+                Intent intent1 = new Intent(MainActivity_Owner.this, OrderListActivity.class);
                 // send this ownerid to the activity
                 intent1.putExtra("Ownerid", uid);
                 startActivity(intent1);

@@ -35,11 +35,11 @@
         <activity
             android:name=".OrderPage"
             android:exported="false"
-            android:label="@string/OrderNumber"
+            android:label="OrderNumber"
             android:parentActivityName=".OrderListActivity" />
         <activity
             android:name=".OrderListActivity"
-            android:label="@string/Orders"
+            android:label="Orders"
             android:parentActivityName=".MainActivity" />
         <activity
             android:name=".MainActivity"
