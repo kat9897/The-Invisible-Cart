@@ -1,6 +1,6 @@
 package com.example.b07_final_project;
 
-public class Singleton {
+public class Singleton implements Presenter {
 
     static Singleton ID;
 
@@ -10,6 +10,10 @@ public class Singleton {
         return ID;
     }
 
-    private Singleton() {}
+    private final Model database;
+
+    private Singleton() {
+        database = new FirebaseDatabase();
+    }
     
 }
