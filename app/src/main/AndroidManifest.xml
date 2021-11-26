@@ -12,7 +12,7 @@
         android:usesCleartextTraffic="true"
         android:windowSoftInputMode="adjustResize">
         <activity
-            android:name=".All_orders_owner"
+            android:name=".My_products_owner"
             android:exported="false" />
         <activity
             android:name=".Add_new_product_owner"
@@ -29,6 +29,15 @@
         <activity
             android:name=".SignUpCustomerActivity"
             android:exported="false" />
+        <activity
+            android:name=".OrderPage"
+            android:exported="false"
+            android:label="OrderNumber"
+            android:parentActivityName=".OrderListActivity" />
+        <activity
+            android:name=".OrderListActivity"
+            android:label="Orders"
+            android:parentActivityName=".MainActivity" />
         <activity
             android:name=".MainActivity"
             android:exported="false" />

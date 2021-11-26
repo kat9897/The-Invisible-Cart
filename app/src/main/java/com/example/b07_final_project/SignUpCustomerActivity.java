@@ -41,7 +41,8 @@ public class SignUpCustomerActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sign_up_customer);
-
+        // Hide TitleBar
+        getSupportActionBar().hide();
         mAuth = FirebaseAuth.getInstance(); // Initialize Firebase Authentication
         edtName = findViewById(R.id.edtTxtName_signincustomer);
         edtEmail = findViewById(R.id.edtTxtEmail_signincustomer);
@@ -140,7 +141,9 @@ public class SignUpCustomerActivity extends AppCompatActivity {
                             FirebaseUser user = mAuth.getCurrentUser();
                             Toast.makeText(SignUpCustomerActivity.this,"Account Created",Toast.LENGTH_LONG).show();
                             finish();
-                            startActivity(new Intent(SignUpCustomerActivity.this, MainActivity.class));
+                            Intent intent = new Intent(SignUpCustomerActivity.this, MainActivity.class);
+                            intent.putExtra("Userid", uid);
+                            startActivity(intent);
                             overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
                         } else {
                             // If sign in fails, display a message to the user.
