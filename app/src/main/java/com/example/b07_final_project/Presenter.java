@@ -4,6 +4,13 @@ import java.util.ArrayList;
 
 public interface Presenter {
 
+    void Update(); // to be called exclusively by the Model (database) when the database changes
+
+    void addView(View view); // please call this in the onResume() method of every View
+    void removeView(View view); // please call this in the onPause() method of every View
+    // the parameter should be "this"
+    // please also reload any database items displayed during the onResume() method of every View
+
     Boolean ownerAccountExists(String email);
     Boolean customerAccountExists(String email);
 
@@ -50,6 +57,14 @@ public interface Presenter {
     String getCurrentStore();
     // returns the name of the store now being viewed by a customer
 
+    int viewOrder();
+    // sets what order a customer or owner is currently viewing
+    // use with empty string to view no order
+    // returns the ID of the order now being viewed
+    // can only view order in the logged in owner's store or the customer's currently viewed store
+    int getCurrentOrder();
+    // returns the ID of the order now being viewed
+
     ArrayList<Integer> getProducts(String storeName);
     ArrayList<Integer> getProducts(int orderID);
     ArrayList<Integer> getProducts();
@@ -74,11 +89,11 @@ public interface Presenter {
     int removeProduct(int productID);
     // removes a product from the logged in owner's store
     // returns 0 if removed successfully, 1 otherwise
-    int addProduct(int productID, int quantity, int orderID);
-    // adds a new product to specified order
+    int addProduct(int productID, int quantity);
+    // adds a new product to currently viewed order
     // returns 0 if added successfully, 1 otherwise
-    int updateProduct(int productID, int quantity, int orderID);
-    // updates quantity of a product in specified order
+    int updateProduct(int productID, int quantity);
+    // updates quantity of a product in currently viewed order
     // update to 0 to remove the product from the order
     // returns 0 if updated successfully, 1 otherwise
 
@@ -86,8 +101,10 @@ public interface Presenter {
     // if owner is logged in, returns a list of IDs of orders for the store
     // if customer is logged in, returns a list of IDs of orders the customer has placed
 
-    int UpdateOrderStatus(int orderID, int status);
+    int UpdateOrderStatus(int status, int orderID);
+    int UpdateOrderStatus(int status);
     // updates status of an order at the logged in owner's store
+    // defaults to currently viewed order if no ID specified
     // returns 0 if updated successfully (including no change in status), or 1 if not
 
     ArrayList<String> getStores();
@@ -95,6 +112,7 @@ public interface Presenter {
 
     int createOrder();
     // returns the ID of a new order for the logged in customer at the store they're currently viewing
+    // also sets the new order as the currently viewed order
     int deleteOrder(int orderID);
     // deletes the specified order for the logged in customer
 

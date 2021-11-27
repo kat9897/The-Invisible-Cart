@@ -2,9 +2,9 @@ package com.example.b07_final_project;
 
 public class Singleton implements Presenter {
 
-    static Singleton ID;
+    static Presenter ID;
 
-    static Singleton getID() {
+    static Presenter getID() {
         if (ID == null)
             ID = new Singleton();
         return ID;
