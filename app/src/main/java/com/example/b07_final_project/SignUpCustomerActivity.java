@@ -141,7 +141,9 @@ public class SignUpCustomerActivity extends AppCompatActivity {
                             FirebaseUser user = mAuth.getCurrentUser();
                             Toast.makeText(SignUpCustomerActivity.this,"Account Created",Toast.LENGTH_LONG).show();
                             finish();
-                            startActivity(new Intent(SignUpCustomerActivity.this, MainActivity.class));
+                            Intent intent = new Intent(SignUpCustomerActivity.this, MainActivity.class);
+                            intent.putExtra("Userid", uid);
+                            startActivity(intent);
                             overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
                         } else {
                             // If sign in fails, display a message to the user.

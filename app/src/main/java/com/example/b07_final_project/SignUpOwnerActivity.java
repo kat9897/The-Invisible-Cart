@@ -152,7 +152,9 @@ public class SignUpOwnerActivity extends AppCompatActivity {
                             FirebaseUser user = mAuth.getCurrentUser();
                             Toast.makeText(SignUpOwnerActivity.this,"Account Created",Toast.LENGTH_LONG).show();
                             finish();
-                            startActivity(new Intent(SignUpOwnerActivity.this, MainActivity_Owner.class));
+                            Intent intent = new Intent(SignUpOwnerActivity.this, MainActivity_Owner.class);
+                            intent.putExtra("Ownerid", uid);
+                            startActivity(intent);
                             overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
                         } else {
                             // If sign in fails, display a message to the user.

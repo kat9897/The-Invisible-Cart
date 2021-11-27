@@ -130,7 +130,7 @@ public class LoginOwnerActivity extends AppCompatActivity {
                                 @Override
                                 public void onDataChange(@NonNull DataSnapshot snapshot) {
                                     if (snapshot.getValue(Integer.class) == null){
-                                        Toast.makeText(getApplicationContext(), "Login in as Admin account", Toast.LENGTH_SHORT).show();
+                                        Toast.makeText(getApplicationContext(), "Login in as Customer account", Toast.LENGTH_SHORT).show();
                                     }
                                     else {
                                         int usertype = snapshot.getValue(Integer.class);
