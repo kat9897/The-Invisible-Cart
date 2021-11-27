@@ -4,6 +4,8 @@ import java.util.ArrayList;
 
 public interface Model {
 
+    // in general, return null if no such object exists
+
     Customer getCustomer(String email);
     Owner getOwner(String email);
     Store getStore(String storeName);
@@ -33,7 +35,7 @@ public interface Model {
     // note: these 2 should also add/remove the order from the customer's order list
     // customer's order list must contain orderID and storeName for the order
 
-    void saveProduct(Product product, String storeName);
-    void removeProduct(Product product, String storeName);
+    void saveProduct(Product_ product, String storeName);
+    void removeProduct(Product_ product, String storeName);
 
 }

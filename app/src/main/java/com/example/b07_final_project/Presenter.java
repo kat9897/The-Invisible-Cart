@@ -26,23 +26,17 @@ public interface Presenter {
 
     int createOwnerAccountAndStore(String ownerEmail, String ownerName, String password, String phoneNumber, String storeName);
     int createOwnerAccountAndStore(String ownerEmail, String ownerName, String password, String phoneNumber);
-    // default store name if not specified is "[ownerName]'s Store". Can Be Updated later.
+    // default store name if not specified is "[ownerName]'s Store". Store name cannot be updated later.
     // if account is created also logs you into that account
-    // int return value is 0 if account created successfully, 1 if not
+    // int return value is 0 if account created successfully, 1 if not, 2 if store name is already taken
 
     int updateOwnerAccount(String ownerEmail, String ownerName, String password, String phoneNumber);
-    int updateStoreName(String storeName);
-    int updateOwnersStoreName(String ownerEmail); // purely an alternative to updateStoreName if it's easier
     // acts on the currently logged in owner
     // int return value is 0 if account updated successfully, 1 if not
 
     int createCustomerAccount(String email, String name, String password);
     // if account is created also logs you into that account
     // int return value is 0 if account created successfully, 1 if not
-
-    int updateCustomerAccount(String email, String name, String password);
-    // acts on the currently logged in customer
-    // int return value is 0 if account updated successfully, 1 if not
 
     String getEmail(); // works for owners or customers
     String getName(); // works for owners or customers
