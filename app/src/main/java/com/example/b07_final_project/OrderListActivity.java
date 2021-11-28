@@ -42,7 +42,7 @@ public class OrderListActivity extends AppCompatActivity {
         // TODO  --> Find all values of products
         orderList.add("Order #1");
 
-        firebaseDatabase.child("Owner").child(uid).child(uid).child("products").addListenerForSingleValueEvent(new ValueEventListener() {
+        firebaseDatabase.child("Owner").child(uid).child("products").addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 String order = snapshot.getValue(String.class);
