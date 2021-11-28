@@ -1,7 +1,5 @@
 package com.example.b07_final_project;
 
-import android.view.View;
-
 import java.util.ArrayList;
 
 public interface Presenter {
