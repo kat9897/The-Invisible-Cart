@@ -1,4 +1,5 @@
 <resources>
     <string name="app_name">b07-final-project</string>
     <string name="add_product_name_hint">Product Name</string>
+    <string name="test">Testing</string>
 </resources>
