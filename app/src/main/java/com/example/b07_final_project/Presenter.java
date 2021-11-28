@@ -46,15 +46,16 @@ public interface Presenter {
 
     String viewStore(String storeName);
     // sets what store a customer currently viewing
+    // sets customer to not be viewing an order
     // use with empty string to view no store
     // returns the name of the store now being viewed
     String getCurrentStore();
     // returns the name of the store now being viewed by a customer
 
-    int viewOrder();
+    int viewOrder(int orderID);
     // sets what order a customer or owner is currently viewing
-    // use with empty string to view no order
-    // returns the ID of the order now being viewed
+    // use with value -1 to view no order
+    // returns the ID of the order now being viewed, or -1 if it can't
     // can only view order in the logged in owner's store or the customer's currently viewed store
     int getCurrentOrder();
     // returns the ID of the order now being viewed
@@ -79,24 +80,19 @@ public interface Presenter {
     // returns ID of new product if added successfully, or -1 if product wasn't added
     int updateProduct(int productID, String productName, String productBrand, float productPrice);
     // updates a product on the logged in owner's store
+    // productID identifies product, and does not change
     // returns 0 if updated successfully, 1 otherwise
-    int removeProduct(int productID);
-    // removes a product from the logged in owner's store
-    // returns 0 if removed successfully, 1 otherwise
     int addProduct(int productID, int quantity);
-    // adds a new product to currently viewed order
+    // adds a new product to currently viewed order for logged in customer
+    // if product already exists in order, updates quantity of product in that order
     // returns 0 if added successfully, 1 otherwise
-    int updateProduct(int productID, int quantity);
-    // updates quantity of a product in currently viewed order
-    // update to 0 to remove the product from the order
-    // returns 0 if updated successfully, 1 otherwise
 
     ArrayList<Integer> getOrders();
     // if owner is logged in, returns a list of IDs of orders for the store
     // if customer is logged in, returns a list of IDs of orders the customer has placed
 
-    int UpdateOrderStatus(int status, int orderID);
-    int UpdateOrderStatus(int status);
+    int updateOrderStatus(int status, int orderID);
+    int updateOrderStatus(int status);
     // updates status of an order at the logged in owner's store
     // defaults to currently viewed order if no ID specified
     // returns 0 if updated successfully (including no change in status), or 1 if not
@@ -107,8 +103,6 @@ public interface Presenter {
     int createOrder();
     // returns the ID of a new order for the logged in customer at the store they're currently viewing
     // also sets the new order as the currently viewed order
-    int deleteOrder(int orderID);
-    // deletes the specified order for the logged in customer
 
 }
 

@@ -5,6 +5,6 @@ public class Product_ {
 	int productID; // unique within its store
 	String name;
 	String brand;
-	int price;
+	float price;
 
 }
