@@ -3,8 +3,8 @@ package com.example.b07_final_project;
 import java.util.ArrayList;
 import java.util.regex.Pattern;
 
-public class Singleton implements Presenter {
-
+public class Singleton{
+    /*
     // Access to Singleton in section below
 
     static Presenter ID;
@@ -640,5 +640,7 @@ public class Singleton implements Presenter {
     }
     // returns the ID of a new order for the logged in customer at the store they're currently viewing
     // also sets the new order as the currently viewed order
+
+     */
 
 }
