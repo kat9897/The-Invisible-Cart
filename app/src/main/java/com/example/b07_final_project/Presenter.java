@@ -8,6 +8,10 @@ public interface Presenter {
 
     int save(IDobj obj);
 
+    Customer loginCustomer(String email, String password);
+
+    Boolean customerExists(String email);
+    Customer newCustomer(String email, String name, String password);
 
     /*
 

@@ -27,7 +27,7 @@ public class MainActivity extends AppCompatActivity {
 
         // Get ownerid to check who logged in
         Intent intent = getIntent();
-        String uid = intent.getExtras().getString("Userid");
+        //String uid = intent.getExtras().getString("Userid");
 
 
         // When this button is clicked perform the following task

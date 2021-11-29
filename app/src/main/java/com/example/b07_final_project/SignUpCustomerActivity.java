@@ -15,6 +15,7 @@ import android.widget.EditText;
 import android.widget.Switch;
 import android.widget.Toast;
 
+/*
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
@@ -22,6 +23,8 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+ */
+
 
 import java.util.regex.Pattern;
 
@@ -33,9 +36,10 @@ public class SignUpCustomerActivity extends AppCompatActivity {
     public static final Pattern VALID_EMAIL_ADDRESS_REGEX = Pattern.compile("^[A-Z0-9._%+-]+@[A-Z0-9.-]+\\.[A-Z]{2,6}$", Pattern.CASE_INSENSITIVE);
     private String name;
 
+    Presenter singleton = Singleton.getID();
 
-    FirebaseAuth mAuth;
-    DatabaseReference firebaseDatabase;
+    //FirebaseAuth mAuth;
+    //DatabaseReference firebaseDatabase;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,13 +47,14 @@ public class SignUpCustomerActivity extends AppCompatActivity {
         setContentView(R.layout.activity_sign_up_customer);
         // Hide TitleBar
         getSupportActionBar().hide();
-        mAuth = FirebaseAuth.getInstance(); // Initialize Firebase Authentication
+        //mAuth = FirebaseAuth.getInstance(); // Initialize Firebase Authentication
         edtName = findViewById(R.id.edtTxtName_signincustomer);
         edtEmail = findViewById(R.id.edtTxtEmail_signincustomer);
         edtPassword = findViewById(R.id.edtTxtPassword_signincustomer);
         edtConfirmPassword = findViewById(R.id.edtTxtConfirmPassword_signincustomer);
         btnSignUp = findViewById(R.id.btnsignIn_signincustomer);
         showpassword = findViewById(R.id.showpassword);
+
 
 
         showpassword.setOnClickListener(new View.OnClickListener() {
@@ -113,6 +118,27 @@ public class SignUpCustomerActivity extends AppCompatActivity {
 
 
     private void signIn(String email, String password) {
+
+        if (singleton.customerExists(email)){
+
+            // customer already exists
+
+            return;
+        }
+
+        singleton.newCustomer(email, name, password);
+        Customer customer = singleton.loginCustomer(email, password);
+
+        // login succeeded
+        Intent intent = new Intent(SignUpCustomerActivity.this, MainActivity.class);
+
+        startActivity(intent);
+        overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
+
+    }
+
+    /*
+    private void signIn(String email, String password) {
         //https://firebase.google.com/docs/auth/android/password-auth#java_3
         mAuth.createUserWithEmailAndPassword(email, password)
                 .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
@@ -153,6 +179,8 @@ public class SignUpCustomerActivity extends AppCompatActivity {
                     }
                 });
     }
+    */
+
     @Override
     public void finish() {
         super.finish();

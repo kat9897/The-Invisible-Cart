@@ -21,6 +21,10 @@ public class Singleton implements Presenter {
         database = new FirebaseModel();
     }
 
+    // project state variables
+
+    private IDobj currentLogin = null;
+
     // methods
 
     @Override
@@ -28,6 +32,68 @@ public class Singleton implements Presenter {
         database.saveIDobj(obj);
         return 0;
     }
+
+    @Override
+    public Customer loginCustomer(String email, String password) {
+
+        ArrayList<IDobj> customers = database.getAllIDobj(IDobj.CUSTOMER);
+
+        for (IDobj o : customers){
+            Customer c = (Customer) o;
+
+            if (c.getEmail().equals(email)){
+                if (c.getPassword().equals(password)) {
+                    currentLogin = database.getIDobj(c); // get a new one so it's not same as return
+                    return c;
+                } else
+                    return null;
+            }
+        }
+        return null;
+    }
+
+
+    @Override
+    public Boolean customerExists(String email){
+
+        ArrayList<IDobj> customers = database.getAllIDobj(IDobj.CUSTOMER);
+
+        for (IDobj o : customers){
+            Customer c = (Customer) o;
+
+            if (c.getEmail().equals(email))
+                return true;
+        }
+        return false;
+    }
+
+    @Override
+    public Customer newCustomer(String email, String name, String password) {
+
+        Customer customer = (Customer) database.newIDobj(IDobj.CUSTOMER);
+
+        customer.setEmail(email);
+        customer.setName(name);
+        customer.setPassword(password);
+
+        customer.save();
+
+        return customer;
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 }
