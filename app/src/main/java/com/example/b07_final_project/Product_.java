@@ -1,10 +1,42 @@
 package com.example.b07_final_project;
 
-public class Product_ {
+public class Product_ extends IDobj {
 
-	int productID; // unique within its store
-	String name;
-	String brand;
-	float price;
+	private String name;
+	private String brand;
+	private double price;
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public String getBrand() {
+		return brand;
+	}
+
+	public void setBrand(String brand) {
+		this.brand = brand;
+	}
+
+	public double getPrice() {
+		return price;
+	}
+
+	public void setPrice(double price) {
+		this.price = price;
+	}
+
+	@Override
+	public int getType() {
+		return IDobj.PRODUCT;
+	}
+
+	public Product_(String ID) {
+		super(ID);
+	}
 
 }

@@ -4,6 +4,27 @@ import java.util.ArrayList;
 
 public interface Model {
 
+    IDobj newIDobj(int type);
+    // creates object in database
+    // prereq: none
+
+    void saveIDobj(IDobj obj);
+    // prereq: object exists in database (deleted objects can't be saved)
+
+    IDobj getIDobj(int type, String ID);
+    IDobj getIDobj(IDobj obj);
+    ArrayList<IDobj> getAllIDobj(int type);
+
+    void addRelation(IDobj obj1, IDobj obj2);
+    ArrayList<IDobj> getRelations(IDobj obj, int type);
+
+    void deleteIDobj (IDobj obj);
+
+
+
+
+    /*
+
     // in general, return null if no such object exists
 
     Customer getCustomer(String email);
@@ -40,4 +61,9 @@ public interface Model {
 
     void saveProductToOrder(int productID, int quantity, Order order);
     // if quantity is 0, remove from order
+
+
+
+
+     */
 }

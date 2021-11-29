@@ -5,6 +5,52 @@ import java.util.regex.Pattern;
 
 public class Singleton implements Presenter {
 
+    // Access to Singleton
+
+    static Presenter ID;
+
+    static Presenter getID() {
+        if (ID == null)
+            ID = new Singleton();
+        return ID;
+    }
+
+    private final Model database;
+
+    private Singleton() {
+        database = new FirebaseModel();
+    }
+
+    // methods
+
+    @Override
+    public int save(IDobj obj) {
+        database.saveIDobj(obj);
+        return 0;
+    }
+
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/*
+
+public class Singleton implements Presenter {
+
     // Access to Singleton in section below
 
     static Presenter ID;
@@ -642,3 +688,5 @@ public class Singleton implements Presenter {
     // also sets the new order as the currently viewed order
 
 }
+
+*/
