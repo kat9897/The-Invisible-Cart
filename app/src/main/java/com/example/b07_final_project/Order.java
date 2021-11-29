@@ -1,12 +1,16 @@
 package com.example.b07_final_project;
+import java.util.ArrayList;
 
 public class Order {
-    private int orderId;                    // unique order ID
+    private String orderId;                 // unique order ID
     private Customers customer;             // corresponding customer of the order
     private int status;                     // 0 : processing, 1 : completed (ready for pickup)
-    private ArrayList<Product> products;    // list of products (this is in Katrina's branch)
+    private ArrayList<Product> products;    // list of products
 
-    public Order(int orderId, Customers customer, int status, ArrayList<Product> products) {
+    public Order() {
+    }
+
+    public Order(String orderId, Customers customer, int status, ArrayList<Product> products) {
         this.orderId = orderId;
         this.customer = customer;
         this.status = status;
@@ -14,13 +18,13 @@ public class Order {
     }
 
     // Getters
-    public int getOrderId() { return orderId; }
+    public String getOrderId() { return orderId; }
     public Customers getCustomer() { return customer; }
     public int getStatus() { return status; }
     public ArrayList<Product> getProducts() { return products; }
 
     // Setters
-    public void setOrderId(int id) { this.orderId = orderId; }
+    public void setOrderId(String id) { this.orderId = orderId; }
     public void setCustomer(String name) { this.customer = customer; }
     public void setStatus(int price) { this.status = status; }
     public void setProducts(String brand) { this.products = products; }
@@ -38,22 +42,22 @@ public class Order {
         }
     }
 
-    public String printProducts() {
-        String SEPARATOR = "";
-        StringBuilder compiledString = new StringBuilder();
-        for (product : products) {
-            compiledString.append(SEPARATOR);
-            compiledString.append(product.getName());
-            SEPARATOR = ", ";
-        }
-        String actualString = compiledString.toString();
-        return actualString;
-    }
-
-    @Override
-    public String toString() {
-        return "Order id: " + getOrderId() + ", by customer: " + getCustomer().getName() + ", " +
-                "with order status: " + statusMeaning() +
-                ", and list of products: " + printProducts() + ".";
-    }
+//    public String printProducts(Order order) {
+//        String SEPARATOR = "";
+//        StringBuilder compiledString = new StringBuilder();
+//        for (product : order.products) {
+//            compiledString.append(SEPARATOR);
+//            compiledString.append(product.getName());
+//            SEPARATOR = ", ";
+//        }
+//        String actualString = compiledString.toString();
+//        return actualString;
+//    }
+//
+//    @Override
+//    public String toString() {
+//        return "Order id: " + getOrderId() + ", by customer: " + getCustomer().getName() + ", " +
+//                "with order status: " + statusMeaning() +
+//                ", and list of products: " + printProducts() + ".";
+//    }
 }
