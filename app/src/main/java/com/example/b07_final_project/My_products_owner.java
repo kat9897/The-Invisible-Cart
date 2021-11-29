@@ -3,14 +3,10 @@ package com.example.b07_final_project;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
-import android.util.Log;
-import android.widget.TextView;
+import android.widget.ListView;
 
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
+import java.util.ArrayList;
+
 
 public class My_products_owner extends AppCompatActivity {
 
@@ -20,5 +16,12 @@ public class My_products_owner extends AppCompatActivity {
         setContentView(R.layout.activity_my_products_owner);
         // Hide TitleBar
         getSupportActionBar().hide();
+        ListView listView = (ListView) findViewById(R.id.listProduct);
+
+        ArrayList<Product_Card> productList = new ArrayList<>();
+        productList.add(new Product_Card("name", "price", "quantity"));
+
+        CustomListAdapter adapter = new CustomListAdapter(this, R.layout.cardview_product, productList);
+        listView.setAdapter(adapter);
     }
 }
