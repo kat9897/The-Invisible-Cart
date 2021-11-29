@@ -12,6 +12,9 @@
         android:usesCleartextTraffic="true"
         android:windowSoftInputMode="adjustResize">
         <activity
+            android:name=".AllStoreActivity"
+            android:exported="false" />
+        <activity
             android:name=".My_products_owner"
             android:exported="false" />
         <activity
