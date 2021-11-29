@@ -159,7 +159,7 @@ public class LoginCustomerActivity extends AppCompatActivity {
                             String uid = task.getResult().getUser().getUid();
 
                             firebaseDatabase = FirebaseDatabase.getInstance().getReference();
-                            firebaseDatabase.child("Users").child("Customer").child(uid).child(uid).child("userType").addListenerForSingleValueEvent(new ValueEventListener() {
+                            firebaseDatabase.child("Customer").child(uid).child("userType").addListenerForSingleValueEvent(new ValueEventListener() {
                                 @Override
                                 public void onDataChange(@NonNull DataSnapshot snapshot) {
                                     if (snapshot.getValue(Integer.class) == null){
