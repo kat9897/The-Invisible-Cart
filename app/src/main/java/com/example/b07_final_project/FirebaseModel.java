@@ -93,7 +93,7 @@ public class FirebaseModel implements Model{
 
         switch (type){
             case IDobj.ORDER:
-                obj = new Order(key);
+                obj = new Order_(key);
             break;
             case IDobj.OWNER:
                 obj = new Owner(key);
@@ -121,7 +121,7 @@ public class FirebaseModel implements Model{
 
         switch (obj.getType()) {
             case IDobj.ORDER:
-                Order order = (Order) obj;
+                Order_ order = (Order_) obj;
                 refField = ref.child("Status");
                 refField.setValue(order.getStatus());
                 break;
@@ -177,7 +177,7 @@ public class FirebaseModel implements Model{
 
         switch (type) {
             case IDobj.ORDER:
-                Order order = new Order(ID);
+                Order_ order = new Order_(ID);
                 obj = order;
                 snapField = snap.child("Status");
                 order.setStatus((int) snapField.getValue());

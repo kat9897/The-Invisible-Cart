@@ -1,6 +1,6 @@
 package com.example.b07_final_project;
 
-public class Order extends IDobj {
+public class Order_ extends IDobj {
 
     private int status;
 
@@ -17,7 +17,7 @@ public class Order extends IDobj {
 		return IDobj.ORDER;
 	}
 
-	public Order(String ID) {
+	public Order_(String ID) {
 		super(ID);
 	}
 
