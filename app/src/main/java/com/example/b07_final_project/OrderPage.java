@@ -36,13 +36,13 @@ public class OrderPage extends AppCompatActivity {
         getSupportActionBar().hide();
 
         // Set the Order Number, Customer Email, Total Price from the Clicked Order ID on this Page
-        orderHeading = findViewById(R.id.heading_orders2);
-        customerName = findViewById(R.id.custName);
-        totalPrice = findViewById(R.id.total);
-        Intent intent = getIntent();
-        orderHeading.setText(intent.getExtras().getString("orderHeading"));
-        customerName.setText(intent.getExtras().getString("customerName"));
-        totalPrice.setText(intent.getExtras().getString("totalPrice"));
+        //orderHeading = findViewById(R.id.heading_orders2);
+        //customerName = findViewById(R.id.custName);
+        //totalPrice = findViewById(R.id.total);
+        //Intent intent = getIntent();
+        //orderHeading.setText(intent.getExtras().getString("orderHeading"));
+        //customerName.setText(intent.getExtras().getString("customerName"));
+        //totalPrice.setText(intent.getExtras().getString("totalPrice"));
 
         // List each items in the Product + Price + Quantity
 

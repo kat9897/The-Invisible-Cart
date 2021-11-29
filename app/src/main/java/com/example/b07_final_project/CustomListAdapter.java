@@ -41,9 +41,9 @@ public class CustomListAdapter extends ArrayAdapter<Product_Card> {
         LayoutInflater inflater = LayoutInflater.from(mContext);
         convertView = inflater.inflate(mResource, parent, false);
 
-        TextView tvName = (TextView) convertView.findViewById(R.id.productName);
-        TextView tvPrice = (TextView) convertView.findViewById(R.id.productPrice);
-        TextView tvQuantity = (TextView) convertView.findViewById(R.id.productQuantity);
+        TextView tvName = (TextView) convertView.findViewById(R.id.product_name);
+        TextView tvPrice = (TextView) convertView.findViewById(R.id.product_price);
+        TextView tvQuantity = (TextView) convertView.findViewById(R.id.product_quantity);
 
         tvName.setText(name);
         tvPrice.setText(price);

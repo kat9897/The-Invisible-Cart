@@ -14,14 +14,15 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 public class OrderListActivity extends AppCompatActivity {
-    // initializing everything :
-    private ListView listView;
 
+
+    private ListView listView;
+    private DatabaseReference firebaseDatabase;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -33,29 +34,25 @@ public class OrderListActivity extends AppCompatActivity {
         Intent intent = getIntent();
         String uid = intent.getExtras().getString("Ownerid");
 
-        //TODO  -->
-        // go to database -> Owner -> uid -> List of Orders -> Order ID
-        // get the order IDs and save them in arraylist
-        // then present these order IDs to ListView on the app
-
         listView = (ListView) findViewById(R.id.OrderList);
-        ArrayList<String> orderIdList = new ArrayList<String>();
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, R.layout.list_item, orderIdList);
-        listView.setAdapter(adapter);
+        ArrayList<String> orderList = new ArrayList<>();
 
-        DatabaseReference ref = FirebaseDatabase.getInstance().getReference().child("Test_Stores");
-        ref.addValueEventListener(new com.google.firebase.database.ValueEventListener() {
+        firebaseDatabase = FirebaseDatabase.getInstance().getReference();;
+        //DatabaseReference ref = FirebaseDatabase.getInstance().getReference();
+        // TODO  --> Find all values of products
+        orderList.add("Order #1");
+
+        firebaseDatabase.child("Owner").child(uid).child("products").addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
-            public void onDataChange(final DataSnapshot dataSnapshot) {
-                orderIdList.clear();
-                for (DataSnapshot ds : dataSnapshot.getChildren()) {
-                    // get the order ID of each order
-                    String order_id = ds.child("Orders").child("Order_Id").getValue(String.class);
-                    // store order ID to the array list of IDs
-                    orderIdList.add(order_id);
-                }
-                // now the orderIdList should be filled with order IDs
-                adapter.notifyDataSetChanged();
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                String order = snapshot.getValue(String.class);
+                //for(DataSnapshot child:snapshot.getChildren()) {
+                // Order orders = child.getValue(Order.class)
+                // String name = product.getName();
+                // String brand = product.getBrand();
+                // String price = product.getPrice();
+                //Save all in Array
+//            }
             }
 
             @Override
@@ -64,61 +61,16 @@ public class OrderListActivity extends AppCompatActivity {
             }
         });
 
+        ArrayAdapter arrayAdapter = new ArrayAdapter(this,android.R.layout.simple_list_item_1,orderList);
+
+        listView.setAdapter(arrayAdapter);
+
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
-            public void onItemClick(AdapterView<?> adapterView, View view, int position, long id) {
-                // get the order ID
-                String clickedOrderId = listView.getAdapter().getItem(position).toString();
-
-                // get an Order reference to that Order ID (to access Customer Email and Products shopped)
-                // Order currentOrder = getOrder(clickedOrderId);
-
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                 Intent intent = new Intent(getApplicationContext(), OrderPage.class);
-                intent.putExtra("orderHeading", clickedOrderId);
-                // intent.putExtra("customerName", currentOrder.getCustomer().getEmail());
-                // intent.putExtra("totalPrice", singleton.orderTotal());
                 startActivity(intent);
             }
         });
     }
 }
-
-    // Function to get a copy of the Order given an Order ID
-//    public Order getOrder(String orderId) {
-//        Order copyOrder = new Order();
-//        DatabaseReference ref = FirebaseDatabase.getInstance().getReference().child("Test_Stores");
-//        ref.addValueEventListener(new com.google.firebase.database.ValueEventListener() {
-//            @Override
-//            public void onDataChange(final DataSnapshot dataSnapshot) {
-//                // iterate through each store
-//                for (DataSnapshot ds : dataSnapshot.getChildren()) {
-//                    // iterate through each store's orders to find the order id
-//                    DatabaseReference ref2 = ref.child("Orders");
-//                    ref2.addValueEventListener(new com.google.firebase.database.ValueEventListener() {
-//                        @Override
-//                        public void onDataChange(@NonNull DataSnapshot snapshot) {
-//                            for (DataSnapshot ds2 : dataSnapshot.getChildren()) {
-//                                String currentOrderId = ds2.child("Order_Id").getValue(String.class);
-//                                if (orderId.equals(currentOrderId)) {
-//                                    // FOUND THE ID!
-//                                    // Copy all the data
-//                                    copyOrder.setOrderId(orderId);
-//                                    copyOrder.setCustomer(ds2.child("Customer").getValue(Customers.class));
-//                                    copyOrder.setProducts(ds2.child("Products").getValue(Product.class));
-//                                    copyOrder.setStatus(ds2.child("Status").getValue(Integer.class));
-//                                }
-//                            }
-//                        }
-//
-//                        @Override
-//                        public void onCancelled(@NonNull DatabaseError error) {
-//                        }
-//                    });
-//                }
-//            }
-//            @Override
-//            public void onCancelled(@NonNull DatabaseError error) {
-//            });
-//        return copyOrder;
-//    }
-//}
