@@ -11,7 +11,7 @@
         android:id="@+id/edtTxtName_signincustomer"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="290dp"
+        android:layout_marginTop="180dp"
         android:ems="10"
         android:hint="Name"
         android:inputType="textEmailAddress"
@@ -69,7 +69,7 @@
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/showpassword"
-        app:layout_constraintVertical_bias="1.0" />
+        app:layout_constraintVertical_bias="0.96" />
 
     <CheckBox
         android:id="@+id/showpassword"

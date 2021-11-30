@@ -1,13 +1,16 @@
-package com.example.b07_final_project.customer_dashboard;
+package com.example.b07_final_project;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.text.method.PasswordTransformationMethod;
 import android.view.View;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
@@ -15,8 +18,7 @@ import android.widget.EditText;
 import android.widget.Switch;
 import android.widget.Toast;
 
-import com.example.b07_final_project.owner_dashboard.Login_Owner;
-import com.example.b07_final_project.R;
+/*
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
@@ -26,6 +28,7 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+*/
 
 import java.util.regex.Pattern;
 
@@ -37,8 +40,10 @@ public class LoginCustomerActivity extends AppCompatActivity {
     CheckBox showpassword;
     public static final Pattern VALID_EMAIL_ADDRESS_REGEX = Pattern.compile("^[A-Z0-9._%+-]+@[A-Z0-9.-]+\\.[A-Z]{2,6}$", Pattern.CASE_INSENSITIVE);
 
-    FirebaseAuth mAuth;
-    DatabaseReference firebaseDatabase;
+    //FirebaseAuth mAuth;
+    //DatabaseReference firebaseDatabase;
+
+    Presenter singleton; // for accessing Singleton (Presenter)
 
 
     @Override
@@ -48,7 +53,7 @@ public class LoginCustomerActivity extends AppCompatActivity {
         // Hide TitleBar
         getSupportActionBar().hide();
 
-        mAuth = FirebaseAuth.getInstance(); //  Initialize Firebase Authentication
+        //mAuth = FirebaseAuth.getInstance(); //  Initialize Firebase Authentication
         edtEmail = findViewById(R.id.edtTxtEmailAddress_customerlogin);
         edtPassword = findViewById(R.id.edtTxtPassword_customerlogin);
         btnLogin = findViewById(R.id.btnLogin_customerlogin);
@@ -56,11 +61,14 @@ public class LoginCustomerActivity extends AppCompatActivity {
         showpassword = findViewById(R.id.showpassword_login);
         swtchtoOwnerMode = findViewById(R.id.switchtoOwnerMode);
 
+        //initialize Singleton (Presenter)
+        singleton = Singleton.getID();
+
         swtchtoOwnerMode.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 if (swtchtoOwnerMode.isChecked()){
-                    Intent intent = new Intent(LoginCustomerActivity.this, Login_Owner.class );
+                    Intent intent = new Intent(LoginCustomerActivity.this, LoginOwnerActivity.class );
                     startActivity(intent);
                     overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
                 }
@@ -109,13 +117,37 @@ public class LoginCustomerActivity extends AppCompatActivity {
         btnSignUp.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(LoginCustomerActivity.this, SignUpCustomerActivity.class);
+                Intent intent = new Intent(LoginCustomerActivity.this,SignUpCustomerActivity.class);
                 startActivity(intent);
                 overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
             }
         });
     }
 
+
+
+    private void login(String email, String password) {
+
+        Customer customer = singleton.loginCustomer(email, password);
+
+        if (customer == null){
+
+            // login failed
+
+        } else {
+
+            // login succeeded
+            Intent intent = new Intent(LoginCustomerActivity.this, MainActivity.class);
+
+            startActivity(intent);
+            overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
+
+        }
+
+
+    }
+
+    /*
     // Firebase Authentication
     private void login(String email, String password) {
         //https://firebase.google.com/docs/auth/android/password-auth#java_3
@@ -138,7 +170,7 @@ public class LoginCustomerActivity extends AppCompatActivity {
 
                                         if (usertype == 0) {
                                             // Login in success, Move to MainActivity
-                                            Intent intent = new Intent(LoginCustomerActivity.this, Main_Customer.class);
+                                            Intent intent = new Intent(LoginCustomerActivity.this, MainActivity.class);
                                             intent.putExtra("Userid", uid);
 
                                             startActivity(intent);
@@ -164,6 +196,9 @@ public class LoginCustomerActivity extends AppCompatActivity {
                     }
                 });
     }
+    */
+
+
     @Override
     public void finish() {
         super.finish();

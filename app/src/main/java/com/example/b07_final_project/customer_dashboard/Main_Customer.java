@@ -26,6 +26,7 @@ public class Main_Customer extends AppCompatActivity {
         allStoresBtn = findViewById(R.id.AllStoresBtn);
         myOrdersBtn = findViewById(R.id.MyOrdersBtn);
 
+
         allStoresBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
