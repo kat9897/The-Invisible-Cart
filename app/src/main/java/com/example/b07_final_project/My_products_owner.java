@@ -6,6 +6,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
 import android.widget.ListView;
@@ -48,6 +50,18 @@ public class My_products_owner extends AppCompatActivity {
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
 
+            }
+        });
+
+        OwnerProducts.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int position, long id) {
+                //TODO When an Item Id is clicked, it will direct the Owner to the description
+                //of the corresponding item
+
+                // String clickedStoreName = listView.getAdapter().getItem(position).toString();
+                Intent intent = new Intent(getApplicationContext(), OrderPage.class);
+                startActivity(intent);
             }
         });
 
