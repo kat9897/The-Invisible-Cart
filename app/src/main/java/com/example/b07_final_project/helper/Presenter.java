@@ -27,7 +27,7 @@ public interface Presenter {
     ArrayList<String> allCustomerOrders();
     Store getStore(Owner owner);
 
-    ArrayList<Order_> getOrders(Owner owner);
+    ArrayList<Order_> getOrders(Owner owner); // Gets orders for the store, not the owner
 
     void viewOrder(Order_ order);
 
