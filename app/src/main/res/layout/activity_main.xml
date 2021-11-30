@@ -16,36 +16,31 @@
         android:textSize="48sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        android:textColor="@color/black"/>
 
     <Button
-        android:id="@+id/customer_order_button"
-        android:layout_width="280dp"
-        android:layout_height="111dp"
-        android:layout_marginTop="76dp"
+        android:id="@+id/AllStoresBtn"
+        android:layout_width="213dp"
+        android:layout_height="126dp"
+        android:layout_marginTop="155dp"
         android:background="@drawable/btn_background"
-        android:text="My Orders"
-        android:textAlignment="center"
-        android:textSize="48sp"
-        app:layout_constraintBottom_toTopOf="@+id/customer_shop_button"
+        android:text="shop"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.503"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/customer_home"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintTop_toBottomOf="@+id/customer_home" />
 
     <Button
-        android:id="@+id/customer_shop_button"
-        android:layout_width="281dp"
-        android:layout_height="109dp"
-        android:text="Shop"
-        android:textAlignment="center"
+        android:id="@+id/MyOrdersBtn"
+        android:layout_width="213dp"
+        android:layout_height="132dp"
+        android:layout_marginTop="30dp"
+        android:layout_marginBottom="140dp"
         android:background="@drawable/btn_background"
-        android:textSize="60sp"
+        android:text="my orders"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.591" />
+        app:layout_constraintTop_toBottomOf="@+id/AllStoresBtn" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
