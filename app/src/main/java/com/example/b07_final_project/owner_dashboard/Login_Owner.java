@@ -17,8 +17,15 @@ import android.widget.Toast;
 
 import com.example.b07_final_project.R;
 import com.example.b07_final_project.customer_dashboard.LoginCustomerActivity;
+import com.example.b07_final_project.customer_dashboard.Main_Customer;
+import com.example.b07_final_project.helper.Customer;
+import com.example.b07_final_project.helper.Owner;
+import com.example.b07_final_project.helper.Presenter;
+import com.example.b07_final_project.helper.Singleton;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+
+/*
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
@@ -26,6 +33,7 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+ */
 
 import java.util.regex.Pattern;
 
@@ -37,8 +45,10 @@ public class Login_Owner extends AppCompatActivity {
     private CheckBox showpassword;
     public static final Pattern VALID_EMAIL_ADDRESS_REGEX = Pattern.compile("^[A-Z0-9._%+-]+@[A-Z0-9.-]+\\.[A-Z]{2,6}$", Pattern.CASE_INSENSITIVE);
 
-    FirebaseAuth mAuth;
-    DatabaseReference firebaseDatabase;
+    //FirebaseAuth mAuth;
+    //DatabaseReference firebaseDatabase;
+
+    Presenter singleton = Singleton.getID();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,7 +57,7 @@ public class Login_Owner extends AppCompatActivity {
         // Hide TitleBar
         getSupportActionBar().hide();
 
-        mAuth = FirebaseAuth.getInstance();
+        //mAuth = FirebaseAuth.getInstance();
 
         edtEmail = findViewById(R.id.edtTxtEmailAddress_ownerlogin);
         edtPassword =findViewById(R.id.edtTxtPassword_ownerlogin);
@@ -116,6 +126,27 @@ public class Login_Owner extends AppCompatActivity {
     }
 
     private void login(String email, String password) {
+
+        Owner owner = singleton.loginOwner(email, password);
+
+        if (owner == null){
+
+            // login failed
+
+        } else {
+
+            // login succeeded
+            Intent intent = new Intent(Login_Owner.this, Main_Owner.class);
+
+            startActivity(intent);
+            overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
+
+        }
+    }
+
+
+    /*
+    private void login(String email, String password) {
         //https://firebase.google.com/docs/auth/android/password-auth#java_3
 
         mAuth.signInWithEmailAndPassword(email, password)
@@ -165,6 +196,7 @@ public class Login_Owner extends AppCompatActivity {
                     }
                 });
     }
+    */
 
 
     @Override
