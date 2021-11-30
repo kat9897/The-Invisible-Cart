@@ -22,11 +22,21 @@ public interface Presenter {
 
     Store getStore(Owner owner);
 
-    // ArrayList<Order_> getOrders(Owner owner); (Do this later)
+    ArrayList<Order_> getOrders(Owner owner);
 
-    // Order_ viewOrder(Order_ order); (Do this later)
+    void viewOrder(Order_ order);
 
+    ArrayList<Store> allStores();
 
+    //int getQuantity(Order_ order, Product_ product);
+
+    Order_ getViewedOrder();
+
+    Customer getCustomer(Order_ order);
+
+    ArrayList<Product_> getProducts(Order_ order);
+
+    ArrayList<Product_> getProducts(Owner owner);
 
 
 

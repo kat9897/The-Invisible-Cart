@@ -25,6 +25,8 @@ public class Singleton implements Presenter {
 
     private IDobj currentLogin = null;
 
+    private IDobj currentOrder = null;
+
     // methods
 
     @Override
@@ -134,7 +136,7 @@ public class Singleton implements Presenter {
 
         return owner;
     }
-
+    //Returns the ID of the current user logged in if they are an owner. Return null otherwise.
     @Override
     public Owner getLoggedInOwner(){
         if(currentLogin.getType() == IDobj.OWNER){
@@ -143,7 +145,7 @@ public class Singleton implements Presenter {
 
         return null;
     }
-
+    //Get the store object of the store that is currently related to
     @Override
     public Store getStore(Owner owner){
             ArrayList<IDobj> owners_store = database.getRelations(owner, IDobj.STORE);
@@ -156,6 +158,89 @@ public class Singleton implements Presenter {
 
 
     }
+
+    @Override
+    public void viewOrder(Order_ order){
+        this.currentOrder = order;
+
+
+
+
+    }
+
+    @Override
+    public ArrayList<Store> allStores(){
+        ArrayList<IDobj> idobj_List = database.getAllIDobj(IDobj.STORE);
+
+        ArrayList<Store> store_List = new ArrayList<Store> ();
+
+        for(IDobj object : idobj_List){
+            store_List.add((Store)object);
+        }
+
+        return store_List;
+    }
+
+    @Override
+    public Order_ getViewedOrder(){
+        return (Order_)this.currentOrder;
+    }
+
+    @Override
+    public Customer getCustomer(Order_ order){
+        ArrayList<IDobj> orders_Customer = database.getRelations(order, IDobj.CUSTOMER);
+
+        return (Customer) orders_Customer.get(0);
+    }
+
+    @Override
+    public ArrayList<Product_> getProducts(Order_ order){
+        ArrayList<IDobj> idobj_list = database.getRelations(order, IDobj.PRODUCT);
+
+        ArrayList<Product_> product_List = new ArrayList<>();
+
+        for(IDobj object : idobj_list){
+            product_List.add((Product_)object);
+        }
+
+        return product_List;
+
+
+    }
+
+    @Override
+    public ArrayList<Product_> getProducts(Owner owner){
+        ArrayList<IDobj> idobj_list = database.getRelations(owner, IDobj.PRODUCT);
+
+        ArrayList<Product_> product_List = new ArrayList<>();
+
+        for(IDobj object : idobj_list){
+            product_List.add((Product_)object);
+        }
+
+        return product_List;
+
+
+    }
+
+    @Override
+    public ArrayList<Order_> getOrders(Owner owner){
+        ArrayList<IDobj> idobj_list = database.getRelations(owner, IDobj.ORDER);
+
+        ArrayList<Order_> product_List = new ArrayList<>();
+
+        for(IDobj object : idobj_list){
+            product_List.add((Order_)object);
+        }
+
+        return product_List;
+
+
+    }
+
+
+
+
 
 
 
