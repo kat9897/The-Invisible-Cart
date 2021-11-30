@@ -15,14 +15,22 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.example.b07_final_project.R;
+import com.example.b07_final_project.customer_dashboard.Main_Customer;
+import com.example.b07_final_project.customer_dashboard.SignUpCustomerActivity;
+import com.example.b07_final_project.helper.Customer;
+import com.example.b07_final_project.helper.Owner;
 import com.example.b07_final_project.helper.Owners;
+import com.example.b07_final_project.helper.Presenter;
+import com.example.b07_final_project.helper.Singleton;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+/*
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+ */
 
 import java.util.regex.Pattern;
 
@@ -38,9 +46,11 @@ public class SignUp_Owner extends AppCompatActivity {
     public static final Pattern VALID_EMAIL_ADDRESS_REGEX = Pattern.compile("^[A-Z0-9._%+-]+@[A-Z0-9.-]+\\.[A-Z]{2,6}$", Pattern.CASE_INSENSITIVE);
     public static final Pattern VALID_PHNNUMBER_REGEX = Pattern.compile("\\d{10}");
 
-    FirebaseAuth mAuth;
-    DatabaseReference firebaseDatabase;
-    FirebaseDatabase db;
+    //FirebaseAuth mAuth;
+    //DatabaseReference firebaseDatabase;
+    //FirebaseDatabase db;
+
+    Presenter singleton = Singleton.getID();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,7 +59,7 @@ public class SignUp_Owner extends AppCompatActivity {
         // Hide TitleBar
         getSupportActionBar().hide();
 
-        mAuth = FirebaseAuth.getInstance(); // Initialize Firebase Authentication
+        //mAuth = FirebaseAuth.getInstance(); // Initialize Firebase Authentication
 
 
         edtName = findViewById(R.id.edtTxtName_signinOwner);
@@ -123,6 +133,29 @@ public class SignUp_Owner extends AppCompatActivity {
     }
 
     private void signInOwner(String email, String password) {
+
+        if (singleton.ownerExists(email)){
+
+            // owner already exists
+
+            return;
+        }
+
+        singleton.newOwner(email, name, password, phn);
+        Owner owner = singleton.loginOwner(email, password);
+
+        // login succeeded
+        Intent intent = new Intent(SignUp_Owner.this, Main_Owner.class);
+
+        startActivity(intent);
+        overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
+
+
+    }
+
+
+    /*
+    private void signInOwner(String email, String password) {
         //https://firebase.google.com/docs/auth/android/password-auth#java_3
         mAuth.createUserWithEmailAndPassword(email, password)
                 .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
@@ -165,6 +198,7 @@ public class SignUp_Owner extends AppCompatActivity {
                     }
                 });
     }
+    */
 
     @Override
     public void finish() {

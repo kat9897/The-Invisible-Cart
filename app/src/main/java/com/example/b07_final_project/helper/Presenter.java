@@ -9,10 +9,18 @@ public interface Presenter {
     int save(IDobj obj);
 
     Customer loginCustomer(String email, String password);
+    Owner loginOwner(String email, String password);
 
     Boolean customerExists(String email);
+    Boolean ownerExists(String email);
 
     Customer newCustomer(String email, String name, String password);
+    Owner newOwner(String email, String name, String password, String phoneNumber);
+    // newOwner also creates a new store
+
+
+
+
 
     /*
 
