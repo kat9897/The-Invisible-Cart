@@ -152,21 +152,27 @@ public class Singleton implements Presenter {
             IDobj store = owners_store.get(0);
 
             return (Store) store;
-
-
-
-
     }
 
     @Override
     public Product_ newProduct(String pdtName, Double pdtPrice, String pdtBrand) {
+
+        Product_ product = (Product_) database.newIDobj(IDobj.PRODUCT);
+        Store store = getStore(getLoggedInOwner());
+        database.addRelation(product, store);
+
+        product.setName(pdtName);
+        product.setPrice(pdtPrice);
+        product.setBrand(pdtBrand);
+
+        product.save();
+        store.save();
+
+        return product;
+    }
     @Override
     public void viewOrder(Order_ order){
         this.currentOrder = order;
-
-
-
-
     }
 
     @Override
@@ -205,8 +211,6 @@ public class Singleton implements Presenter {
         }
 
         return product_List;
-
-
     }
 
     @Override
@@ -220,8 +224,6 @@ public class Singleton implements Presenter {
         }
 
         return product_List;
-
-
     }
 
     @Override
@@ -235,27 +237,6 @@ public class Singleton implements Presenter {
         }
 
         return product_List;
-
-
-    }
-
-
-
-
-
-
-        Product_ product = (Product_) database.newIDobj(IDobj.PRODUCT);
-        Store store = getStore(getLoggedInOwner());
-        database.addRelation(product, store);
-
-        product.setName(pdtName);
-        product.setPrice(pdtPrice);
-        product.setBrand(pdtBrand);
-
-        product.save();
-        store.save();
-
-        return product;
     }
 
     @Override
