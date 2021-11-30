@@ -41,17 +41,31 @@
         app:layout_constraintTop_toBottomOf="@+id/edtTxtName_signinOwner" />
 
     <EditText
+        android:id="@+id/Store_Name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="80dp"
+        android:ems="10"
+        android:hint="Store Name"
+        android:inputType="text"
+        app:layout_constraintBottom_toTopOf="@+id/edtTxtName_signinOwner"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/heading_signup1"
+        app:layout_constraintVertical_bias="0.55" />
+
+    <EditText
         android:id="@+id/edtTxtName_signinOwner"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="232dp"
+        android:layout_marginTop="20dp"
         android:ems="10"
         android:hint="Name"
         android:inputType="textEmailAddress"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.502"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/Store_Name" />
 
     <EditText
         android:id="@+id/edtTxtEmail_signinowner1"
@@ -95,7 +109,7 @@
         android:id="@+id/btnsignIn_signinowner1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="80dp"
+        android:layout_marginBottom="30dp"
         android:background="@drawable/btn_background"
         android:text="SIGN UP"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -109,7 +123,7 @@
         android:id="@+id/showpassword_signinowner1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="20dp"
         android:text="Show Password"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.363"

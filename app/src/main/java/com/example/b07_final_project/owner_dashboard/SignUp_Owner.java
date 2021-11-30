@@ -38,7 +38,7 @@ public class SignUp_Owner extends AppCompatActivity {
 
     private EditText edtEmail, edtPassword, edtConfirmPassword;
 
-    private EditText edtName, edtphn;
+    private EditText edtName, edtphn, edtstorename;
 
     private Button btnSignUp;
     private CheckBox showpassword;
@@ -68,6 +68,7 @@ public class SignUp_Owner extends AppCompatActivity {
         edtPassword = findViewById(R.id.edtTxtPassword_signinowner1);
         edtConfirmPassword = findViewById(R.id.edtTxtConfirmPassword_signinowner1);
         btnSignUp = findViewById(R.id.btnsignIn_signinowner1);
+        edtstorename = findViewById(R.id.Store_Name);
         showpassword = findViewById(R.id.showpassword_signinowner1);
 
 
@@ -92,14 +93,26 @@ public class SignUp_Owner extends AppCompatActivity {
                 String email = edtEmail.getText().toString().trim();
                 String password = edtPassword.getText().toString().trim();
                 String confirmpassword = edtConfirmPassword.getText().toString().trim();
+                String storename = edtstorename.getText().toString().trim();
 
                 //check if stings are empty using TextUtils
+                //Store Name
+                if ( TextUtils.isEmpty(storename)){
+                    Toast.makeText(SignUp_Owner.this, "Enter a store Name", Toast.LENGTH_SHORT).show();
+                    return;
+                } else if(singleton.storeExists(storename)){
+                     Toast.makeText(SignUp_Owner.this, "Store Name already exists", Toast.LENGTH_SHORT).show();
+                     return;
+                  }
                 //Email
                 if (TextUtils.isEmpty(email)) { //email is empty
                     Toast.makeText(SignUp_Owner.this, "Please enter email", Toast.LENGTH_SHORT).show();
                     return;
                 } else if (!VALID_EMAIL_ADDRESS_REGEX.matcher(email).find()) {
                     Toast.makeText(SignUp_Owner.this, "Please enter a valid email", Toast.LENGTH_SHORT).show();
+                    return;
+                } else if(singleton.ownerExists(email)){
+                    Toast.makeText(SignUp_Owner.this, "Owner already exists", Toast.LENGTH_SHORT).show();
                     return;
                 }
                 //Phone
@@ -126,22 +139,15 @@ public class SignUp_Owner extends AppCompatActivity {
                     return;
                 }
 
-                signInOwner(email, password);
+                signInOwner(email, password, storename);
             }
         });
 
     }
 
-    private void signInOwner(String email, String password) {
+    private void signInOwner(String email, String password, String storename) {
 
-        if (singleton.ownerExists(email)){
-
-            // owner already exists
-
-            return;
-        }
-
-        singleton.newOwner(email, name, password, phn);
+        singleton.newOwner(email, name, password, phn, storename);
         Owner owner = singleton.loginOwner(email, password);
 
         // login succeeded
