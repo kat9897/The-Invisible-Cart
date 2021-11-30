@@ -32,7 +32,7 @@ public class My_products_owner extends AppCompatActivity {
         final ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, R.layout.list_item, productIDList);
         OwnerProducts.setAdapter(adapter);
 
-        // Fetch all the Store Names in the Database to the storeNamesList
+
         DatabaseReference reference = FirebaseDatabase.getInstance().getReference().child("Test_Stores").child("Walmart").child("Products");
         reference.addValueEventListener(new ValueEventListener() {
             @Override
