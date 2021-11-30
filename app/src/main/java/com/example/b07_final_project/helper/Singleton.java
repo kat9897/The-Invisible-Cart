@@ -135,6 +135,16 @@ public class Singleton implements Presenter {
     }
 
     @Override
+    public ArrayList<Store> allStores() {
+        return null;
+    }
+
+    @Override
+    public ArrayList<String> allCustomerOrders() {
+        return null;
+    }
+
+    @Override
     public boolean storeExists(String storename) {
 
         ArrayList<IDobj> stores = database.getAllIDobj(IDobj.STORE);

@@ -17,12 +17,11 @@ public interface Presenter {
 
     Customer newCustomer(String email, String name, String password);
     Owner newOwner(String email, String name, String password, String phoneNumber, String storename);
-
     // newOwner also creates a new store
 
 
-
-
+    ArrayList<Store> allStores();
+    ArrayList<String> allCustomerOrders();
 
     /*
 
