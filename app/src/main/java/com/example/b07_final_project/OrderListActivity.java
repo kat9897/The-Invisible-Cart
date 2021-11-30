@@ -50,7 +50,7 @@ public class OrderListActivity extends AppCompatActivity {
                 orderIdList.clear();
                 for (DataSnapshot ds : dataSnapshot.getChildren()) {
                     // get the order ID of each order
-                    String order_id = ds.child("Orders").child("Order_Id").getValue(String.class);
+                    String order_id = ds.child("Walmart").child("Orders").child("Order_Id").getValue(String.class);
                     // store order ID to the array list of IDs
                     orderIdList.add(order_id);
                 }

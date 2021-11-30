@@ -22,38 +22,26 @@ public class My_products_owner extends AppCompatActivity {
 
     private ListView OwnerProducts;
 
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_my_products_owner);
-        // Hide TitleBar
-        getSupportActionBar().hide();
 
-        //Get Owner ID
-        Intent intent = getIntent();
-        String uid = intent.getExtras().getString("Ownerid");
-
-        OwnerProducts = (ListView) findViewById(R.id.listview_orders);
-
-        ArrayList<String> productIdList = new ArrayList();
-
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, R.layout.list_item, productIdList);
+        OwnerProducts = (ListView) findViewById(R.id.StoreList);
+        final ArrayList<String> productIDList = new ArrayList<String>();
+        final ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, R.layout.list_item, productIDList);
         OwnerProducts.setAdapter(adapter);
 
-        DatabaseReference ref = FirebaseDatabase.getInstance().getReference().child("Test_Stores");
-        ref.addValueEventListener(new com.google.firebase.database.ValueEventListener() {
+        // Fetch all the Store Names in the Database to the storeNamesList
+        DatabaseReference reference = FirebaseDatabase.getInstance().getReference().child("Test_Stores").child("Walmart").child("Products");
+        reference.addValueEventListener(new ValueEventListener() {
             @Override
-            public void onDataChange(final DataSnapshot dataSnapshot) {
-                productIdList.clear();
-                for (DataSnapshot ds : dataSnapshot.getChildren()) {
-                    // get the product ID of each product
-                    String product_id = ds.child("Products").child("Product_Id").getValue(String.class);
-                    // store product ID to the array list of IDs
-                    productIdList.add(product_id);
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                productIDList.clear();
+                for (DataSnapshot ds : dataSnapshot.getChildren()){
+                    String storeName = ds.child("Product_Id").getValue().toString();
+                    productIDList.add(storeName);
                 }
-                // now the productIdList should be filled with order IDs
                 adapter.notifyDataSetChanged();
             }
 
@@ -62,6 +50,10 @@ public class My_products_owner extends AppCompatActivity {
 
             }
         });
+
+
+
+
 
 
     }
