@@ -1,12 +1,5 @@
 package com.example.b07_final_project.helper;
 
-import android.content.Intent;
-
-import com.example.b07_final_project.owner_dashboard.Add_New_Product;
-import com.example.b07_final_project.owner_dashboard.My_Products;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
-
 import java.util.ArrayList;
 import java.util.regex.Pattern;
 
@@ -121,7 +114,7 @@ public class Singleton implements Presenter {
     }
 
     @Override
-    public Owner newOwner(String email, String name, String password, String phoneNumber) {
+    public Owner newOwner(String email, String name, String password, String phoneNumber, String storename) {
 
         Owner owner = (Owner) database.newIDobj(IDobj.OWNER);
         Store store = (Store) database.newIDobj(IDobj.STORE);
@@ -135,13 +128,16 @@ public class Singleton implements Presenter {
 
         owner.save();
 
-        store.setName("Default");
-
+        store.setName(storename);
         store.save();
 
         return owner;
     }
 
+    @Override
+    public ArrayList<Store> allStores() {
+        return null;
+    }
     @Override
     public Owner getLoggedInOwner(){
         if(currentLogin.getType() == IDobj.OWNER){
@@ -177,18 +173,24 @@ public class Singleton implements Presenter {
         return product;
     }
 
+    @Override
+    public ArrayList<String> allCustomerOrders() {
+        return null;
+    }
 
+    @Override
+    public boolean storeExists(String storename) {
 
+        ArrayList<IDobj> stores = database.getAllIDobj(IDobj.STORE);
 
+        for (IDobj o : stores){
+            Store store = (Store) o;
 
-
-
-
-
-
-
-
-
+            if (store.getName().equals(storename))
+                return true;
+        }
+        return false;
+    }
 }
 
 

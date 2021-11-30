@@ -126,9 +126,8 @@ public class SignUpCustomerActivity extends AppCompatActivity {
     private void signIn(String email, String password) {
 
         if (singleton.customerExists(email)){
-
             // customer already exists
-
+            Toast.makeText(this, "Customer Already Exists", Toast.LENGTH_SHORT).show();
             return;
         }
 

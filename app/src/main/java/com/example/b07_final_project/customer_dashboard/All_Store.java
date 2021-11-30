@@ -10,6 +10,9 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
+import com.example.b07_final_project.helper.Presenter;
+import com.example.b07_final_project.helper.Singleton;
+import com.example.b07_final_project.helper.Store;
 import com.example.b07_final_project.owner_dashboard.OrderPage;
 import com.example.b07_final_project.R;
 import com.google.firebase.database.DataSnapshot;
@@ -31,37 +34,24 @@ public class All_Store extends AppCompatActivity {
         // Hide TitleBar
         getSupportActionBar().hide();
 
-        listView = (ListView) findViewById(R.id.StoreList);
-        final ArrayList<String> storeNamesList = new ArrayList<String>();
-        final ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, R.layout.list_item, storeNamesList);
-        listView.setAdapter(adapter);
+        listView = findViewById(R.id.OrderList_1);
+        ArrayList<String> list = new ArrayList<>();
 
+        Presenter singleton = Singleton.getID();
         // Fetch all the Store Names in the Database to the storeNamesList
-        DatabaseReference reference = FirebaseDatabase.getInstance().getReference().child("Test_Stores");
-        reference.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                storeNamesList.clear();
-                for (DataSnapshot ds : dataSnapshot.getChildren()){
-                    String storeName = ds.child("Store_Name").getValue().toString();
-                    storeNamesList.add(storeName);
-                }
-                adapter.notifyDataSetChanged();
-            }
+        ArrayList<Store> allStores = singleton.allStores();
+        for (int i = 0; i < allStores.size(); i++){
+            list.add(allStores.get(i).getName());
+        }
 
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
+        ArrayAdapter arrayAdapter = new ArrayAdapter(this,android.R.layout.simple_list_item_1,list);
+        listView.setAdapter(arrayAdapter);
 
-            }
-        });
 
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int position, long id) {
-                //TODO When a Store Name is clicked, it will direct the Customer to the
-                // Order page containing List of Products belonging to the Store Name clicked
 
-                // String clickedStoreName = listView.getAdapter().getItem(position).toString();
                 Intent intent = new Intent(getApplicationContext(), All_Products.class);
                 startActivity(intent);
             }
