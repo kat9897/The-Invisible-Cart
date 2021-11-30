@@ -18,7 +18,7 @@ public interface Presenter {
     Owner newOwner(String email, String name, String password, String phoneNumber);
     // newOwner also creates a new store
 
-
+    Product_ newProduct(String pdtName, Double pdtPrice, String pdtBrand);
 
 
 

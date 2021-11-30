@@ -1,5 +1,12 @@
 package com.example.b07_final_project.helper;
 
+import android.content.Intent;
+
+import com.example.b07_final_project.owner_dashboard.Add_New_Product;
+import com.example.b07_final_project.owner_dashboard.My_Products;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+
 import java.util.ArrayList;
 import java.util.regex.Pattern;
 
@@ -136,6 +143,23 @@ public class Singleton implements Presenter {
     }
 
 
+
+    @Override
+    public Product_ newProduct(String pdtName, Double pdtPrice, String pdtBrand) {
+
+        Product_ product = (Product_) database.newIDobj(IDobj.PRODUCT);
+        //Store store = getStore(currentLogin);
+        //database.addRelation(product, store);
+
+        product.setName(pdtName);
+        product.setPrice(pdtPrice);
+        product.setBrand(pdtBrand);
+
+        product.save();
+        //store.save();
+
+        return product;
+    }
 
 
 
