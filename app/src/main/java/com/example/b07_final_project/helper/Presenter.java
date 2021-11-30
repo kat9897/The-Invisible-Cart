@@ -20,6 +20,14 @@ public interface Presenter {
 
     Product_ newProduct(String pdtName, Double pdtPrice, String pdtBrand);
 
+    Owner getLoggedInOwner();
+
+    Store getStore(Owner owner);
+
+    // ArrayList<Order_> getOrders(Owner owner); (Do this later)
+
+    // Order_ viewOrder(Order_ order); (Do this later)
+
 
 
     /*
