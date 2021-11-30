@@ -39,8 +39,8 @@ public class My_products_owner extends AppCompatActivity {
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 productIDList.clear();
                 for (DataSnapshot ds : dataSnapshot.getChildren()){
-                    String storeName = ds.child("Product_Id").getValue().toString();
-                    productIDList.add(storeName);
+                    String productID = ds.child("Product_Id").getValue().toString();
+                    productIDList.add(productID);
                 }
                 adapter.notifyDataSetChanged();
             }
