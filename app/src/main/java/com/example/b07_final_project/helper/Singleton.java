@@ -135,6 +135,30 @@ public class Singleton implements Presenter {
         return owner;
     }
 
+    @Override
+    public Owner getLoggedInOwner(){
+        if(currentLogin.getType() == IDobj.OWNER){
+            return (Owner) currentLogin;
+        }
+
+        return null;
+    }
+
+    @Override
+    public Store getStore(Owner owner){
+            ArrayList<IDobj> owners_store = database.getRelations(owner, IDobj.STORE);
+
+            IDobj store = owners_store.get(0);
+
+            return (Store) store;
+
+
+
+
+    }
+
+
+
 
 
 
