@@ -5,9 +5,13 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import android.widget.ListView;
 
+import com.example.b07_final_project.helper.Owner;
+import com.example.b07_final_project.helper.Presenter;
+import com.example.b07_final_project.helper.Product_;
 import com.example.b07_final_project.helper.Product_Card;
 import com.example.b07_final_project.R;
 import com.example.b07_final_project.helper.CustomListAdapter;
+import com.example.b07_final_project.helper.Singleton;
 
 import java.util.ArrayList;
 
@@ -22,10 +26,27 @@ public class My_Products extends AppCompatActivity {
         getSupportActionBar().hide();
         ListView listView = (ListView) findViewById(R.id.listProduct);
 
+        Presenter singleton = Singleton.getID();
+
+        Owner owner = singleton.getLoggedInOwner();
+        ArrayList<Product_> products ;
+
+        ArrayList<Product_> productsInStore = singleton.getProducts(owner);
+
         ArrayList<Product_Card> productList = new ArrayList<>();
-        //singleton.getProducts(OwnerID) needs to return a arraylist of Product_Card(which contains
-        //the name, price and quantity of a product)
-        productList.add(new Product_Card("name", "price", "quantity"));
+
+        for (Product_ product : productsInStore) {
+
+            String name = product.getName();
+            String brand = product.getBrand();
+            String price = String.valueOf(product.getPrice());
+            // shorten string to 2 decimals?
+
+            Product_Card productCard = new Product_Card(name, price, brand);
+            productList.add(productCard);
+        }
+
+        productList.add(new Product_Card("name", "price", "quantity", "brand"));
 
         CustomListAdapter adapter = new CustomListAdapter(this, R.layout.cardview_product, productList);
         listView.setAdapter(adapter);

@@ -18,6 +18,19 @@ public interface Presenter {
     Owner newOwner(String email, String name, String password, String phoneNumber);
     // newOwner also creates a new store
 
+    Owner getLoggedInOwner();
+    Store getStore(Owner owner);
+    ArrayList<Order_> getOrders(Owner owner);
+
+    void viewOrder(Order_ order);
+
+    int getQuantity(Order_ order, Product_ product);
+
+    Order_ getViewedOrder();
+    Customer getCustomer(Order_ order);
+    ArrayList<Product_> getProducts(Order_ order);
+
+    ArrayList<Product_> getProducts(Owner owner);
 
 
 

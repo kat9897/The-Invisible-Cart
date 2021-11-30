@@ -10,7 +10,7 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
 import com.example.b07_final_project.R;
-import com.example.b07_final_project.owner_dashboard.OrderPage;
+import com.example.b07_final_project.owner_dashboard.OrderPage_Owner;
 
 import java.util.ArrayList;
 
@@ -37,7 +37,7 @@ public class Order_List_Customer extends AppCompatActivity {
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                Intent intent = new Intent(getApplicationContext(), OrderPage.class);
+                Intent intent = new Intent(getApplicationContext(), OrderPage_Customer.class);
                 startActivity(intent);
             }
         });

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.b07_final_project">
+    package="com.example.b07_final_project" >
 
     <application
         android:allowBackup="true"
@@ -10,7 +10,10 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.B07finalproject"
         android:usesCleartextTraffic="true"
-        android:windowSoftInputMode="adjustResize">
+        android:windowSoftInputMode="adjustResize" >
+        <activity
+            android:name=".customer_dashboard.OrderPage_Customer"
+            android:exported="false" />
         <activity
             android:name=".customer_dashboard.Order_List_Customer"
             android:exported="false" />
@@ -39,7 +42,7 @@
             android:name=".customer_dashboard.SignUpCustomerActivity"
             android:exported="false" />
         <activity
-            android:name=".owner_dashboard.OrderPage"
+            android:name=".owner_dashboard.OrderPage_Owner"
             android:exported="false"
             android:label="OrderNumber"
             android:parentActivityName=".owner_dashboard.Order_List_Owner" />
@@ -52,7 +55,7 @@
             android:exported="false" />
         <activity
             android:name=".customer_dashboard.LoginCustomerActivity"
-            android:exported="true">
+            android:exported="true" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

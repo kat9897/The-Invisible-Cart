@@ -25,7 +25,7 @@ public class All_Products extends AppCompatActivity {
         ArrayList<Product_Card> productList = new ArrayList<>();
         //singleton.getProducts(StoreID) needs to return a arraylist of Product_Card(which contains
         //the name, price and quantity of a product)
-        productList.add(new Product_Card("name", "price", "quantity"));
+        productList.add(new Product_Card("name", "price", "quantity", "brand"));
 
         CustomListAdapter adapter = new CustomListAdapter(this, R.layout.cardview_product, productList);
         listView.setAdapter(adapter);

@@ -22,6 +22,7 @@ public class CustomListAdapter extends ArrayAdapter<Product_Card> {
         TextView name;
         TextView price;
         TextView quantity;
+        TextView brand;
     }
     public CustomListAdapter(Context context, int resource, ArrayList<Product_Card> objects) {
         super(context, resource, objects);
@@ -35,8 +36,9 @@ public class CustomListAdapter extends ArrayAdapter<Product_Card> {
         String name = getItem(position).getName();
         String price = getItem(position).getPrice();
         String quantity = getItem(position).getQuantity();
+        String brand = getItem(position).getBrand();
 
-        Product_Card product = new Product_Card(name, price, quantity);
+        Product_Card product = new Product_Card(name, price, quantity, brand);
 
         LayoutInflater inflater = LayoutInflater.from(mContext);
         convertView = inflater.inflate(mResource, parent, false);
@@ -45,7 +47,7 @@ public class CustomListAdapter extends ArrayAdapter<Product_Card> {
         TextView tvPrice = (TextView) convertView.findViewById(R.id.product_price);
         TextView tvQuantity = (TextView) convertView.findViewById(R.id.product_quantity);
 
-        tvName.setText(name);
+        tvName.setText(name + " (" + brand + ")");
         tvPrice.setText(price);
         tvQuantity.setText(quantity);
 

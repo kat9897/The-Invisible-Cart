@@ -10,6 +10,10 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
 import com.example.b07_final_project.R;
+import com.example.b07_final_project.helper.Order_;
+import com.example.b07_final_project.helper.Owner;
+import com.example.b07_final_project.helper.Presenter;
+import com.example.b07_final_project.helper.Singleton;
 
 
 import java.util.ArrayList;
@@ -25,21 +29,27 @@ public class Order_List_Owner extends AppCompatActivity {
         // Hide TitleBar
         getSupportActionBar().hide();
 
+        Presenter singleton = Singleton.getID();
+
         listView = (ListView) findViewById(R.id.OrderList);
-        ArrayList<String> orderList = new ArrayList<>();
+        ArrayList<String> orderListStrings = new ArrayList<>();
 
-        //singleton.getOrders(OwnerID) needs to return a arraylist of string where each string is
-        // a order number
-        orderList.add("Order #1");
+        //Owner owner = singleton.getLoggedInOwner();
+        //ArrayList<Order_> orderListObjects = singleton.getOrders(owner);
 
 
-        ArrayAdapter arrayAdapter = new ArrayAdapter(this,android.R.layout.simple_list_item_1,orderList);
+        //for (int i = 1; i <= orderListObjects.size(); i++)
+            //orderListStrings.add("Order Number " + String.valueOf(i));
+
+
+        ArrayAdapter arrayAdapter = new ArrayAdapter(this,android.R.layout.simple_list_item_1,orderListStrings);
         listView.setAdapter(arrayAdapter);
 
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                Intent intent = new Intent(getApplicationContext(), OrderPage.class);
+                //singleton.viewOrder(orderListObjects.get(i));
+                Intent intent = new Intent(getApplicationContext(), OrderPage_Owner.class);
                 startActivity(intent);
             }
         });
