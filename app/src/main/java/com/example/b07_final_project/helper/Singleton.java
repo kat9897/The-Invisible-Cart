@@ -25,6 +25,8 @@ public class Singleton implements Presenter {
 
     private IDobj currentLogin = null;
 
+    private IDobj currentOrder = null;
+
     // methods
 
     @Override
@@ -114,7 +116,7 @@ public class Singleton implements Presenter {
     }
 
     @Override
-    public Owner newOwner(String email, String name, String password, String phoneNumber) {
+    public Owner newOwner(String email, String name, String password, String phoneNumber, String storename) {
 
         Owner owner = (Owner) database.newIDobj(IDobj.OWNER);
         Store store = (Store) database.newIDobj(IDobj.STORE);
@@ -128,27 +130,133 @@ public class Singleton implements Presenter {
 
         owner.save();
 
-        store.setName("Default");
-
+        store.setName(storename);
         store.save();
 
         return owner;
     }
 
+    @Override
+    public Owner getLoggedInOwner(){
+        if(currentLogin.getType() == IDobj.OWNER){
+            return (Owner) currentLogin;
+        }
 
+        return null;
+    }
+    //Get the store object of the store that is currently related to
+    @Override
+    public Store getStore(Owner owner){
+            ArrayList<IDobj> owners_store = database.getRelations(owner, IDobj.STORE);
 
+            IDobj store = owners_store.get(0);
 
+            return (Store) store;
+    }
 
+    @Override
+    public Product_ newProduct(String pdtName, Double pdtPrice, String pdtBrand) {
 
+        Product_ product = (Product_) database.newIDobj(IDobj.PRODUCT);
+        Store store = getStore(getLoggedInOwner());
+        database.addRelation(product, store);
 
+        product.setName(pdtName);
+        product.setPrice(pdtPrice);
+        product.setBrand(pdtBrand);
 
+        product.save();
+        store.save();
 
+        return product;
+    }
+    @Override
+    public void viewOrder(Order_ order){
+        this.currentOrder = order;
+    }
 
+    @Override
+    public ArrayList<Store> allStores(){
+        ArrayList<IDobj> idobj_List = database.getAllIDobj(IDobj.STORE);
 
+        ArrayList<Store> store_List = new ArrayList<Store> ();
 
+        for(IDobj object : idobj_List){
+            store_List.add((Store)object);
+        }
 
+        return store_List;
+    }
 
+    @Override
+    public Order_ getViewedOrder(){
+        return (Order_)this.currentOrder;
+    }
 
+    @Override
+    public Customer getCustomer(Order_ order){
+        ArrayList<IDobj> orders_Customer = database.getRelations(order, IDobj.CUSTOMER);
+
+        return (Customer) orders_Customer.get(0);
+    }
+
+    @Override
+    public ArrayList<Product_> getProducts(Order_ order){
+        ArrayList<IDobj> idobj_list = database.getRelations(order, IDobj.PRODUCT);
+
+        ArrayList<Product_> product_List = new ArrayList<>();
+
+        for(IDobj object : idobj_list){
+            product_List.add((Product_)object);
+        }
+
+        return product_List;
+    }
+
+    @Override
+    public ArrayList<Product_> getProducts(Owner owner){
+        ArrayList<IDobj> idobj_list = database.getRelations(owner, IDobj.PRODUCT);
+
+        ArrayList<Product_> product_List = new ArrayList<>();
+
+        for(IDobj object : idobj_list){
+            product_List.add((Product_)object);
+        }
+
+        return product_List;
+    }
+
+    @Override
+    public ArrayList<Order_> getOrders(Owner owner){
+        ArrayList<IDobj> idobj_list = database.getRelations(owner, IDobj.ORDER);
+
+        ArrayList<Order_> product_List = new ArrayList<>();
+
+        for(IDobj object : idobj_list){
+            product_List.add((Order_)object);
+        }
+
+        return product_List;
+    }
+
+    @Override
+    public ArrayList<String> allCustomerOrders() {
+        return null;
+    }
+
+    @Override
+    public boolean storeExists(String storename) {
+
+        ArrayList<IDobj> stores = database.getAllIDobj(IDobj.STORE);
+
+        for (IDobj o : stores){
+            Store store = (Store) o;
+
+            if (store.getName().equals(storename))
+                return true;
+        }
+        return false;
+    }
 }
 
 

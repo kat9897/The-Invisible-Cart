@@ -276,8 +276,17 @@ public class FirebaseModel implements Model{
         snap = moveToChild(snap, obj.getType());
         snap = snap.child(obj.getID());
         snap = snap.child(dirRELATION);
+        snap = moveToChild(snap, type);
 
-        return getAllIDobjAt(snap, type);
+        ArrayList<IDobj> output = new ArrayList<>();
+        String ID;
+
+        for (DataSnapshot snapChild : snap.getChildren()){
+
+            ID = (String) snapChild.getValue();
+            output.add(getIDobj(type, ID));
+        }
+        return output;
     }
 
     @Override

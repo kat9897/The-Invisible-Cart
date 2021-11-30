@@ -48,7 +48,7 @@ public class My_Products extends AppCompatActivity {
 
         productList.add(new Product_Card("name", "price", "quantity", "brand"));
 
-        CustomListAdapter adapter = new CustomListAdapter(this, R.layout.cardview_product, productList);
+        CustomListAdapter adapter = new CustomListAdapter(this, R.layout.cardview_product_owner, productList);
         listView.setAdapter(adapter);
     }
 }

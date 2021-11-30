@@ -5,7 +5,7 @@ public class Owners extends Users {
     // 0 for customer
     // 1 for Owner
     private int userType = 1;
-    // TODO
+
     private String orderId;
     private String productId;
 
