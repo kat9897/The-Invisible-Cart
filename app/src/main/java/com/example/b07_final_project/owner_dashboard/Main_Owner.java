@@ -31,7 +31,7 @@ public class Main_Owner extends AppCompatActivity {
 
         // Get ownerid to check who logged in
         Intent intent = getIntent();
-        String uid = intent.getExtras().getString("Ownerid");
+   //     String uid = intent.getExtras().getString("Ownerid");
 
 
         // When this button is clicked perform the following task
@@ -41,7 +41,7 @@ public class Main_Owner extends AppCompatActivity {
                 // Open up another activity
                 Intent intent1 = new Intent(Main_Owner.this, Order_List_Owner.class);
                 // send this ownerid to the activity
-                intent1.putExtra("Ownerid", uid);
+     //           intent1.putExtra("Ownerid", uid);
                 startActivity(intent1);
             }
         });
@@ -53,7 +53,7 @@ public class Main_Owner extends AppCompatActivity {
             public void onClick(View view) {
                 // Open up another activity
                 Intent intent1 = new Intent(Main_Owner.this, My_Products.class);
-                intent1.putExtra("Ownerid", uid);
+    //            intent1.putExtra("Ownerid", uid);
                 // send this ownerid to the activity
                 startActivity(intent1);
             }

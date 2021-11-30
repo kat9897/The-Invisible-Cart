@@ -52,6 +52,24 @@ public class Singleton implements Presenter {
         return null;
     }
 
+    @Override
+    public Owner loginOwner(String email, String password) {
+
+        ArrayList<IDobj> owners = database.getAllIDobj(IDobj.OWNER);
+
+        for (IDobj o : owners){
+            Owner owner = (Owner) o;
+
+            if (owner.getEmail().equals(email)){
+                if (owner.getPassword().equals(password)) {
+                    currentLogin = database.getIDobj(owner); // get a new one so it's not same as return
+                    return owner;
+                } else
+                    return null;
+            }
+        }
+        return null;
+    }
 
     @Override
     public Boolean customerExists(String email){
@@ -62,6 +80,20 @@ public class Singleton implements Presenter {
             Customer c = (Customer) o;
 
             if (c.getEmail().equals(email))
+                return true;
+        }
+        return false;
+    }
+
+    @Override
+    public Boolean ownerExists(String email){
+
+        ArrayList<IDobj> owners = database.getAllIDobj(IDobj.OWNER);
+
+        for (IDobj o : owners){
+            Owner owner = (Owner) o;
+
+            if (owner.getEmail().equals(email))
                 return true;
         }
         return false;
@@ -81,6 +113,27 @@ public class Singleton implements Presenter {
         return customer;
     }
 
+    @Override
+    public Owner newOwner(String email, String name, String password, String phoneNumber) {
+
+        Owner owner = (Owner) database.newIDobj(IDobj.OWNER);
+        Store store = (Store) database.newIDobj(IDobj.STORE);
+
+        database.addRelation(owner, store);
+
+        owner.setEmail(email);
+        owner.setPassword(password);
+        owner.setName(name);
+        owner.setPhoneNumber(phoneNumber);
+
+        owner.save();
+
+        store.setName("Default");
+
+        store.save();
+
+        return owner;
+    }
 
 
 

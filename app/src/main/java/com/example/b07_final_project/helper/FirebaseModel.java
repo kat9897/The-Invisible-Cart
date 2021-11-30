@@ -16,7 +16,7 @@ public class FirebaseModel implements Model{
     private final DatabaseReference refRoot;
     private DataSnapshot dataRoot;
 
-    private final String dirROOT = "Alex_R_Test_Dir";
+    private final String dirROOT = "";
     private final String dirOWNER = "Owner";
     private final String dirSTORE = "Store";
     private final String dirPRODUCT = "Product";
@@ -29,7 +29,7 @@ public class FirebaseModel implements Model{
     FirebaseModel() {
 
         FirebaseDatabase database = FirebaseDatabase.getInstance();
-        refRoot = database.getReference().child(dirROOT);
+        refRoot = database.getReference();//.child(dirROOT);
 
         ValueEventListener listener = new ValueEventListener() {
             @Override
