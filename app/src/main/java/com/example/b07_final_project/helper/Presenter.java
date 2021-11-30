@@ -28,7 +28,11 @@ public interface Presenter {
 
     // Order_ viewOrder(Order_ order); (Do this later)
 
+    // int getQuantity(Order_ order, Product_ product); (Do this later)
 
+    // Order getViewedOrder();
+    //Customer getCustomer(Order_ order);
+    //ArrayList<Product_> getProducts(Order_ order);
 
     /*
 
