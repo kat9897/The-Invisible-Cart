@@ -114,7 +114,7 @@ public class Singleton implements Presenter {
     }
 
     @Override
-    public Owner newOwner(String email, String name, String password, String phoneNumber) {
+    public Owner newOwner(String email, String name, String password, String phoneNumber, String storename) {
 
         Owner owner = (Owner) database.newIDobj(IDobj.OWNER);
         Store store = (Store) database.newIDobj(IDobj.STORE);
@@ -128,27 +128,35 @@ public class Singleton implements Presenter {
 
         owner.save();
 
-        store.setName("Default");
-
+        store.setName(storename);
         store.save();
 
         return owner;
     }
 
+    @Override
+    public ArrayList<Store> allStores() {
+        return null;
+    }
 
+    @Override
+    public ArrayList<String> allCustomerOrders() {
+        return null;
+    }
 
+    @Override
+    public boolean storeExists(String storename) {
 
+        ArrayList<IDobj> stores = database.getAllIDobj(IDobj.STORE);
 
+        for (IDobj o : stores){
+            Store store = (Store) o;
 
-
-
-
-
-
-
-
-
-
+            if (store.getName().equals(storename))
+                return true;
+        }
+        return false;
+    }
 }
 
 

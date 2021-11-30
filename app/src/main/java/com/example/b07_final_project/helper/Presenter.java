@@ -13,14 +13,15 @@ public interface Presenter {
 
     Boolean customerExists(String email);
     Boolean ownerExists(String email);
+    boolean storeExists(String storename); // Added by Yashank
 
     Customer newCustomer(String email, String name, String password);
-    Owner newOwner(String email, String name, String password, String phoneNumber);
+    Owner newOwner(String email, String name, String password, String phoneNumber, String storename);
     // newOwner also creates a new store
 
 
-
-
+    ArrayList<Store> allStores();
+    ArrayList<String> allCustomerOrders();
 
     /*
 
