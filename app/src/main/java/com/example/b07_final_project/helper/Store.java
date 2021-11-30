@@ -1,6 +1,4 @@
-package com.example.b07_final_project;
-
-import java.util.ArrayList;
+package com.example.b07_final_project.helper;
 
 public class Store extends IDobj {
 

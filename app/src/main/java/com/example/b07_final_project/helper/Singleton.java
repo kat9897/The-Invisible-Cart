@@ -7,9 +7,9 @@ public class Singleton implements Presenter {
 
     // Access to Singleton
 
-    static Presenter ID;
+    private static Presenter ID;
 
-    static Presenter getID() {
+    public static Presenter getID() {
         if (ID == null)
             ID = new Singleton();
         return ID;

@@ -6,6 +6,16 @@ import java.util.ArrayList;
 
 public interface Presenter {
 
+    int save(IDobj obj);
+
+    Customer loginCustomer(String email, String password);
+
+    Boolean customerExists(String email);
+
+    Customer newCustomer(String email, String name, String password);
+
+    /*
+
     void Update(); // to be called exclusively by the Model (database) when the database changes
 
     void addView(View view); // please call this in the onResume() method of every View
@@ -105,6 +115,6 @@ public interface Presenter {
     int createOrder();
     // returns the ID of a new order for the logged in customer at the store they're currently viewing
     // also sets the new order as the currently viewed order
-
+*/
 }
 

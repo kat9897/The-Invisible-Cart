@@ -1,16 +1,12 @@
-package com.example.b07_final_project;
+package com.example.b07_final_project.customer_dashboard;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
-import android.os.Build;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.text.method.PasswordTransformationMethod;
 import android.view.View;
-import android.view.Window;
-import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
@@ -29,6 +25,12 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 */
+
+import com.example.b07_final_project.R;
+import com.example.b07_final_project.helper.Customer;
+import com.example.b07_final_project.helper.Presenter;
+import com.example.b07_final_project.helper.Singleton;
+import com.example.b07_final_project.owner_dashboard.Login_Owner;
 
 import java.util.regex.Pattern;
 
@@ -68,7 +70,7 @@ public class LoginCustomerActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 if (swtchtoOwnerMode.isChecked()){
-                    Intent intent = new Intent(LoginCustomerActivity.this, LoginOwnerActivity.class );
+                    Intent intent = new Intent(LoginCustomerActivity.this, Login_Owner.class );
                     startActivity(intent);
                     overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
                 }
@@ -137,7 +139,7 @@ public class LoginCustomerActivity extends AppCompatActivity {
         } else {
 
             // login succeeded
-            Intent intent = new Intent(LoginCustomerActivity.this, MainActivity.class);
+            Intent intent = new Intent(LoginCustomerActivity.this, Main_Customer.class);
 
             startActivity(intent);
             overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);

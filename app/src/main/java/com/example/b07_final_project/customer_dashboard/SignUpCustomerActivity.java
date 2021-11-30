@@ -1,4 +1,4 @@
-package com.example.b07_final_project;
+package com.example.b07_final_project.customer_dashboard;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -26,6 +26,11 @@ import com.google.firebase.database.FirebaseDatabase;
  */
 
 
+import com.example.b07_final_project.R;
+import com.example.b07_final_project.helper.Customer;
+import com.example.b07_final_project.helper.Presenter;
+import com.example.b07_final_project.helper.Singleton;
+
 import java.util.regex.Pattern;
 
 public class SignUpCustomerActivity extends AppCompatActivity {
@@ -45,6 +50,7 @@ public class SignUpCustomerActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sign_up_customer);
+//        R.layout.activity_sign_up_customer
         // Hide TitleBar
         getSupportActionBar().hide();
         //mAuth = FirebaseAuth.getInstance(); // Initialize Firebase Authentication
@@ -130,7 +136,7 @@ public class SignUpCustomerActivity extends AppCompatActivity {
         Customer customer = singleton.loginCustomer(email, password);
 
         // login succeeded
-        Intent intent = new Intent(SignUpCustomerActivity.this, MainActivity.class);
+        Intent intent = new Intent(SignUpCustomerActivity.this, Main_Customer.class);
 
         startActivity(intent);
         overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);

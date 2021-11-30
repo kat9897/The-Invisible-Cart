@@ -1,11 +1,10 @@
-package com.example.b07_final_project;
+package com.example.b07_final_project.helper;
 
-public class Owner extends IDobj {
+public class Customer extends IDobj {
 
 	private String email; // unique
 	private String name;
 	private String password;
-	private String phoneNumber;
 
 	public String getEmail() {
 		return email;
@@ -31,20 +30,12 @@ public class Owner extends IDobj {
 		this.password = password;
 	}
 
-	public String getPhoneNumber() {
-		return phoneNumber;
-	}
-
-	public void setPhoneNumber(String phoneNumber) {
-		this.phoneNumber = phoneNumber;
-	}
-
 	@Override
 	public int getType() {
-		return IDobj.OWNER;
+		return IDobj.CUSTOMER;
 	}
 
-	public Owner(String ID) {
+	public Customer(String ID) {
 		super(ID);
 	}
 
