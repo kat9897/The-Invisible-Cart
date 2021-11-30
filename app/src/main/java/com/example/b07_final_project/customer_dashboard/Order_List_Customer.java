@@ -27,8 +27,7 @@ public class Order_List_Customer extends AppCompatActivity {
         listView = (ListView) findViewById(R.id.OrderList_1);
         ArrayList<String> orderList = new ArrayList<>();
 
-        //singleton.getOrders(OwnerID) needs to return a arraylist of string where each string is
-        // a order number
+        // TODO singleton.getOrders(OwnerID) needs to return a arraylist of string where each string is a order number
         orderList.add("Order #1");
 
 
