@@ -1,4 +1,4 @@
-package com.example.b07_final_project;
+package com.example.b07_final_project.owner_dashboard;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -6,14 +6,15 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.example.b07_final_project.helper.Product;
+import com.example.b07_final_project.R;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
-public class Add_new_product_owner extends AppCompatActivity {
+public class Add_New_Product extends AppCompatActivity {
 
     EditText prdName, prdPrice, brandName;
 
@@ -39,14 +40,14 @@ public class Add_new_product_owner extends AppCompatActivity {
 
         // Check if empty
         if(TextUtils.isEmpty(prdName.getText().toString())){ // name is empty
-            Toast.makeText(Add_new_product_owner.this, "Please enter name", Toast.LENGTH_SHORT).show();
+            Toast.makeText(Add_New_Product.this, "Please enter name", Toast.LENGTH_SHORT).show();
             return;
         }       else if (TextUtils.isEmpty(stringPrice)){ // price is empty or not valid
-            Toast.makeText(Add_new_product_owner.this, "Please enter a valid price", Toast.LENGTH_SHORT).show();
+            Toast.makeText(Add_New_Product.this, "Please enter a valid price", Toast.LENGTH_SHORT).show();
             return;
         }
         if(TextUtils.isEmpty(brandName.getText().toString())){ // brand is empty
-            Toast.makeText(Add_new_product_owner.this, "Please enter brand", Toast.LENGTH_SHORT).show();
+            Toast.makeText(Add_New_Product.this, "Please enter brand", Toast.LENGTH_SHORT).show();
             return;
         } else {
             // Input to database
@@ -55,7 +56,7 @@ public class Add_new_product_owner extends AppCompatActivity {
         }
 
         // Go to new page
-        Intent intent = new Intent(Add_new_product_owner.this, My_products_owner.class);
+        Intent intent = new Intent(Add_New_Product.this, My_Products.class);
         startActivity(intent);
     }
 }

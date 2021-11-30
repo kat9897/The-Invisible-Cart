@@ -1,16 +1,17 @@
-package com.example.b07_final_project;
+package com.example.b07_final_project.customer_dashboard;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.renderscript.Sampler;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
+import com.example.b07_final_project.owner_dashboard.OrderPage;
+import com.example.b07_final_project.R;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -19,7 +20,7 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 
-public class AllStoreActivity extends AppCompatActivity {
+public class All_Store extends AppCompatActivity {
 
     private ListView listView;
 
@@ -27,6 +28,8 @@ public class AllStoreActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_all_store);
+        // Hide TitleBar
+        getSupportActionBar().hide();
 
         listView = (ListView) findViewById(R.id.StoreList);
         final ArrayList<String> storeNamesList = new ArrayList<String>();
@@ -59,7 +62,7 @@ public class AllStoreActivity extends AppCompatActivity {
                 // Order page containing List of Products belonging to the Store Name clicked
 
                 // String clickedStoreName = listView.getAdapter().getItem(position).toString();
-                Intent intent = new Intent(getApplicationContext(), OrderPage.class);
+                Intent intent = new Intent(getApplicationContext(), All_Products.class);
                 startActivity(intent);
             }
         });

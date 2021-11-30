@@ -1,4 +1,4 @@
-package com.example.b07_final_project;
+package com.example.b07_final_project.helper;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -9,7 +9,7 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 
-import org.w3c.dom.Text;
+import com.example.b07_final_project.R;
 
 import java.util.ArrayList;
 

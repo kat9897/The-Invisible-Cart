@@ -12,40 +12,46 @@
         android:usesCleartextTraffic="true"
         android:windowSoftInputMode="adjustResize">
         <activity
-            android:name=".AllStoreActivity"
+            android:name=".customer_dashboard.Order_List_Customer"
             android:exported="false" />
         <activity
-            android:name=".My_products_owner"
+            android:name=".customer_dashboard.All_Products"
             android:exported="false" />
         <activity
-            android:name=".Add_new_product_owner"
+            android:name=".customer_dashboard.All_Store"
             android:exported="false" />
         <activity
-            android:name=".SignUpOwnerActivity"
+            android:name=".owner_dashboard.My_Products"
             android:exported="false" />
         <activity
-            android:name=".LoginOwnerActivity"
+            android:name=".owner_dashboard.Add_New_Product"
             android:exported="false" />
         <activity
-            android:name=".MainActivity_Owner"
+            android:name=".owner_dashboard.SignUp_Owner"
             android:exported="false" />
         <activity
-            android:name=".SignUpCustomerActivity"
+            android:name=".owner_dashboard.Login_Owner"
             android:exported="false" />
         <activity
-            android:name=".OrderPage"
+            android:name=".owner_dashboard.Main_Owner"
+            android:exported="false" />
+        <activity
+            android:name=".customer_dashboard.SignUpCustomerActivity"
+            android:exported="false" />
+        <activity
+            android:name=".owner_dashboard.OrderPage"
             android:exported="false"
             android:label="OrderNumber"
-            android:parentActivityName=".OrderListActivity" />
+            android:parentActivityName=".owner_dashboard.Order_List_Owner" />
         <activity
-            android:name=".OrderListActivity"
+            android:name=".owner_dashboard.Order_List_Owner"
             android:label="Orders"
-            android:parentActivityName=".MainActivity" />
+            android:parentActivityName=".customer_dashboard.Main_Customer" />
         <activity
-            android:name=".MainActivity"
+            android:name=".customer_dashboard.Main_Customer"
             android:exported="false" />
         <activity
-            android:name=".LoginCustomerActivity"
+            android:name=".customer_dashboard.LoginCustomerActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

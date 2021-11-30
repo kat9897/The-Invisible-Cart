@@ -1,4 +1,4 @@
-package com.example.b07_final_project;
+package com.example.b07_final_project.customer_dashboard;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -7,7 +7,9 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
-public class MainActivity extends AppCompatActivity {
+import com.example.b07_final_project.R;
+
+public class Main_Customer extends AppCompatActivity {
     //Declare all the tools in which you want to assign functionality
 
     private Button allStoresBtn;
@@ -17,7 +19,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_main_customer);
         // Hide TitleBar
         getSupportActionBar().hide();
 
@@ -27,7 +29,7 @@ public class MainActivity extends AppCompatActivity {
         allStoresBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(getApplicationContext(), AllStoreActivity.class);
+                Intent intent = new Intent(getApplicationContext(), All_Store.class);
                 startActivity(intent);
             }
         });
@@ -35,7 +37,7 @@ public class MainActivity extends AppCompatActivity {
         myOrdersBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(getApplicationContext(), AllStoreActivity.class);
+                Intent intent = new Intent(getApplicationContext(), Order_List_Customer.class);
                 startActivity(intent);
             }
         });

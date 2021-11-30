@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Add_new_product_owner">
+    tools:context=".owner_dashboard.Add_New_Product">
 
     <TextView
         android:id="@+id/heading_add_new_product"

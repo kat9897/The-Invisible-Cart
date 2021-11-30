@@ -1,6 +1,6 @@
-package com.example.b07_final_project;
+package com.example.b07_final_project.helper;
 
-public class Customers extends Users{
+public class Customers extends Users {
     // 0 for customer
     // 1 for Owner
     private int userType = 0;
