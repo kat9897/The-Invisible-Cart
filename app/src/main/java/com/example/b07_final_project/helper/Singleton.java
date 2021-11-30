@@ -1,10 +1,122 @@
-package com.example.b07_final_project;
+package com.example.b07_final_project.helper;
 
 import java.util.ArrayList;
 import java.util.regex.Pattern;
 
-public class Singleton{
-    /*
+public class Singleton implements Presenter {
+
+    // Access to Singleton
+
+    private static Presenter ID;
+
+    public static Presenter getID() {
+        if (ID == null)
+            ID = new Singleton();
+        return ID;
+    }
+
+    private final Model database;
+
+    private Singleton() {
+        database = new FirebaseModel();
+    }
+
+    // project state variables
+
+    private IDobj currentLogin = null;
+
+    // methods
+
+    @Override
+    public int save(IDobj obj) {
+        database.saveIDobj(obj);
+        return 0;
+    }
+
+    @Override
+    public Customer loginCustomer(String email, String password) {
+
+        ArrayList<IDobj> customers = database.getAllIDobj(IDobj.CUSTOMER);
+
+        for (IDobj o : customers){
+            Customer c = (Customer) o;
+
+            if (c.getEmail().equals(email)){
+                if (c.getPassword().equals(password)) {
+                    currentLogin = database.getIDobj(c); // get a new one so it's not same as return
+                    return c;
+                } else
+                    return null;
+            }
+        }
+        return null;
+    }
+
+
+    @Override
+    public Boolean customerExists(String email){
+
+        ArrayList<IDobj> customers = database.getAllIDobj(IDobj.CUSTOMER);
+
+        for (IDobj o : customers){
+            Customer c = (Customer) o;
+
+            if (c.getEmail().equals(email))
+                return true;
+        }
+        return false;
+    }
+
+    @Override
+    public Customer newCustomer(String email, String name, String password) {
+
+        Customer customer = (Customer) database.newIDobj(IDobj.CUSTOMER);
+
+        customer.setEmail(email);
+        customer.setName(name);
+        customer.setPassword(password);
+
+        customer.save();
+
+        return customer;
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/*
+
+public class Singleton implements Presenter {
+
     // Access to Singleton in section below
 
     static Presenter ID;
@@ -641,6 +753,6 @@ public class Singleton{
     // returns the ID of a new order for the logged in customer at the store they're currently viewing
     // also sets the new order as the currently viewed order
 
-     */
-
 }
+
+*/

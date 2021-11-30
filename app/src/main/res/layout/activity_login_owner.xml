@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".LoginOwnerActivity">
+    tools:context=".owner_dashboard.Login_Owner">
 
     <TextView
         android:id="@+id/heading_login1"

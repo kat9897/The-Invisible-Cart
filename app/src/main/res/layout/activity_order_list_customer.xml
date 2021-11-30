@@ -4,10 +4,10 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".owner_dashboard.My_Products">
+    tools:context=".owner_dashboard.Order_List_Owner">
 
     <TextView
-        android:id="@+id/heading_products"
+        android:id="@+id/heading_orders"
         android:layout_width="330dp"
         android:layout_height="65dp"
         android:layout_alignParentStart="true"
@@ -17,7 +17,7 @@
         android:layout_marginTop="69dp"
         android:layout_marginEnd="41dp"
         android:shadowColor="#303030"
-        android:text="Products"
+        android:text="Orders"
         android:textAlignment="center"
         android:textSize="40dp"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -28,15 +28,18 @@
         app:layout_constraintVertical_bias="0.0" />
 
     <ListView
-        android:id="@+id/listProduct"
+        android:id="@+id/OrderList_1"
         android:layout_width="343dp"
         android:layout_height="542dp"
-        android:layout_below="@+id/heading_products"
+        android:layout_below="@+id/heading_orders"
         android:layout_alignParentStart="true"
         android:layout_alignParentEnd="true"
         android:layout_alignParentBottom="true"
-        android:layout_marginTop="55dp"
-        android:layout_marginBottom="20dp"
+        android:layout_centerHorizontal="true"
+        android:layout_marginStart="10dp"
         android:layout_marginLeft="10dp"
-        android:layout_marginRight="10dp"/>
+        android:layout_marginTop="54dp"
+        android:layout_marginEnd="9dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginBottom="21dp" />
 </RelativeLayout>

@@ -1,4 +1,4 @@
-package com.example.b07_final_project;
+package com.example.b07_final_project.owner_dashboard;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -7,7 +7,9 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
-public class MainActivity_Owner extends AppCompatActivity {
+import com.example.b07_final_project.R;
+
+public class Main_Owner extends AppCompatActivity {
 
     // Declare all the tools to which you want to assign functionality
     private Button btn_orders, btn_add_new_product, btn_products;
@@ -37,7 +39,7 @@ public class MainActivity_Owner extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 // Open up another activity
-                Intent intent1 = new Intent(MainActivity_Owner.this, OrderListActivity.class);
+                Intent intent1 = new Intent(Main_Owner.this, Order_List_Owner.class);
                 // send this ownerid to the activity
                 intent1.putExtra("Ownerid", uid);
                 startActivity(intent1);
@@ -50,7 +52,7 @@ public class MainActivity_Owner extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 // Open up another activity
-                Intent intent1 = new Intent(MainActivity_Owner.this, My_products_owner.class);
+                Intent intent1 = new Intent(Main_Owner.this, My_Products.class);
                 intent1.putExtra("Ownerid", uid);
                 // send this ownerid to the activity
                 startActivity(intent1);
@@ -60,7 +62,7 @@ public class MainActivity_Owner extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 // Open up another activity
-                Intent intent1 = new Intent(MainActivity_Owner.this, Add_new_product_owner.class);
+                Intent intent1 = new Intent(Main_Owner.this, Add_New_Product.class);
                 //intent1.putExtra("Ownerid", uid);
                 // send this ownerid to the activity
                 startActivity(intent1);

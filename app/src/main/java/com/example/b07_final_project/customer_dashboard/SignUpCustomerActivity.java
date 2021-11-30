@@ -1,4 +1,4 @@
-package com.example.b07_final_project;
+package com.example.b07_final_project.customer_dashboard;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -15,6 +15,7 @@ import android.widget.EditText;
 import android.widget.Switch;
 import android.widget.Toast;
 
+/*
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
@@ -22,49 +23,50 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+ */
+
+
+import com.example.b07_final_project.R;
+import com.example.b07_final_project.helper.Customer;
+import com.example.b07_final_project.helper.Presenter;
+import com.example.b07_final_project.helper.Singleton;
 
 import java.util.regex.Pattern;
 
-public class SignUpOwnerActivity extends AppCompatActivity {
+public class SignUpCustomerActivity extends AppCompatActivity {
 
-    private EditText edtEmail, edtPassword, edtConfirmPassword;
-
-    private EditText edtName, edtphn;
-
+    private EditText edtName, edtEmail, edtPassword, edtConfirmPassword;
     private Button btnSignUp;
     private CheckBox showpassword;
-    private String name,phn;
     public static final Pattern VALID_EMAIL_ADDRESS_REGEX = Pattern.compile("^[A-Z0-9._%+-]+@[A-Z0-9.-]+\\.[A-Z]{2,6}$", Pattern.CASE_INSENSITIVE);
-    public static final Pattern VALID_PHNNUMBER_REGEX = Pattern.compile("\\d{10}");
+    private String name;
 
-    FirebaseAuth mAuth;
-    DatabaseReference firebaseDatabase;
-    FirebaseDatabase db;
+    Presenter singleton = Singleton.getID();
+
+    //FirebaseAuth mAuth;
+    //DatabaseReference firebaseDatabase;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_sign_up_owner);
+        setContentView(R.layout.activity_sign_up_customer);
+//        R.layout.activity_sign_up_customer
         // Hide TitleBar
         getSupportActionBar().hide();
-
-        mAuth = FirebaseAuth.getInstance(); // Initialize Firebase Authentication
-
-
-        edtName = findViewById(R.id.edtTxtName_signinOwner);
-        edtphn = findViewById(R.id.edtphn_signinowner);
-        edtEmail = findViewById(R.id.edtTxtEmail_signinowner1);
-        edtPassword = findViewById(R.id.edtTxtPassword_signinowner1);
-        edtConfirmPassword = findViewById(R.id.edtTxtConfirmPassword_signinowner1);
-        btnSignUp = findViewById(R.id.btnsignIn_signinowner1);
-        showpassword = findViewById(R.id.showpassword_signinowner1);
+        //mAuth = FirebaseAuth.getInstance(); // Initialize Firebase Authentication
+        edtName = findViewById(R.id.edtTxtName_signincustomer);
+        edtEmail = findViewById(R.id.edtTxtEmail_signincustomer);
+        edtPassword = findViewById(R.id.edtTxtPassword_signincustomer);
+        edtConfirmPassword = findViewById(R.id.edtTxtConfirmPassword_signincustomer);
+        btnSignUp = findViewById(R.id.btnsignIn_signincustomer);
+        showpassword = findViewById(R.id.showpassword);
 
 
 
         showpassword.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (((CompoundButton) view).isChecked()) {
+                if(((CompoundButton) view).isChecked()){
                     edtConfirmPassword.setTransformationMethod(null);
                     edtPassword.setTransformationMethod(null);
                 } else {
@@ -73,55 +75,76 @@ public class SignUpOwnerActivity extends AppCompatActivity {
                 }
             }
         });
+
         btnSignUp.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                name = edtName.getText().toString().trim();
-                phn = edtphn.getText().toString().trim();
                 String email = edtEmail.getText().toString().trim();
                 String password = edtPassword.getText().toString().trim();
                 String confirmpassword = edtConfirmPassword.getText().toString().trim();
+                name = edtName.getText().toString().trim();
 
                 //check if stings are empty using TextUtils
-                //Email
-                if (TextUtils.isEmpty(email)) { //email is empty
-                    Toast.makeText(SignUpOwnerActivity.this, "Please enter email", Toast.LENGTH_SHORT).show();
-                    return;
-                } else if (!VALID_EMAIL_ADDRESS_REGEX.matcher(email).find()) {
-                    Toast.makeText(SignUpOwnerActivity.this, "Please enter a valid email", Toast.LENGTH_SHORT).show();
+                //Name
+                if(TextUtils.isEmpty(name)){ //email is empty
+                    Toast.makeText(SignUpCustomerActivity.this, "Please enter Name", Toast.LENGTH_SHORT).show();
+                    //stop further execution
                     return;
                 }
-                //Phone
-                if (TextUtils.isEmpty(email)) { //email is empty
-                    Toast.makeText(SignUpOwnerActivity.this, "Please enter Phone number", Toast.LENGTH_SHORT).show();
+
+                //Email
+                if(TextUtils.isEmpty(email)){ //email is empty
+                    Toast.makeText(SignUpCustomerActivity.this, "Please enter email", Toast.LENGTH_SHORT).show();
                     return;
-                } else if (!VALID_PHNNUMBER_REGEX.matcher(phn).find()) {
-                    Toast.makeText(SignUpOwnerActivity.this, "Please enter a valid Phone Number", Toast.LENGTH_SHORT).show();
+                }else if (!VALID_EMAIL_ADDRESS_REGEX.matcher(email).find()){
+                    Toast.makeText(SignUpCustomerActivity.this, "Please enter a valid email", Toast.LENGTH_SHORT).show();
                     return;
                 }
 
                 //Password
-                if (TextUtils.isEmpty(password)) { //password is empty
-                    Toast.makeText(SignUpOwnerActivity.this, "Please enter Password", Toast.LENGTH_SHORT).show();
+                if(TextUtils.isEmpty(password)){ //password is empty
+                    Toast.makeText(SignUpCustomerActivity.this, "Please enter Password", Toast.LENGTH_SHORT).show();
                     return;
-                } else if (password.length() < 8) {
-                    Toast.makeText(SignUpOwnerActivity.this, "Password must have at least 8 characters", Toast.LENGTH_SHORT).show();
+                }else if(password.length() < 8){
+                    Toast.makeText(SignUpCustomerActivity.this, "Password must have at least 8 characters", Toast.LENGTH_SHORT).show();
                     return;
                 }
 
                 //Confirm Password
-                if (!password.equals(confirmpassword)) {
-                    Toast.makeText(SignUpOwnerActivity.this, "Your passwords do not match", Toast.LENGTH_SHORT).show();
+                if(!password.equals(confirmpassword)){
+                    Toast.makeText(SignUpCustomerActivity.this, "Your passwords do not match", Toast.LENGTH_SHORT).show();
                     return;
                 }
 
-                signInOwner(email, password);
+                signIn(email, password);
+
             }
         });
+    }
+
+
+    private void signIn(String email, String password) {
+
+        if (singleton.customerExists(email)){
+
+            // customer already exists
+
+            return;
+        }
+
+        singleton.newCustomer(email, name, password);
+        Customer customer = singleton.loginCustomer(email, password);
+
+        // login succeeded
+        Intent intent = new Intent(SignUpCustomerActivity.this, Main_Customer.class);
+
+        startActivity(intent);
+        overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
 
     }
 
-    private void signInOwner(String email, String password) {
+    /*
+    private void signIn(String email, String password) {
         //https://firebase.google.com/docs/auth/android/password-auth#java_3
         mAuth.createUserWithEmailAndPassword(email, password)
                 .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
@@ -129,31 +152,29 @@ public class SignUpOwnerActivity extends AppCompatActivity {
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
 
-                            // Add user to Firebase
-
                             String uid = task.getResult().getUser().getUid();
-                            Owners u = new Owners(uid,name,phn,email,password);
-
-                            firebaseDatabase = FirebaseDatabase.getInstance().getReference().child("Users").child("Owner").child(uid);
+                            Customers u = new Customers(uid,name,"",email,password);
+                            firebaseDatabase = FirebaseDatabase.getInstance().getReference().child("Users").child("Customer").child(uid);
 
                             firebaseDatabase.child(mAuth.getCurrentUser().getUid()).setValue(u)
                                     .addOnCompleteListener(new OnCompleteListener<Void>() {
                                         @Override
                                         public void onComplete(@NonNull Task<Void> task) {
                                             if (task.isSuccessful()) {
-                                                Toast.makeText(SignUpOwnerActivity.this, "User registered to database", Toast.LENGTH_SHORT).show();
+                                                Toast.makeText(SignUpCustomerActivity.this, "User registered to database", Toast.LENGTH_SHORT).show();
                                             } else {
                                                 System.out.println("onComplete: " + task.getException().getMessage());
                                             }
                                         }
                                     });
 
-                            // Sign in success, Move to MainActivity_owner
+
+                            // Sign in success, Move to MainActivity
                             FirebaseUser user = mAuth.getCurrentUser();
-                            Toast.makeText(SignUpOwnerActivity.this,"Account Created",Toast.LENGTH_LONG).show();
+                            Toast.makeText(SignUpCustomerActivity.this,"Account Created",Toast.LENGTH_LONG).show();
                             finish();
-                            Intent intent = new Intent(SignUpOwnerActivity.this, MainActivity_Owner.class);
-                            intent.putExtra("Ownerid", uid);
+                            Intent intent = new Intent(SignUpCustomerActivity.this, MainActivity.class);
+                            intent.putExtra("Userid", uid);
                             startActivity(intent);
                             overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
                         } else {
@@ -164,6 +185,7 @@ public class SignUpOwnerActivity extends AppCompatActivity {
                     }
                 });
     }
+    */
 
     @Override
     public void finish() {
