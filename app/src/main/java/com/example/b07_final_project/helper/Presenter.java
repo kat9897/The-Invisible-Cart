@@ -45,7 +45,13 @@ public interface Presenter {
 
     ArrayList<Product_> getProducts(Owner owner);
 
-
+/*
+    Customer customer = singleton.getLoggedInCustomer();
+    Store store = singleton.getViewedStore();
+    ArrayList<Product_> productListObjects = singleton.getProducts(store);
+    Order_ order = singleton.newOrder(customer, store);
+    singleton.addProductToOrder(order, pc.getID(), pc.getQuantity());
+*/
 
     // Order getViewedOrder();
     //Customer getCustomer(Order_ order);
