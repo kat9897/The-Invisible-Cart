@@ -13,7 +13,7 @@ import android.widget.ListView;
 import com.example.b07_final_project.helper.Presenter;
 import com.example.b07_final_project.helper.Singleton;
 import com.example.b07_final_project.helper.Store;
-import com.example.b07_final_project.owner_dashboard.OrderPage;
+import com.example.b07_final_project.customer_dashboard.OrderPage_Customer;
 import com.example.b07_final_project.R;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -34,7 +34,7 @@ public class All_Store extends AppCompatActivity {
         // Hide TitleBar
         getSupportActionBar().hide();
 
-        listView = findViewById(R.id.OrderList_1);
+        listView = findViewById(R.id.StoreList);
         ArrayList<String> list = new ArrayList<>();
 
         Presenter singleton = Singleton.getID();
@@ -53,7 +53,7 @@ public class All_Store extends AppCompatActivity {
                 //TODO When a Store Name is clicked, it will direct the Customer to the
                 // Order page containing List of Products belonging to the Store Name clicked
 
-                // String clickedStoreName = listView.getAdapter().getItem(position).toString();
+                //String clickedStoreName = listView.getAdapter().getItem(position).toString();
                 Intent intent = new Intent(getApplicationContext(), All_Products.class);
                 startActivity(intent);
             }

@@ -34,12 +34,14 @@ public class Order_List_Owner extends AppCompatActivity {
         listView = (ListView) findViewById(R.id.OrderList);
         ArrayList<String> orderListStrings = new ArrayList<>();
 
-        //Owner owner = singleton.getLoggedInOwner();
-        //ArrayList<Order_> orderListObjects = singleton.getOrders(owner);
+        orderListStrings.add("order #1");
+
+        Owner owner = singleton.getLoggedInOwner();
+        ArrayList<Order_> orderListObjects = singleton.getOrders(owner);
 
 
-        //for (int i = 1; i <= orderListObjects.size(); i++)
-            //orderListStrings.add("Order Number " + String.valueOf(i));
+        for (int i = 1; i <= orderListObjects.size(); i++)
+            orderListStrings.add("Order Number " + String.valueOf(i));
 
 
         ArrayAdapter arrayAdapter = new ArrayAdapter(this,android.R.layout.simple_list_item_1,orderListStrings);
@@ -48,7 +50,7 @@ public class Order_List_Owner extends AppCompatActivity {
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                //singleton.viewOrder(orderListObjects.get(i));
+                singleton.viewOrder(orderListObjects.get(i));
                 Intent intent = new Intent(getApplicationContext(), OrderPage_Owner.class);
                 startActivity(intent);
             }

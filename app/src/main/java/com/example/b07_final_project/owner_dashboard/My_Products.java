@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import android.widget.ListView;
 
+import com.example.b07_final_project.helper.CustomListAdapter1;
 import com.example.b07_final_project.helper.Owner;
 import com.example.b07_final_project.helper.Presenter;
 import com.example.b07_final_project.helper.Product_;
@@ -46,9 +47,9 @@ public class My_Products extends AppCompatActivity {
             productList.add(productCard);
         }
 
-        productList.add(new Product_Card("name", "price", "quantity", "brand"));
+        productList.add(new Product_Card("name", "price", "brand"));
 
-        CustomListAdapter adapter = new CustomListAdapter(this, R.layout.cardview_product_owner, productList);
+        CustomListAdapter1 adapter = new CustomListAdapter1(this, R.layout.view_product_page_owner, productList);
         listView.setAdapter(adapter);
     }
 }

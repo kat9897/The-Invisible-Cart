@@ -31,32 +31,31 @@ public class OrderPage_Owner extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_order_page_owner);
-        // Hide TitleBar
         getSupportActionBar().hide();
         ListView listView = (ListView) findViewById(R.id.productListView);
 
-        //Order_ order = singleton.getViewedOrder();
-        //Customer customer = singleton.getCustomer(order);
-        //ArrayList<Product_> productsInOrder = singleton.getProducts(order);
+        Order_ order = singleton.getViewedOrder();
+        Customer customer = singleton.getCustomer(order);
+        ArrayList<Product_> productsInOrder = singleton.getProducts(order);
 
         ArrayList<Product_Card> productList = new ArrayList<>();
 
-        /*for (Product_ product : productsInOrder) {
+        for (Product_ product : productsInOrder) {
 
             String name = product.getName();
             String brand = product.getBrand();
             String price = String.valueOf(product.getPrice());
             // shorten string to 2 decimals?
 
-            String quantity = String.valueOf(singleton.getQuantity(order, product));
+            String quantity = "-1";//String.valueOf(singleton.getQuantity(order, product));
 
             Product_Card productCard = new Product_Card(name, price, quantity, brand);
             productList.add(productCard);
-        }*/
+        }
 
         productList.add(new Product_Card("name", "price", "quantity", "brand"));
 
-        CustomListAdapter adapter = new CustomListAdapter(this, R.layout.cardview_product_owner, productList);
+        CustomListAdapter adapter = new CustomListAdapter(this, R.layout.view_product_order_page_owner, productList);
         listView.setAdapter(adapter);
 
         // COMPLETE Button
