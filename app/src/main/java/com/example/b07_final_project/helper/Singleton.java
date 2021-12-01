@@ -241,9 +241,32 @@ public class Singleton implements Presenter {
     }
 
     @Override
-    public ArrayList<String> allCustomerOrders() {
-        return null;
+    public ArrayList<Order_> allCustomerOrders(Customer customer) {
+
+        ArrayList<IDobj> orders = database.getRelations(customer, IDobj.ORDER);
+        ArrayList<Order_> output = new ArrayList<>();
+
+        for (IDobj o : orders){
+            Order_ order = (Order_) o;
+            output.add(order);
+        }
+
+        return output;
     }
+
+    @Override
+    public ArrayList<Order_> allCustomerOrders() { // assumes logged in customer
+
+        if (this.currentLogin == null)
+            return null;
+        if (currentLogin.getType() != IDobj.CUSTOMER)
+            return null;
+        // customer must be logged in at this point
+
+        Customer customer = (Customer) database.getIDobj(currentLogin);
+        return allCustomerOrders(customer);
+    }
+
 
     @Override
     public boolean storeExists(String storename) {
@@ -258,6 +281,20 @@ public class Singleton implements Presenter {
         }
         return false;
     }
+
+    @Override
+    public void setQuantity(Order_ order, Product_ product, int quantity) {
+
+        database.addRelation(order, product);
+        database.setRelationContext(order, product, Integer.toString(quantity));
+    }
+
+    @Override
+    public int getQuantity(Order_ order, Product_ product) {
+
+        return Integer.valueOf(database.getRelationContext(order,  product));
+    }
+
 }
 
 

@@ -12,11 +12,11 @@ public class FirebaseModel implements Model{
 
     // fields
 
-    private FirebaseDatabase database;
+    private final FirebaseDatabase database;
     private final DatabaseReference refRoot;
     private DataSnapshot dataRoot;
 
-    private final String dirROOT = "";
+    private final String dirROOT = "Test_Database";
     private final String dirOWNER = "Owner";
     private final String dirSTORE = "Store";
     private final String dirPRODUCT = "Product";
@@ -24,11 +24,12 @@ public class FirebaseModel implements Model{
     private final String dirCUSTOMER = "Customer";
     private final String dirID = "ID";
     private final String dirRELATION = "Relation";
+    private final String dirCONTEXT = "Context";
 
 
     FirebaseModel() {
 
-        FirebaseDatabase database = FirebaseDatabase.getInstance();
+        database = FirebaseDatabase.getInstance();
         refRoot = database.getReference();//.child(dirROOT);
 
         ValueEventListener listener = new ValueEventListener() {
@@ -106,7 +107,6 @@ public class FirebaseModel implements Model{
             break;
             default: //case IDobj.CUSTOMER:
                 obj = new Customer(key);
-                break;
         }
 
         return obj;
@@ -158,6 +158,8 @@ public class FirebaseModel implements Model{
                 refField.setValue(customer.getName());
                 refField = ref.child("Password");
                 refField.setValue(customer.getPassword());
+                refField = ref.child("NextOrderNumber");
+                refField.setValue(customer.getNextOrderNumber());
                 break;
         }
     }
@@ -180,8 +182,8 @@ public class FirebaseModel implements Model{
                 Order_ order = new Order_(ID);
                 obj = order;
                 snapField = snap.child("Status");
-                Long tempLong = (long) snapField.getValue();
-                order.setStatus(tempLong.intValue());
+                Long tempLong1 = (long) snapField.getValue();
+                order.setStatus(tempLong1.intValue());
                 break;
             case IDobj.OWNER:
                 Owner owner = new Owner(ID);
@@ -220,6 +222,9 @@ public class FirebaseModel implements Model{
                 customer.setName((String) snapField.getValue());
                 snapField = snap.child("Password");
                 customer.setPassword((String) snapField.getValue());
+                snapField = snap.child("NextOrderNumber");
+                Long tempLong2 = (long) snapField.getValue();
+                customer.setNextOrderNumber(tempLong2.intValue());
                 break;
         }
 
@@ -260,11 +265,18 @@ public class FirebaseModel implements Model{
         ref = moveToChild(ref, obj2.getType());
         ref = ref.child(obj2.getID());
 
-        ref.setValue(ref.getKey());
+        String ID = ref.getKey();
+        ref = ref.child(dirID);
+
+        ref.setValue(ID);
     }
 
     @Override
     public void addRelation(IDobj obj1, IDobj obj2) {
+
+        if (relationExists(obj1, obj2))
+            return;
+
         addOneWayRelation(obj1, obj2);
         addOneWayRelation(obj2, obj1);
     }
@@ -284,10 +296,63 @@ public class FirebaseModel implements Model{
 
         for (DataSnapshot snapChild : snap.getChildren()){
 
-            ID = (String) snapChild.getValue();
+            ID = (String) snapChild.child(dirID).getValue();
             output.add(getIDobj(type, ID));
         }
         return output;
+    }
+
+    @Override
+    public Boolean relationExists(IDobj obj1, IDobj obj2) {
+
+        DataSnapshot snap = dataRoot;
+
+        snap = moveToChild(snap, obj1.getType());
+        snap = snap.child(obj1.getID());
+        snap = snap.child(dirRELATION);
+        snap = moveToChild(snap, obj2.getType());
+        snap = snap.child(obj2.getID());
+
+        return snap.exists();
+    }
+
+    @Override
+    public void setRelationContext(IDobj obj1, IDobj obj2, String context) {
+
+        if (!relationExists(obj1, obj2))
+            return;
+        // below here, the relation to add context to must exist
+
+        DatabaseReference ref = refRoot;
+
+        ref = moveToChild(ref, obj1.getType());
+        ref = ref.child(obj1.getID());
+        ref = ref.child(dirRELATION);
+        ref = moveToChild(ref, obj2.getType());
+        ref = ref.child(obj2.getID());
+
+        ref = ref.child(dirCONTEXT);
+
+        if (context == null) {
+            ref.removeValue();
+            return;
+        }
+        ref.setValue(context);
+    }
+
+    @Override
+    public String getRelationContext(IDobj obj1, IDobj obj2) {
+
+        DataSnapshot snap = dataRoot;
+
+        snap = moveToChild(snap, obj1.getType());
+        snap = snap.child(obj1.getID());
+        snap = snap.child(dirRELATION);
+        snap = moveToChild(snap, obj2.getType());
+        snap = snap.child(obj2.getID());
+        snap = snap.child(dirCONTEXT);
+
+        return (String) snap.getValue();
     }
 
     @Override
@@ -315,7 +380,7 @@ public class FirebaseModel implements Model{
             for (DataSnapshot snapChild : snapTyped.getChildren()){
 
                 refReflect = moveToChild(refRoot, type);
-                refReflect = refReflect.child((String) snapChild.getValue());
+                refReflect = refReflect.child((String) snapChild.child(dirID).getValue());
                 refReflect = refReflect.child(dirRELATION);
                 refReflect = moveToChild(refReflect, obj.getType());
                 refReflect = refReflect.child(obj.getID());
