@@ -4,6 +4,7 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.GenericTypeIndicator;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
@@ -143,7 +144,7 @@ public class FirebaseModel implements Model{
                 refField = ref.child("Brand");
                 refField.setValue(product.getBrand());
                 refField = ref.child("Price");
-                refField.setValue(product.getPrice());
+                refField.setValue(String.valueOf(product.getPrice()));
                 break;
             case IDobj.STORE:
                 Store store = (Store) obj;
@@ -205,7 +206,18 @@ public class FirebaseModel implements Model{
                 snapField = snap.child("Brand");
                 product.setBrand((String) snapField.getValue());
                 snapField = snap.child("Price");
-                product.setPrice((double) snapField.getValue());
+
+                /*
+                Object tempObject = snapField.getValue();
+                Double tempDouble = new Double(0);
+                if (tempObject.getClass() == tempDouble.getClass())
+                    tempDouble = (double) tempObject;
+                else {
+                    Long tempLong2 = (long) tempObject;
+                    tempDouble = tempLong2.doubleValue();
+                }*/
+
+                product.setPrice(Double.valueOf((String) snapField.getValue()));
                 break;
             case IDobj.STORE:
                 Store store = new Store(ID);
