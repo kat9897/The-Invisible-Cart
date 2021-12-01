@@ -18,13 +18,17 @@ public interface Presenter {
     Customer newCustomer(String email, String name, String password);
     Owner newOwner(String email, String name, String password, String phoneNumber, String storename);
     // newOwner also creates a new store
+    // also logs you in
 
     Product_ newProduct(String pdtName, Double pdtPrice, String pdtBrand);
 
     Owner getLoggedInOwner();
 
     ArrayList<Store> allStores();
-    ArrayList<String> allCustomerOrders();
+
+    ArrayList<Order_> allCustomerOrders(Customer customer);
+    ArrayList<Order_> allCustomerOrders(); // assumes logged in customer
+
     Store getStore(Owner owner);
 
     ArrayList<Order_> getOrders(Owner owner); // Gets orders for the store, not the owner
@@ -33,7 +37,8 @@ public interface Presenter {
 
     Order_ getViewedOrder();
 
-    // int getQuantity(Order_ order, Product_ product); (Do this later)
+    void setQuantity(Order_ order, Product_ product, int quantity);
+    int getQuantity(Order_ order, Product_ product);
     Customer getCustomer(Order_ order);
 
     ArrayList<Product_> getProducts(Order_ order);

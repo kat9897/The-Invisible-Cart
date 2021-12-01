@@ -131,8 +131,8 @@ public class SignUpCustomerActivity extends AppCompatActivity {
             return;
         }
 
+        // also logs you in
         singleton.newCustomer(email, name, password);
-        Customer customer = singleton.loginCustomer(email, password);
 
         // login succeeded
         Intent intent = new Intent(SignUpCustomerActivity.this, Main_Customer.class);
