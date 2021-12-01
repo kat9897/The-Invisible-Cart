@@ -53,8 +53,9 @@ public class All_Store extends AppCompatActivity {
                 //TODO When a Store Name is clicked, it will direct the Customer to the
                 // Order page containing List of Products belonging to the Store Name clicked
 
-                //String clickedStoreName = listView.getAdapter().getItem(position).toString();
-                Intent intent = new Intent(getApplicationContext(), All_Products.class);
+                String clickedStoreName = listView.getAdapter().getItem(position).toString();
+                Intent intent = new Intent(getApplicationContext(), All_Products_Alternative.class);
+                intent.putExtra("heading_store", clickedStoreName);
                 startActivity(intent);
             }
         });

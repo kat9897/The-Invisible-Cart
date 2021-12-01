@@ -8,7 +8,7 @@
     <TextView
         android:gravity="center"
         android:textAlignment="center"
-        android:text="Name"
+        android:text="Name (Brand)"
         android:layout_width="match_parent"
         android:layout_height="60dp"
         android:id="@+id/product_name"

@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/Product"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="horizontal"
+    android:weightSum="100">
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="60">
+
+        <TextView
+            android:gravity="center"
+            android:text="Name (Brand)"
+            android:layout_width="match_parent"
+            android:layout_height="30dp"
+            android:id="@+id/product_name"/>
+
+        <TextView
+            android:id="@+id/product_price"
+            android:layout_width="match_parent"
+            android:layout_height="32dp"
+            android:layout_below="@+id/product_name"
+            android:gravity="center"
+            android:text="Price" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_weight="40">
+
+        x<Button
+        android:id="@+id/decreaseBtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_centerVertical="true"
+        android:onClick="decreaseQty"
+        android:text="-"
+        android:layout_marginLeft="5dp"></Button>
+
+        <TextView
+            android:id="@+id/product_quantity"
+            android:gravity="center"
+            android:textAlignment="center"
+            android:text="0"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:layout_weight="40"/>
+
+        <Button
+            android:id="@+id/increaseBtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:onClick="increaseQty"
+            android:text="+"
+            android:layout_marginRight="5dp"></Button>
+
+    </LinearLayout>
+
+</LinearLayout>
+
+
+
+
+
+
+
+
