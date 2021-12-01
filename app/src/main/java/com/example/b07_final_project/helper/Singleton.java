@@ -228,7 +228,8 @@ public class Singleton implements Presenter {
 
     @Override
     public ArrayList<Order_> getOrders(Owner owner){
-        ArrayList<IDobj> idobj_list = database.getRelations(owner, IDobj.ORDER);
+        Store store = getStore(owner);
+        ArrayList<IDobj> idobj_list = database.getRelations(store, IDobj.ORDER);
 
         ArrayList<Order_> product_List = new ArrayList<>();
 
