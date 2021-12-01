@@ -180,7 +180,8 @@ public class FirebaseModel implements Model{
                 Order_ order = new Order_(ID);
                 obj = order;
                 snapField = snap.child("Status");
-                order.setStatus((int) snapField.getValue());
+                Long tempLong = (long) snapField.getValue();
+                order.setStatus(tempLong.intValue());
                 break;
             case IDobj.OWNER:
                 Owner owner = new Owner(ID);
