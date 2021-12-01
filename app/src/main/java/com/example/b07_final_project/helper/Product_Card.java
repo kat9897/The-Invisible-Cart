@@ -5,6 +5,15 @@ public class Product_Card {
     private String price;
     private String quantity;
     private String brand;
+    private String ID;
+
+    public String getID() {
+        return ID;
+    }
+
+    public void setID(String ID) {
+        this.ID = ID;
+    }
 
     public Product_Card(String name, String price, String brand){
         this.name = name;

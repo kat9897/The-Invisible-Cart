@@ -40,6 +40,7 @@ public class All_Store extends AppCompatActivity {
         Presenter singleton = Singleton.getID();
         // Fetch all the Store Names in the Database to the storeNamesList
         ArrayList<Store> allStores = singleton.allStores();
+        list.clear();
         for (int i = 0; i < allStores.size(); i++){
             list.add(allStores.get(i).getName());
         }
@@ -54,7 +55,7 @@ public class All_Store extends AppCompatActivity {
                 // Order page containing List of Products belonging to the Store Name clicked
 
                 String clickedStoreName = listView.getAdapter().getItem(position).toString();
-                Intent intent = new Intent(getApplicationContext(), All_Products_Alternative.class);
+                Intent intent = new Intent(getApplicationContext(), All_Products.class);
                 intent.putExtra("heading_store", clickedStoreName);
                 startActivity(intent);
             }

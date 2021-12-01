@@ -11,20 +11,20 @@ import androidx.annotation.NonNull;
 
 import com.example.b07_final_project.R;
 
+import org.w3c.dom.Text;
+
 import java.util.ArrayList;
 
 public class CustomListAdapter2 extends ArrayAdapter<Product_Card> {
     private Context mContext;
     private int mResource;
-    int quantity = 0;
-    TextView tvQuantity;
 
     private static class ViewHolder{
         TextView name;
         TextView price;
         TextView quantity;
+        TextView brand;
     }
-
     public CustomListAdapter2(Context context, int resource, ArrayList<Product_Card> objects) {
         super(context, resource, objects);
         mContext = context;
@@ -46,27 +46,13 @@ public class CustomListAdapter2 extends ArrayAdapter<Product_Card> {
 
         TextView tvName = (TextView) convertView.findViewById(R.id.product_name);
         TextView tvPrice = (TextView) convertView.findViewById(R.id.product_price);
-        tvQuantity = (TextView) convertView.findViewById(R.id.product_quantity);
+        TextView tvQuantity = (TextView) convertView.findViewById(R.id.product_quantity);
 
-        tvName.setText(name + "(" + brand + ")");
+        tvName.setText(name + " (" + brand + ")");
         tvPrice.setText(price);
         tvQuantity.setText(quantity);
 
         return convertView;
     }
 
-    public void increaseQty(View v) {
-        quantity++;
-        tvQuantity.setText("" + quantity);
-    }
-
-    public void decreaseQty(View v) {
-        if (quantity <= 0) {
-            quantity = 0;
-        }
-        else {
-            quantity--;
-        }
-        tvQuantity.setText("" + quantity);
-    }
 }

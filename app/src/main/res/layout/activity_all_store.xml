@@ -19,7 +19,6 @@
         android:shadowColor="#303030"
         android:text="List of Stores"
         android:textAlignment="center"
-        android:textColor="@color/black"
         android:textSize="40dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
