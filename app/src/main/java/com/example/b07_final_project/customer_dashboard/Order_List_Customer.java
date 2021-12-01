@@ -40,7 +40,9 @@ public class Order_List_Customer extends AppCompatActivity {
         ArrayList<String> list = new ArrayList<>();
 
         Presenter singleton = Singleton.getID();
-        list = singleton.allCustomerOrders();
+
+        // TODO: replace commented line below
+        // list = singleton.allCustomerOrders();
 
         ArrayAdapter arrayAdapter = new ArrayAdapter(this,android.R.layout.simple_list_item_1,list);
         listView.setAdapter(arrayAdapter);
