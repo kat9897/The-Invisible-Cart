@@ -34,8 +34,6 @@ public class Order_List_Owner extends AppCompatActivity {
         listView = (ListView) findViewById(R.id.OrderList);
         ArrayList<String> orderListStrings = new ArrayList<>();
 
-        orderListStrings.add("order #1");
-
         Owner owner = singleton.getLoggedInOwner();
         ArrayList<Order_> orderListObjects = singleton.getOrders(owner);
 
@@ -53,6 +51,7 @@ public class Order_List_Owner extends AppCompatActivity {
                 singleton.viewOrder(orderListObjects.get(i));
                 Intent intent = new Intent(getApplicationContext(), OrderPage_Owner.class);
                 startActivity(intent);
+                System.out.println("hello");
             }
         });
     }
