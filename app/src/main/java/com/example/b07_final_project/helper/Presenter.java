@@ -18,6 +18,7 @@ public interface Presenter {
     Customer newCustomer(String email, String name, String password);
     Owner newOwner(String email, String name, String password, String phoneNumber, String storename);
     // newOwner also creates a new store
+    // also logs you in
 
     Product_ newProduct(String pdtName, Double pdtPrice, String pdtBrand);
 

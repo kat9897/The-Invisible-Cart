@@ -147,8 +147,8 @@ public class SignUp_Owner extends AppCompatActivity {
 
     private void signInOwner(String email, String password, String storename) {
 
+        // also logs you in
         singleton.newOwner(email, name, password, phn, storename);
-        Owner owner = singleton.loginOwner(email, password);
 
         // login succeeded
         Intent intent = new Intent(SignUp_Owner.this, Main_Owner.class);

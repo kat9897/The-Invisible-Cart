@@ -112,6 +112,8 @@ public class Singleton implements Presenter {
 
         customer.save();
 
+        currentLogin = customer;
+
         return customer;
     }
 
@@ -132,6 +134,8 @@ public class Singleton implements Presenter {
 
         store.setName(storename);
         store.save();
+
+        currentLogin = owner;
 
         return owner;
     }
@@ -179,7 +183,7 @@ public class Singleton implements Presenter {
     public ArrayList<Store> allStores(){
         ArrayList<IDobj> idobj_List = database.getAllIDobj(IDobj.STORE);
 
-        ArrayList<Store> store_List = new ArrayList<Store> ();
+        ArrayList<Store> store_List = new ArrayList<> ();
 
         for(IDobj object : idobj_List){
             store_List.add((Store)object);
