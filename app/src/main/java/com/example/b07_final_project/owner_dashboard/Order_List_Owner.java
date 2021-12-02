@@ -51,7 +51,6 @@ public class Order_List_Owner extends AppCompatActivity {
                 singleton.viewOrder(orderListObjects.get(i));
                 Intent intent = new Intent(getApplicationContext(), OrderPage_Owner.class);
                 startActivity(intent);
-                System.out.println("hello");
             }
         });
     }

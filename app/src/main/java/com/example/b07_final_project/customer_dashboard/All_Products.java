@@ -31,6 +31,7 @@ public class All_Products extends AppCompatActivity {
     private EditText qty;
     private ListView product_listview;
     private TextView totalPrice;
+    private TextView nameOfStore;
 
     private ArrayList<Product_Card> productList;
     private Customer customer;
@@ -81,6 +82,7 @@ public class All_Products extends AppCompatActivity {
         qty = (EditText) findViewById(R.id.product_quantity);
         product_listview = findViewById(R.id.productListView);
         totalPrice = findViewById(R.id.total);
+        nameOfStore = findViewById(R.id.heading_store);
 
         singleton = Singleton.getID();
         listView = findViewById(R.id.listProduct_1);
@@ -109,6 +111,8 @@ public class All_Products extends AppCompatActivity {
         customer = singleton.getLoggedInCustomer();
         store = singleton.getViewedStore();
         productListObjects = singleton.getProducts(store);
+
+        nameOfStore.setText(store.getName());
 
 
         for (Product_ p : productListObjects) {
@@ -151,10 +155,13 @@ public class All_Products extends AppCompatActivity {
                 }
                 Order_ order = singleton.newOrder(customer, store);
                 for (Product_Card pc : productList)
-
-                    singleton.addProductToOrder(order, pc.getID(), Integer.valueOf(pc.getQuantity()));
-                // ignores any with 0 quantity
-
+                    // ignore any with quantity 0
+                    if (! pc.getQuantity().equals("0")) {
+                        singleton.addProductToOrder(order, pc.getID(), Integer.valueOf(pc.getQuantity()));
+                    }
+                    if (singleton.getProducts(order) == null) {
+                        Toast.makeText(All_Products.this, "Please place an order with valid quantities.", Toast.LENGTH_LONG).show();
+                    }
                 // Intent
                 startActivity(new Intent(All_Products.this, Order_List_Customer.class));
             }

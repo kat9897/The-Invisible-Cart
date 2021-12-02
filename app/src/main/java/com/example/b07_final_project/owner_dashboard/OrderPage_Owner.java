@@ -51,7 +51,8 @@ public class OrderPage_Owner extends AppCompatActivity {
             String price = String.valueOf(product.getPrice());
             // shorten string to 2 decimals?
 
-            String quantity = "-1";//String.valueOf(singleton.getQuantity(order, product));
+            String quantity = "-1";
+            // String quantity = String.valueOf(singleton.getQuantity(order, product));
 
             Product_Card productCard = new Product_Card(name, price, quantity, brand);
             productList.add(productCard);
@@ -68,13 +69,24 @@ public class OrderPage_Owner extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Button button = (Button) v;
+                button.setEnabled(false);
                 button.setText("COMPLETED"); // Text "COMPLETE" becomes COMPLETED
                 button.setSelected(!button.isSelected()); // Button colour changes from Blue to Green
-                //TODO Status becomes Ready for Pick Up (1)
+                button.setSelected(true); // Button stays Green
+                // Status becomes Ready for Pick Up
                 order.setStatus(Order_.COMPLETE);
                 order.save();
-
             }
         });
+        // Button needs to stay COMPLETED + Green if previously clicked when going back to this Order Page
+        String orderStatus = "COMPLETE";
+        int orderStatusNum = order.getStatus();
+        if (orderStatusNum == Order_.COMPLETE){
+            btnComplete.setEnabled(false);
+            orderStatus = "COMPLETED";
+            btnComplete.setSelected(!btnComplete.isSelected());
+            btnComplete.setSelected(true);
+        }
+        btnComplete.setText(orderStatus);
     }
 }
