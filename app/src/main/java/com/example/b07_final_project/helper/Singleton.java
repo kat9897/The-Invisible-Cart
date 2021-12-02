@@ -201,6 +201,11 @@ public class Singleton implements Presenter {
     }
 
     @Override
+    public void viewStore(Store store) {
+        this.currentStore = store;
+    }
+
+    @Override
     public ArrayList<Store> allStores(){
         ArrayList<IDobj> idobj_List = database.getAllIDobj(IDobj.STORE);
 
