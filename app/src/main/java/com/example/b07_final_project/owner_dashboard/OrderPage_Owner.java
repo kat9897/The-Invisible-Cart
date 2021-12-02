@@ -67,6 +67,8 @@ public class OrderPage_Owner extends AppCompatActivity {
                 button.setText("COMPLETED"); // Text "COMPLETE" becomes COMPLETED
                 button.setSelected(!button.isSelected()); // Button colour changes from Blue to Green
                 //TODO Status becomes Ready for Pick Up (1)
+                order.setStatus(Order_.COMPLETE);
+                order.save();
 
             }
         });
