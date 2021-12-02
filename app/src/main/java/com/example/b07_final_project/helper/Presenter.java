@@ -44,6 +44,8 @@ public interface Presenter {
     ArrayList<Product_> getProducts(Owner owner);
     ArrayList<Product_> getProducts(Store store);
 
+    void viewStore(Store store);
+
     /*
 
     void Update(); // to be called exclusively by the Model (database) when the database changes
