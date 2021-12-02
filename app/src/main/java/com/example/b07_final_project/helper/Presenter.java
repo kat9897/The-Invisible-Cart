@@ -40,6 +40,7 @@ public interface Presenter {
     Customer getCustomer(Order_ order);
     Store getStore(Owner owner);
     ArrayList<Order_> getOrders(Owner owner); // Gets orders for the store, not the owner
+    ArrayList<Order_> getOrders(Customer customer);
     ArrayList<Product_> getProducts(Order_ order);
     ArrayList<Product_> getProducts(Owner owner);
     ArrayList<Product_> getProducts(Store store);
