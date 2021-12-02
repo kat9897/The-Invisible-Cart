@@ -18,7 +18,7 @@ public interface Presenter {
     Customer newCustomer(String email, String name, String password);
     Owner newOwner(String email, String name, String password, String phoneNumber, String storename);
     // newOwner also creates a new store and also logs you in
-    Order_ newOrder(Customer customer, Store store);
+    Order_ newOrder(Customer customer, Store store); // changes currentOrder to this order
     Product_ newProduct(String pdtName, Double pdtPrice, String pdtBrand);
 
     Owner getLoggedInOwner();

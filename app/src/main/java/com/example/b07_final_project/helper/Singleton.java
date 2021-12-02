@@ -188,6 +188,8 @@ public class Singleton implements Presenter {
         database.addRelation(order, customer);
         database.addRelation(order, store);
 
+        currentOrder = order;
+
         order.save();
         customer.save();
         store.save();
