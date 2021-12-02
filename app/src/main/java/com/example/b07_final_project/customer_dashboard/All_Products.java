@@ -92,7 +92,7 @@ public class All_Products extends AppCompatActivity {
         //the name, price and quantity of a product)
         productList.add(new Product_Card("name", "price", "0", "brand"));
 
-        CustomListAdapter2 adapter = new CustomListAdapter2(this, R.layout.cardview_product_customer, productList);
+        CustomListAdapter2 adapter = new CustomListAdapter2(this, R.layout.cardview_product_order, productList);
         listView.setAdapter(adapter);
 
         btnOrder.setOnClickListener(new View.OnClickListener() {

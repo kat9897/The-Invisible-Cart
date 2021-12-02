@@ -7,6 +7,7 @@
         <entry key="..\:/ProgramFiles/cscb07-group-project-TUT02/app/src/main/res/drawable/btn_complete_bg.xml" value="0.1" />
         <entry key="..\:/ProgramFiles/cscb07-group-project-TUT02/app/src/main/res/layout/activity_all_orders_owner.xml" value="0.25" />
         <entry key="..\:/ProgramFiles/cscb07-group-project-TUT02/app/src/main/res/layout/activity_all_orders_owner2.xml" value="0.25" />
+        <entry key="..\:/ProgramFiles/cscb07-group-project-TUT02/app/src/main/res/layout/activity_all_products.xml" value="0.184375" />
         <entry key="..\:/ProgramFiles/cscb07-group-project-TUT02/app/src/main/res/layout/activity_all_store.xml" value="0.2" />
         <entry key="..\:/ProgramFiles/cscb07-group-project-TUT02/app/src/main/res/layout/activity_login_customer.xml" value="0.25" />
         <entry key="..\:/ProgramFiles/cscb07-group-project-TUT02/app/src/main/res/layout/activity_login_owner.xml" value="0.2" />
@@ -14,30 +15,17 @@
         <entry key="..\:/ProgramFiles/cscb07-group-project-TUT02/app/src/main/res/layout/activity_main_owner.xml" value="0.25" />
         <entry key="..\:/ProgramFiles/cscb07-group-project-TUT02/app/src/main/res/layout/activity_my_products_owner.xml" value="0.2" />
         <entry key="..\:/ProgramFiles/cscb07-group-project-TUT02/app/src/main/res/layout/activity_order_list.xml" value="0.165" />
+        <entry key="..\:/ProgramFiles/cscb07-group-project-TUT02/app/src/main/res/layout/activity_order_list_customer.xml" value="0.184375" />
         <entry key="..\:/ProgramFiles/cscb07-group-project-TUT02/app/src/main/res/layout/activity_order_page.xml" value="0.25" />
         <entry key="..\:/ProgramFiles/cscb07-group-project-TUT02/app/src/main/res/layout/activity_orders_owner.xml" value="0.375" />
         <entry key="..\:/ProgramFiles/cscb07-group-project-TUT02/app/src/main/res/layout/activity_sign_up_customer.xml" value="0.2" />
         <entry key="..\:/ProgramFiles/cscb07-group-project-TUT02/app/src/main/res/layout/activity_sign_up_owner.xml" value="0.2" />
         <entry key="..\:/ProgramFiles/cscb07-group-project-TUT02/app/src/main/res/layout/adapter_products_layout.xml" value="0.25" />
         <entry key="..\:/ProgramFiles/cscb07-group-project-TUT02/app/src/main/res/layout/card_product_list_storeowner.xml" value="0.25" />
+        <entry key="..\:/ProgramFiles/cscb07-group-project-TUT02/app/src/main/res/layout/cardview_product_order.xml" value="0.2" />
         <entry key="..\:/ProgramFiles/cscb07-group-project-TUT02/app/src/main/res/layout/list_item.xml" value="0.25" />
-        <entry key="..\:/Users/Yashank/OneDrive - University of Toronto/Desktop/Alex/app/src/main/res/layout/activity_add_new_product_owner.xml" value="0.21927083333333333" />
-        <entry key="..\:/Users/Yashank/OneDrive - University of Toronto/Desktop/Alex/app/src/main/res/layout/activity_all_products.xml" value="0.21927083333333333" />
-        <entry key="..\:/Users/Yashank/OneDrive - University of Toronto/Desktop/Alex/app/src/main/res/layout/activity_all_products_alternative.xml" value="0.2" />
-        <entry key="..\:/Users/Yashank/OneDrive - University of Toronto/Desktop/Alex/app/src/main/res/layout/activity_all_store.xml" value="0.21927083333333333" />
-        <entry key="..\:/Users/Yashank/OneDrive - University of Toronto/Desktop/Alex/app/src/main/res/layout/activity_billing_page.xml" value="0.21927083333333333" />
-        <entry key="..\:/Users/Yashank/OneDrive - University of Toronto/Desktop/Alex/app/src/main/res/layout/activity_main_customer.xml" value="0.21927083333333333" />
-        <entry key="..\:/Users/Yashank/OneDrive - University of Toronto/Desktop/Alex/app/src/main/res/layout/activity_order_list_customer.xml" value="0.21927083333333333" />
-        <entry key="..\:/Users/Yashank/OneDrive - University of Toronto/Desktop/Alex/app/src/main/res/layout/activity_order_list_owner.xml" value="0.21927083333333333" />
-        <entry key="..\:/Users/Yashank/OneDrive - University of Toronto/Desktop/Alex/app/src/main/res/layout/activity_sign_up_owner.xml" value="0.264" />
-        <entry key="..\:/Users/Yashank/OneDrive - University of Toronto/Desktop/Alex/app/src/main/res/layout/card_product_list_storeowner.xml" value="0.21927083333333333" />
-        <entry key="..\:/Users/Yashank/OneDrive - University of Toronto/Desktop/Alex/app/src/main/res/layout/cardview_product.xml" value="0.21927083333333333" />
-        <entry key="..\:/Users/Yashank/OneDrive - University of Toronto/Desktop/Alex/app/src/main/res/layout/cardview_product_customer.xml" value="0.4" />
-        <entry key="..\:/Users/Yashank/OneDrive - University of Toronto/Desktop/Alex/app/src/main/res/layout/cardview_product_order.xml" value="0.264" />
-        <entry key="..\:/Users/Yashank/OneDrive - University of Toronto/Desktop/Alex/app/src/main/res/layout/cardview_product_owner.xml" value="0.21927083333333333" />
-        <entry key="..\:/Users/Yashank/OneDrive - University of Toronto/Desktop/Alex/app/src/main/res/layout/view_product_order_page_owner.xml" value="0.264" />
-        <entry key="..\:/Users/Yashank/OneDrive - University of Toronto/Desktop/Alex/app/src/main/res/layout/view_product_page_owner.xml" value="0.264" />
-        <entry key="..\:/Users/Yashank/OneDrive - University of Toronto/Desktop/Alex/app/src/main/res/layout/xyz.xml" value="0.4" />
+        <entry key="..\:/ProgramFiles/cscb07-group-project-TUT02/app/src/main/res/layout/view_product_order_page_owner.xml" value="0.184375" />
+        <entry key="..\:/ProgramFiles/cscb07-group-project-TUT02/app/src/main/res/layout/view_product_page_owner.xml" value="0.184375" />
         <entry key="..\:/school/CSCB 07/Project/app/src/main/res/layout/activity_all_products.xml" value="0.3734375" />
         <entry key="..\:/school/CSCB 07/Project/app/src/main/res/layout/activity_all_store.xml" value="0.3734375" />
         <entry key="..\:/school/CSCB 07/Project/app/src/main/res/layout/activity_my_products_owner.xml" value="0.3734375" />
@@ -48,14 +36,10 @@
         <entry key="..\:/school/CSCB 07/Project/app/src/main/res/layout/adapter_products_layout.xml" value="0.3734375" />
         <entry key="..\:/school/CSCB 07/Project/app/src/main/res/layout/cardview_product_owner.xml" value="0.3734375" />
         <entry key="..\:/school/CSCB 07/Project/app/src/main/res/layout/view_product_page_owner.xml" value="0.3734375" />
-        <entry key="app/src/main/res/layout/activity_all_products.xml" value="0.44093356311989995" />
+        <entry key="app/src/main/res/layout/activity_all_products.xml" value="0.45" />
         <entry key="app/src/main/res/layout/activity_all_products_alternative.xml" value="0.17753623188405798" />
-        <entry key="app/src/main/res/layout/activity_order_page_customer.xml" value="0.17753623188405798" />
-        <entry key="app/src/main/res/layout/activity_order_page_owner.xml" value="0.17753623188405798" />
         <entry key="app/src/main/res/layout/card_product_list_storeowner.xml" value="0.17753623188405798" />
         <entry key="app/src/main/res/layout/cardview_product_order.xml" value="0.375" />
-        <entry key="app/src/main/res/layout/list_item.xml" value="0.17753623188405798" />
-        <entry key="app/src/main/res/layout/store_owner_main_page.xml" value="0.17753623188405798" />
         <entry key="app/src/main/res/layout/view_product_order_page_owner.xml" value="0.17753623188405798" />
         <entry key="app/src/main/res/layout/view_product_page_owner.xml" value="0.17753623188405798" />
       </map>
