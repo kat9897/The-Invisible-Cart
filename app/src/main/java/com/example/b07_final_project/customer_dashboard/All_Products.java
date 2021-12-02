@@ -32,6 +32,13 @@ public class All_Products extends AppCompatActivity {
     private ListView product_listview;
     private TextView totalPrice;
 
+    private ArrayList<Product_Card> productList;
+    private Customer customer;
+    private Store store;
+    private ArrayList<Product_> productListObjects;
+    private Presenter singleton;
+    private ListView listView;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -44,8 +51,8 @@ public class All_Products extends AppCompatActivity {
         product_listview = findViewById(R.id.productListView);
         totalPrice = findViewById(R.id.total);
 
-        Presenter singleton = Singleton.getID();
-        ListView listView = findViewById(R.id.listProduct_1);
+        singleton = Singleton.getID();
+        listView = findViewById(R.id.listProduct_1);
 
 //        qty.addTextChangedListener(new TextWatcher() {
 //            @Override
@@ -66,11 +73,11 @@ public class All_Products extends AppCompatActivity {
 //
 //            }
 //        });
-        ArrayList<Product_Card> productList = new ArrayList<>();
+        productList = new ArrayList<>();
 
-        Customer customer = singleton.getLoggedInCustomer();
-        Store store = singleton.getViewedStore();
-        ArrayList<Product_> productListObjects = singleton.getProducts(store);
+        customer = singleton.getLoggedInCustomer();
+        store = singleton.getViewedStore();
+        productListObjects = singleton.getProducts(store);
 
 
         for (Product_ p : productListObjects) {
@@ -90,7 +97,7 @@ public class All_Products extends AppCompatActivity {
 //        singleton.getProducts()
         // needs to return a arraylist of Product_Card(which contains
         //the name, price and quantity of a product)
-        productList.add(new Product_Card("name", "price", "0", "brand"));
+        //productList.add(new Product_Card("name", "price", "0", "brand"));
 
         CustomListAdapter2 adapter = new CustomListAdapter2(this, R.layout.cardview_product_order, productList);
         listView.setAdapter(adapter);
@@ -100,11 +107,12 @@ public class All_Products extends AppCompatActivity {
             public void onClick(View v) {
             ArrayList<Product_Card> orderproducts = new ArrayList<>();
             // loop for all the items in listview
-            for(int i =0 ; i < product_listview.getCount(); i++){
+            for(int i =0 ; i < productList.size(); i++){
 
+                qty = findViewById(R.id.product_quantity);
                 String quantity = qty.getText().toString();
 
-                int qtynum;
+                int qtynum = 0;
 
                 qtynum = Integer.parseInt(quantity);
 

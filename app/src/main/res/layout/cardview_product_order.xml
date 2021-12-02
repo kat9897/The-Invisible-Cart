@@ -38,7 +38,7 @@
             android:id="@+id/product_quantity"
             android:gravity="center"
             android:textAlignment="center"
-            android:text="0"
+            android:hint="0"
             android:inputType="number"
             android:layout_width="match_parent"
             android:layout_height="60dp"/>
