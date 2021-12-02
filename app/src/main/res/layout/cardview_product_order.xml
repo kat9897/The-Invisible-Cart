@@ -10,7 +10,7 @@
         android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_weight="60">
+        android:layout_weight="50">
 
         <TextView
             android:gravity="center"
@@ -32,37 +32,16 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:layout_weight="40">
+        android:layout_weight="50">
 
-        x<Button
-        android:id="@+id/decreaseBtn"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_centerVertical="true"
-        android:onClick="decreaseQty"
-        android:text="-"
-        android:layout_marginLeft="5dp"></Button>
-
-        <TextView
+        <EditText
             android:id="@+id/product_quantity"
             android:gravity="center"
             android:textAlignment="center"
             android:text="0"
             android:inputType="number"
             android:layout_width="match_parent"
-            android:layout_height="60dp"
-            android:layout_weight="40"/>
-
-        <Button
-            android:id="@+id/increaseBtn"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentRight="true"
-            android:layout_centerVertical="true"
-            android:onClick="increaseQty"
-            android:text="+"
-            android:layout_marginRight="5dp"></Button>
+            android:layout_height="60dp"/>
 
     </LinearLayout>
 

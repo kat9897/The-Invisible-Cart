@@ -17,6 +17,7 @@ import com.example.b07_final_project.helper.Presenter;
 import com.example.b07_final_project.helper.Product_;
 import com.example.b07_final_project.helper.Product_Card;
 import com.example.b07_final_project.helper.Singleton;
+import com.example.b07_final_project.helper.Store;
 
 import java.util.ArrayList;
 
@@ -56,7 +57,7 @@ public class All_Products extends AppCompatActivity {
         //the name, price and quantity of a product)
         productList.add(new Product_Card("name", "price", "0", "brand"));
 
-        CustomListAdapter2 adapter = new CustomListAdapter2(this, R.layout.cardview_product_customer, productList);
+        CustomListAdapter2 adapter = new CustomListAdapter2(this, R.layout.cardview_product_order, productList);
         listView.setAdapter(adapter);
 
         btnOrder.setOnClickListener(new View.OnClickListener() {
@@ -65,7 +66,7 @@ public class All_Products extends AppCompatActivity {
                 // TODO DATABASE
                 Order_ order = singleton.newOrder(customer, store);
                 for (Product_Card pc : productList)
-                    singleton.addProductToOrder(order, pc.getID(), pc.getQuantity());
+                    singleton.addProductToOrder(order, pc.getID(), Integer.valueOf(pc.getQuantity()));
                     // ignores any with 0 quantity
 
                 // Intent

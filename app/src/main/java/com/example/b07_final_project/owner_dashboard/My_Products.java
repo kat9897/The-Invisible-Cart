@@ -30,7 +30,6 @@ public class My_Products extends AppCompatActivity {
         Presenter singleton = Singleton.getID();
 
         Owner owner = singleton.getLoggedInOwner();
-        ArrayList<Product_> products ;
 
         ArrayList<Product_> productsInStore = singleton.getProducts(owner);
 

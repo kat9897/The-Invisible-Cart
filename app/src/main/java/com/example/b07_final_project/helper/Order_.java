@@ -2,7 +2,10 @@ package com.example.b07_final_project.helper;
 
 public class Order_ extends IDobj {
 
-    private int status;
+	public static final int INCOMPLETE = 0;
+	public static final int COMPLETE = 1;
+
+    private int status = Order_.INCOMPLETE;
 
 	public int getStatus() {
 		return status;
