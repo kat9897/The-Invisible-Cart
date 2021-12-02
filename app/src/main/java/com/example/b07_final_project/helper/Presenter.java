@@ -17,45 +17,32 @@ public interface Presenter {
 
     Customer newCustomer(String email, String name, String password);
     Owner newOwner(String email, String name, String password, String phoneNumber, String storename);
-    // newOwner also creates a new store
-    // also logs you in
-
+    // newOwner also creates a new store and also logs you in
+    Order_ newOrder(Customer customer, Store store);
     Product_ newProduct(String pdtName, Double pdtPrice, String pdtBrand);
 
     Owner getLoggedInOwner();
+    Customer getLoggedInCustomer();
 
     ArrayList<Store> allStores();
-
     ArrayList<Order_> allCustomerOrders(Customer customer);
     ArrayList<Order_> allCustomerOrders(); // assumes logged in customer
 
-    Store getStore(Owner owner);
-
-    ArrayList<Order_> getOrders(Owner owner); // Gets orders for the store, not the owner
-
     void viewOrder(Order_ order);
-
     Order_ getViewedOrder();
+    Store getViewedStore();
 
     void setQuantity(Order_ order, Product_ product, int quantity);
     int getQuantity(Order_ order, Product_ product);
+
+    void addProductToOrder(Order_ order, String product_id, int quantity);
+
     Customer getCustomer(Order_ order);
-
+    Store getStore(Owner owner);
+    ArrayList<Order_> getOrders(Owner owner); // Gets orders for the store, not the owner
     ArrayList<Product_> getProducts(Order_ order);
-
     ArrayList<Product_> getProducts(Owner owner);
-
-/*
-    Customer customer = singleton.getLoggedInCustomer();
-    Store store = singleton.getViewedStore();
-    ArrayList<Product_> productListObjects = singleton.getProducts(store);
-    Order_ order = singleton.newOrder(customer, store);
-    singleton.addProductToOrder(order, pc.getID(), pc.getQuantity());
-*/
-
-    // Order getViewedOrder();
-    //Customer getCustomer(Order_ order);
-    //ArrayList<Product_> getProducts(Order_ order);
+    ArrayList<Product_> getProducts(Store store);
 
     /*
 
