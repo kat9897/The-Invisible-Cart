@@ -53,6 +53,7 @@ public class All_Store extends AppCompatActivity {
             public void onItemClick(AdapterView<?> adapterView, View view, int position, long id) {
                 //TODO When a Store Name is clicked, it will direct the Customer to the
                 // Order page containing List of Products belonging to the Store Name clicked
+                singleton.viewStore(allStores.get(position));
 
                 String clickedStoreName = listView.getAdapter().getItem(position).toString();
                 Intent intent = new Intent(getApplicationContext(), All_Products.class);

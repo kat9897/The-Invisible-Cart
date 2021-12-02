@@ -3,7 +3,7 @@ package com.example.b07_final_project.helper;
 public class Product_Card {
     private String name;
     private String price;
-    private String quantity;
+    public String quantity;
     private String brand;
     private String ID;
 

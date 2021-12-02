@@ -194,6 +194,8 @@ public class Singleton implements Presenter {
         customer.save();
         store.save();
 
+        currentOrder = order;
+
         return order;
     }
 
