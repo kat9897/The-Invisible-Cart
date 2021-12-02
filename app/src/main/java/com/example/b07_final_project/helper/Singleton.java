@@ -280,14 +280,28 @@ public class Singleton implements Presenter {
         Store store = getStore(owner);
         ArrayList<IDobj> idobj_list = database.getRelations(store, IDobj.ORDER);
 
-        ArrayList<Order_> product_List = new ArrayList<>();
+        ArrayList<Order_> order_List = new ArrayList<>();
 
         for(IDobj object : idobj_list){
-            product_List.add((Order_)object);
+            order_List.add((Order_)object);
         }
 
-        return product_List;
+        return order_List;
     }
+
+    @Override
+    public ArrayList<Order_> getOrders(Customer customer) {
+        ArrayList<IDobj> idobj_list = database.getRelations(customer, IDobj.ORDER);
+
+        ArrayList<Order_> order_List = new ArrayList<>();
+
+        for(IDobj object : idobj_list){
+            order_List.add((Order_)object);
+        }
+
+        return order_List;
+    }
+
 
     @Override
     public ArrayList<Order_> allCustomerOrders(Customer customer) {
