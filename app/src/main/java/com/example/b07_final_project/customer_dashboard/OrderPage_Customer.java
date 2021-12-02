@@ -3,6 +3,8 @@ package com.example.b07_final_project.customer_dashboard;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
 import android.widget.ListView;
 
 import com.example.b07_final_project.R;
@@ -18,6 +20,9 @@ import java.util.ArrayList;
 
 public class OrderPage_Customer extends AppCompatActivity {
 
+    Button statusBtn;
+    String orderStatus;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -32,11 +37,10 @@ public class OrderPage_Customer extends AppCompatActivity {
 
         String customerName = customer.getName();
         int orderStatusNum = order.getStatus();
-        String orderStatus = "Not ready for pick up";
+        orderStatus = "Not ready for pick up";
         if (orderStatusNum == Order_.COMPLETE){
             orderStatus = "Ready for pick up";
         }
-
 
         ArrayList<Product_Card> productList = new ArrayList<>();
 
@@ -57,5 +61,9 @@ public class OrderPage_Customer extends AppCompatActivity {
 
         CustomListAdapter adapter = new CustomListAdapter(this, R.layout.view_product_order_page_owner, productList);
         listView.setAdapter(adapter);
+
+        // Display Status to Customer
+        statusBtn = findViewById(R.id.statusOrder);
+        statusBtn.setText(orderStatus);
     }
 }

@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import com.example.b07_final_project.helper.CustomListAdapter;
 import com.example.b07_final_project.R;
@@ -23,7 +24,7 @@ public class OrderPage_Owner extends AppCompatActivity {
     // This page is shown when Store Owner clicks on an order ID in All Orders page.
 
     private Button btnComplete;
-
+    private TextView displayCustomerName;
     Presenter singleton = Singleton.getID();
 
 
@@ -37,6 +38,9 @@ public class OrderPage_Owner extends AppCompatActivity {
         Order_ order = singleton.getViewedOrder();
         Customer customer = singleton.getCustomer(order);
         ArrayList<Product_> productsInOrder = singleton.getProducts(order);
+
+        displayCustomerName = findViewById(R.id.custName);
+        displayCustomerName.setText(customer.getName());
 
         ArrayList<Product_Card> productList = new ArrayList<>();
 

@@ -59,7 +59,7 @@ public class Order_List_Customer extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
 
-                singleton.viewOrder(orders.get(i));
+                // singleton.viewOrder(orders.get(i));
 
                 Intent intent = new Intent(getApplicationContext(), OrderPage_Customer.class);
                 startActivity(intent);

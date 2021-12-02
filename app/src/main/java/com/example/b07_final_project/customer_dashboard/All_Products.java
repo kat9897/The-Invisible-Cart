@@ -39,6 +39,37 @@ public class All_Products extends AppCompatActivity {
     private Presenter singleton;
     private ListView listView;
 
+//    private TextWatcher textWatcher = new TextWatcher() {
+//        @Override
+//        public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+//
+//        }
+//
+//        @Override
+//        public void onTextChanged(CharSequence s, int start, int before, int count) {
+//            String qtyNumber = qty.getText().toString();
+//            int number = Integer.parseInt(qtyNumber);
+//            if (number < 0 && number > 50) {
+//                Toast.makeText(getApplicationContext(), "Insert a valid number between 0-50", Toast.LENGTH_SHORT).show();
+//            }
+//            qty.setText(qtyNumber);
+//        }
+//
+//        @Override
+//        public void afterTextChanged(Editable s) {
+//            String strEnteredVal = qty.getText().toString();
+//            if (!strEnteredVal.equals("")) {
+//                int num = Integer.parseInt(strEnteredVal);
+//                if (num >= 0 && num <= 50) {
+//                    qty.setText("" + num);
+//                } else {
+//                    qty.setText("0");
+//                    Toast.makeText(getApplicationContext(), "Insert a valid number between 0-50", Toast.LENGTH_SHORT).show();
+//                }
+//            }
+//        }
+//    };
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -47,7 +78,7 @@ public class All_Products extends AppCompatActivity {
         getSupportActionBar().hide();
 
         btnOrder = findViewById(R.id.Order);
-        qty = findViewById(R.id.product_quantity);
+        qty = (EditText) findViewById(R.id.product_quantity);
         product_listview = findViewById(R.id.productListView);
         totalPrice = findViewById(R.id.total);
 
@@ -93,42 +124,36 @@ public class All_Products extends AppCompatActivity {
             productList.add(pc);
         }
 
-
-//        singleton.getProducts()
-        // needs to return a arraylist of Product_Card(which contains
-        //the name, price and quantity of a product)
-        //productList.add(new Product_Card("name", "price", "0", "brand"));
-
         CustomListAdapter2 adapter = new CustomListAdapter2(this, R.layout.cardview_product_order, productList);
         listView.setAdapter(adapter);
 
         btnOrder.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-            ArrayList<Product_Card> orderproducts = new ArrayList<>();
-            // loop for all the items in listview
-            for(int i =0 ; i < productList.size(); i++){
+                ArrayList<Product_Card> orderproducts = new ArrayList<>();
+                // loop for all the items in listview
+                for (int i = 0; i < productList.size(); i++) {
 
-                qty = findViewById(R.id.product_quantity);
-                String quantity = qty.getText().toString();
+                    qty = findViewById(R.id.product_quantity);
+                    String quantity = qty.getText().toString();
 
-                int qtynum = 0;
+                    int qtynum = 0;
 
-                qtynum = Integer.parseInt(quantity);
+                    qtynum = Integer.parseInt(quantity);
 
-                if (!(0 <= qtynum &&  qtynum <= 50)){
-                    Toast.makeText(All_Products.this, "Insert a valid number between 0-50", Toast.LENGTH_LONG);
-                    return;
+                    if (!(0 <= qtynum && qtynum <= 50)) {
+                        Toast.makeText(All_Products.this, "Insert a valid number between 0-50", Toast.LENGTH_LONG).show();
+                        return;
+                    }
+
+                    productList.get(i).quantity = String.valueOf(qtynum);
+
                 }
-
-                productList.get(i).quantity = String.valueOf(qtynum);
-
-            }
                 Order_ order = singleton.newOrder(customer, store);
                 for (Product_Card pc : productList)
 
                     singleton.addProductToOrder(order, pc.getID(), Integer.valueOf(pc.getQuantity()));
-                    // ignores any with 0 quantity
+                // ignores any with 0 quantity
 
                 // Intent
                 startActivity(new Intent(All_Products.this, Order_List_Customer.class));
