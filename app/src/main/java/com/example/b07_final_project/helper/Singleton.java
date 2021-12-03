@@ -154,14 +154,20 @@ public class Singleton implements Presenter {
         return null;
     }
 
-    //Get the store object of the store that is currently related to
+    // Get the store object of the store that is currently related to
     @Override
     public Store getStore(Owner owner){
-            ArrayList<IDobj> owners_store = database.getRelations(owner, IDobj.STORE);
+        ArrayList<IDobj> owners_store = database.getRelations(owner, IDobj.STORE);
+        IDobj store = owners_store.get(0);
+        return (Store) store;
+    }
 
-            IDobj store = owners_store.get(0);
-
-            return (Store) store;
+    // Get store for customer order
+    @Override
+    public Store getStore(Order_ order) {
+        ArrayList<IDobj> owners_store = database.getRelations(order, IDobj.STORE);
+        IDobj store = owners_store.get(0);
+        return (Store) store;
     }
 
     @Override

@@ -39,7 +39,7 @@ public class All_Products extends AppCompatActivity {
     private ArrayList<Product_> productListObjects;
     private Presenter singleton;
     private ListView listView;
-    
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -85,16 +85,19 @@ public class All_Products extends AppCompatActivity {
                 int totalProductsOrdered = 0;
                 // loop for all the items in listview
                 for (int i = 0; i < productList.size(); i++) {
-                    v =listView.getChildAt(i);
+                    // This is important for updating quantity values!!
+                    v = listView.getChildAt(i);
                     qty = v.findViewById(R.id.product_quantity);
                     String quantity = qty.getText().toString();
                     int qtynum;
 
+                    // If it's empty, make quantity 0, else set it equal to the int value
                     if (quantity.isEmpty())
                         qtynum = 0;
                     else
                         qtynum = Integer.parseInt(quantity);
 
+                    // check if it's a valid input
                     if (0 < qtynum && qtynum <= 50) {
                         totalProductsOrdered += 1;
                         productList.get(i).quantity = String.valueOf(qtynum);
