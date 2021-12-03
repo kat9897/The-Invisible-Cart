@@ -47,8 +47,8 @@ public class CustomListAdapter extends ArrayAdapter<Product_Card> {
         TextView tvPrice = (TextView) convertView.findViewById(R.id.product_price);
         TextView tvQuantity = (TextView) convertView.findViewById(R.id.product_quantity);
 
-        tvName.setText(name + " (" + brand + ")");
-        tvPrice.setText(price);
+        tvName.setText(name + " (" + brand + ")!");
+        tvPrice.setText("$" + price);
         tvQuantity.setText(quantity);
 
         return convertView;

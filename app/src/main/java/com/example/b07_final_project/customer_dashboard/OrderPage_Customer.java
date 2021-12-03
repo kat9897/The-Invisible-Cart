@@ -86,7 +86,7 @@ public class OrderPage_Customer extends AppCompatActivity {
 
         // Total
         totalText = findViewById(R.id.total);
-        totalText.setText(priceFormat.format(total));
+        totalText.setText("$" + priceFormat.format(total));
 
         CustomListAdapter adapter = new CustomListAdapter(this, R.layout.view_product_order_page_owner, productList);
         listView.setAdapter(adapter);
