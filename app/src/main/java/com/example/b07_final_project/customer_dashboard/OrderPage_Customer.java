@@ -76,9 +76,10 @@ public class OrderPage_Customer extends AppCompatActivity {
             String name = product.getName();
             String brand = product.getBrand();
             String price = priceFormat.format(product.getPrice());
-            total += Double.parseDouble(priceFormat.format(product.getPrice()));
-
             String quantity = String.valueOf(singleton.getQuantity(order, product));
+            total += (Double.parseDouble(priceFormat.format(product.getPrice()))
+                    * Double.parseDouble(quantity));
+
 
             Product_Card productCard = new Product_Card(name, price, quantity, brand);
             productList.add(productCard);
