@@ -2,6 +2,7 @@ package com.example.b07_final_project.owner_dashboard;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.widget.ListView;
 
@@ -48,5 +49,18 @@ public class My_Products extends AppCompatActivity {
 
         CustomListAdapter1 adapter = new CustomListAdapter1(this, R.layout.view_product_page_owner, productList);
         listView.setAdapter(adapter);
+    }
+    @Override
+    public void onBackPressed() {
+        Intent intent = new Intent(My_Products.this, Main_Owner.class);
+        startActivity(intent);
+        overridePendingTransition(R.anim.slide_in_left,R.anim.slide_out_right);
+    }
+
+
+    @Override
+    public void finish() {
+        super.finish();
+        overridePendingTransition(R.anim.slide_in_left,R.anim.slide_out_right);
     }
 }

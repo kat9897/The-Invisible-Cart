@@ -2,6 +2,7 @@ package com.example.b07_final_project.customer_dashboard;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -90,9 +91,21 @@ public class OrderPage_Customer extends AppCompatActivity {
 
         // Total
         totalText = findViewById(R.id.total);
-        totalText.setText(priceFormat.format(total));
+        totalText.setText("$" + priceFormat.format(total));
 
         CustomListAdapter adapter = new CustomListAdapter(this, R.layout.view_product_order_page_owner, productList);
         listView.setAdapter(adapter);
+    }
+    @Override
+    public void onBackPressed() {
+        Intent intent = new Intent(OrderPage_Customer.this, Order_List_Customer.class);
+        startActivity(intent);
+        overridePendingTransition(R.anim.slide_in_left,R.anim.slide_out_right);
+    }
+
+    @Override
+    public void finish() {
+        super.finish();
+        overridePendingTransition(R.anim.slide_in_left,R.anim.slide_out_right);
     }
 }

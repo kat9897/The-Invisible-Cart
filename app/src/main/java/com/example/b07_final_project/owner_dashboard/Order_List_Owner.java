@@ -51,7 +51,22 @@ public class Order_List_Owner extends AppCompatActivity {
                 singleton.viewOrder(orderListObjects.get(i));
                 Intent intent = new Intent(getApplicationContext(), OrderPage_Owner.class);
                 startActivity(intent);
+                overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
             }
         });
     }
+    @Override
+    public void onBackPressed() {
+        Intent intent = new Intent(Order_List_Owner.this, Main_Owner.class);
+        startActivity(intent);
+        overridePendingTransition(R.anim.slide_in_left,R.anim.slide_out_right);
+    }
+
+
+    @Override
+    public void finish() {
+        super.finish();
+        overridePendingTransition(R.anim.slide_in_left,R.anim.slide_out_right);
+    }
+
 }

@@ -80,9 +80,22 @@ public class Add_New_Product extends AppCompatActivity {
 
         Product_ product = singleton.newProduct(pdtName, pdtPrice, pdtBrand);
 
-        Intent intent = new Intent(Add_New_Product.this, Main_Owner.class);
+        Intent intent = new Intent(Add_New_Product.this, My_Products.class);
         Toast.makeText(Add_New_Product.this, "Successfully added new product: " + pdtName, Toast.LENGTH_SHORT).show();
         startActivity(intent);
         overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
+    }
+    @Override
+    public void onBackPressed() {
+        Intent intent = new Intent(Add_New_Product.this, Main_Owner.class);
+        startActivity(intent);
+        overridePendingTransition(R.anim.slide_in_left,R.anim.slide_out_right);
+    }
+
+
+    @Override
+    public void finish() {
+        super.finish();
+        overridePendingTransition(R.anim.slide_in_left,R.anim.slide_out_right);
     }
 }

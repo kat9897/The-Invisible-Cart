@@ -43,6 +43,7 @@ public class Main_Owner extends AppCompatActivity {
                 // send this ownerid to the activity
      //           intent1.putExtra("Ownerid", uid);
                 startActivity(intent1);
+                overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
             }
         });
 
@@ -56,6 +57,7 @@ public class Main_Owner extends AppCompatActivity {
     //            intent1.putExtra("Ownerid", uid);
                 // send this ownerid to the activity
                 startActivity(intent1);
+                overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
             }
         });
         btn_add_new_product.setOnClickListener(new View.OnClickListener() {
@@ -66,12 +68,20 @@ public class Main_Owner extends AppCompatActivity {
                 //intent1.putExtra("Ownerid", uid);
                 // send this ownerid to the activity
                 startActivity(intent1);
+                overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
             }
         });
 
 
 
     }
+    @Override
+    public void onBackPressed() {
+        Intent intent = new Intent(Main_Owner.this, Login_Owner.class);
+        startActivity(intent);
+        overridePendingTransition(R.anim.slide_in_left,R.anim.slide_out_right);
+    }
+
 
     @Override
     public void finish() {
