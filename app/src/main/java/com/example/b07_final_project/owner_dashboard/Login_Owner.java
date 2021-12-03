@@ -119,6 +119,8 @@ public class Login_Owner extends AppCompatActivity {
                     return;
                 }
 
+                edtEmail.setText("");
+                edtPassword.setText("");
                 // If entered Correctly then Login
                 login(email, password);
             }

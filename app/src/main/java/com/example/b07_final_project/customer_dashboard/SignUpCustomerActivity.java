@@ -115,6 +115,10 @@ public class SignUpCustomerActivity extends AppCompatActivity {
                     Toast.makeText(SignUpCustomerActivity.this, "Your passwords do not match", Toast.LENGTH_SHORT).show();
                     return;
                 }
+                edtName.setText("");
+                edtEmail.setText("");
+                edtPassword.setText("");
+                edtConfirmPassword.setText("");
 
                 signIn(email, password);
 

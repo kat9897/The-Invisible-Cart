@@ -139,6 +139,12 @@ public class SignUp_Owner extends AppCompatActivity {
                     return;
                 }
 
+
+                edtName.setText("");
+                edtEmail.setText("");
+                edtPassword.setText("");
+                edtConfirmPassword.setText("");
+
                 signInOwner(email, password, storename);
             }
         });
