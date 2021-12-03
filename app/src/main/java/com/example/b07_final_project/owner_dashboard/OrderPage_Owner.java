@@ -17,6 +17,7 @@ import com.example.b07_final_project.helper.Product_;
 import com.example.b07_final_project.helper.Product_Card;
 import com.example.b07_final_project.helper.Singleton;
 
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 
 public class OrderPage_Owner extends AppCompatActivity {
@@ -25,8 +26,9 @@ public class OrderPage_Owner extends AppCompatActivity {
 
     private Button btnComplete;
     private TextView displayCustomerName;
+    private TextView totalText;
     Presenter singleton = Singleton.getID();
-
+    private static final DecimalFormat priceFormat = new DecimalFormat("0.00");
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,20 +44,27 @@ public class OrderPage_Owner extends AppCompatActivity {
         displayCustomerName = findViewById(R.id.custName);
         displayCustomerName.setText(customer.getName());
 
+        // Total
+        Double total = 0.0;
+
         ArrayList<Product_Card> productList = new ArrayList<>();
 
         for (Product_ product : productsInOrder) {
 
             String name = product.getName();
             String brand = product.getBrand();
-            String price = String.valueOf(product.getPrice());
-            // shorten string to 2 decimals?
+            String price = priceFormat.format(product.getPrice());
+            total += Double.parseDouble(priceFormat.format(product.getPrice()));
 
             String quantity = String.valueOf(singleton.getQuantity(order, product));
 
             Product_Card productCard = new Product_Card(name, price, quantity, brand);
             productList.add(productCard);
         }
+
+        // Total
+        totalText = findViewById(R.id.total);
+        totalText.setText("$" + priceFormat.format(total));
 
         CustomListAdapter adapter = new CustomListAdapter(this, R.layout.view_product_order_page_owner, productList);
         listView.setAdapter(adapter);
