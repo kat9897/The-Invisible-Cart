@@ -42,6 +42,7 @@ public class CustomListAdapter2 extends ArrayAdapter<Product_Card> {
     @Override
     public View getView(int position, View convertView, ViewGroup parent){
 
+
         String name = getItem(position).getName();
         String price = getItem(position).getPrice();
         String quantity = getItem(position).getQuantity();
@@ -59,6 +60,11 @@ public class CustomListAdapter2 extends ArrayAdapter<Product_Card> {
         tvName.setText(name + " (" + brand + ")");
         tvPrice.setText(price);
         tvQuantity.setText(quantity);
+
+
+
+
+
 
         return convertView;
     }

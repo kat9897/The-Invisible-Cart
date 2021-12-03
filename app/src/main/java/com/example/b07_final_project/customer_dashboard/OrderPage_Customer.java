@@ -10,6 +10,7 @@ import android.widget.TextView;
 
 import com.example.b07_final_project.R;
 import com.example.b07_final_project.helper.CustomListAdapter;
+import com.example.b07_final_project.helper.CustomListAdapter2;
 import com.example.b07_final_project.helper.Customer;
 import com.example.b07_final_project.helper.Order_;
 import com.example.b07_final_project.helper.Presenter;
@@ -36,6 +37,9 @@ public class OrderPage_Customer extends AppCompatActivity {
     private ArrayList<Product_> productsInOrder;
 
     private static final DecimalFormat priceFormat = new DecimalFormat("0.00");
+    private CustomListAdapter2 dataAdapter = null;
+    private Double orderTotal = 0.00;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
