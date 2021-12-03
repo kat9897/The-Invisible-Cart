@@ -24,6 +24,7 @@ import java.util.ArrayList;
 public class OrderPage_Customer extends AppCompatActivity {
 
     private TextView nameOfStore;
+    private TextView totalText;
     private Button statusBtn;
     private String orderStatus;
     private ListView listView;
@@ -65,6 +66,9 @@ public class OrderPage_Customer extends AppCompatActivity {
         statusBtn = findViewById(R.id.statusOrder);
         statusBtn.setText(orderStatus);
 
+        // Total
+        Double total = 0.0;
+
         ArrayList<Product_Card> productList = new ArrayList<>();
         
         for (Product_ product : productsInOrder) {
@@ -72,15 +76,17 @@ public class OrderPage_Customer extends AppCompatActivity {
             String name = product.getName();
             String brand = product.getBrand();
             String price = priceFormat.format(product.getPrice());
+            total += Double.parseDouble(priceFormat.format(product.getPrice()));
 
-            //String quantity = "-1";
             String quantity = String.valueOf(singleton.getQuantity(order, product));
 
             Product_Card productCard = new Product_Card(name, price, quantity, brand);
             productList.add(productCard);
         }
 
-        // productList.add(new Product_Card("name", "price", "quantity", "brand"));
+        // Total
+        totalText = findViewById(R.id.total);
+        totalText.setText(priceFormat.format(total));
 
         CustomListAdapter adapter = new CustomListAdapter(this, R.layout.view_product_order_page_owner, productList);
         listView.setAdapter(adapter);
