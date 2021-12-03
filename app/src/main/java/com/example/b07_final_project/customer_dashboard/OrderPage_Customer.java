@@ -18,6 +18,7 @@ import com.example.b07_final_project.helper.Product_Card;
 import com.example.b07_final_project.helper.Singleton;
 import com.example.b07_final_project.helper.Store;
 
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 
 public class OrderPage_Customer extends AppCompatActivity {
@@ -32,6 +33,8 @@ public class OrderPage_Customer extends AppCompatActivity {
     private Order_ order;
     private Customer customer;
     private ArrayList<Product_> productsInOrder;
+
+    private static final DecimalFormat priceFormat = new DecimalFormat("0.00");
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,10 +51,10 @@ public class OrderPage_Customer extends AppCompatActivity {
         String customerName = customer.getName();
         productsInOrder = singleton.getProducts(order);
 
-        // Display Store Name
-//        nameOfStore = findViewById(R.id.storeName);
-//        store = singleton.getViewedStore();
-//        nameOfStore.setText(store.getName());
+        // Display Store Name and add it to order page
+        nameOfStore = findViewById(R.id.storeName);
+        store = singleton.getViewedStore();
+        nameOfStore.setText(store.getName());
 
         // Display Status
         int orderStatusNum = order.getStatus();
@@ -68,11 +71,10 @@ public class OrderPage_Customer extends AppCompatActivity {
 
             String name = product.getName();
             String brand = product.getBrand();
-            String price = String.valueOf(product.getPrice());
-            // shorten string to 2 decimals?
+            String price = priceFormat.format(product.getPrice());
 
-            String quantity = "-1";
-            // String quantity = String.valueOf(singleton.getQuantity(order, product));
+            //String quantity = "-1";
+            String quantity = String.valueOf(singleton.getQuantity(order, product));
 
             Product_Card productCard = new Product_Card(name, price, quantity, brand);
             productList.add(productCard);

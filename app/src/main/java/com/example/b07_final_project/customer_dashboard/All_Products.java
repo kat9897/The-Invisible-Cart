@@ -40,37 +40,6 @@ public class All_Products extends AppCompatActivity {
     private Presenter singleton;
     private ListView listView;
 
-//    private TextWatcher textWatcher = new TextWatcher() {
-//        @Override
-//        public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-//
-//        }
-//
-//        @Override
-//        public void onTextChanged(CharSequence s, int start, int before, int count) {
-//            String qtyNumber = qty.getText().toString();
-//            int number = Integer.parseInt(qtyNumber);
-//            if (number < 0 && number > 50) {
-//                Toast.makeText(getApplicationContext(), "Insert a valid number between 0-50", Toast.LENGTH_SHORT).show();
-//            }
-//            qty.setText(qtyNumber);
-//        }
-//
-//        @Override
-//        public void afterTextChanged(Editable s) {
-//            String strEnteredVal = qty.getText().toString();
-//            if (!strEnteredVal.equals("")) {
-//                int num = Integer.parseInt(strEnteredVal);
-//                if (num >= 0 && num <= 50) {
-//                    qty.setText("" + num);
-//                } else {
-//                    qty.setText("0");
-//                    Toast.makeText(getApplicationContext(), "Insert a valid number between 0-50", Toast.LENGTH_SHORT).show();
-//                }
-//            }
-//        }
-//    };
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -86,26 +55,6 @@ public class All_Products extends AppCompatActivity {
 
         singleton = Singleton.getID();
         listView = findViewById(R.id.listProduct_1);
-
-//        qty.addTextChangedListener(new TextWatcher() {
-//            @Override
-//            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-//
-//            }
-//
-//            @Override
-//            public void onTextChanged(CharSequence s, int start, int before, int count) {
-////                totalPrice.setText();
-////                for(int i =0 ; i < product_listview.getCount(); i++) {
-////
-////                }
-//            }
-//
-//            @Override
-//            public void afterTextChanged(Editable s) {
-//
-//            }
-//        });
         productList = new ArrayList<>();
 
         customer = singleton.getLoggedInCustomer();
@@ -136,16 +85,19 @@ public class All_Products extends AppCompatActivity {
                 int totalProductsOrdered = 0;
                 // loop for all the items in listview
                 for (int i = 0; i < productList.size(); i++) {
-                    v =listView.getChildAt(i);
+                    // This is important for updating quantity values!!
+                    v = listView.getChildAt(i);
                     qty = v.findViewById(R.id.product_quantity);
                     String quantity = qty.getText().toString();
                     int qtynum;
 
+                    // If it's empty, make quantity 0, else set it equal to the int value
                     if (quantity.isEmpty())
                         qtynum = 0;
                     else
                         qtynum = Integer.parseInt(quantity);
 
+                    // check if it's a valid input
                     if (0 < qtynum && qtynum <= 50) {
                         totalProductsOrdered += 1;
                         productList.get(i).quantity = String.valueOf(qtynum);
@@ -153,6 +105,7 @@ public class All_Products extends AppCompatActivity {
                         productList.get(i).quantity = "0";
                     }
                 }
+                // Check if all products are empty
                 if (totalProductsOrdered == 0) {
                     Toast.makeText(All_Products.this, "Insert a valid number between 0-50", Toast.LENGTH_LONG).show();
                     return;
@@ -163,9 +116,10 @@ public class All_Products extends AppCompatActivity {
                     if (!pc.getQuantity().equals("0")) {
                         singleton.addProductToOrder(order, pc.getID(), Integer.valueOf(pc.getQuantity()));
                     }
-                    if (singleton.getProducts(order) == null) {
+                    /* Checked before this
+                    if (singleton.getProducts(order).isEmpty()) {
                         Toast.makeText(All_Products.this, "Please place an order with valid quantities.", Toast.LENGTH_LONG).show();
-                    }
+                    }*/
                 // Intent
                 startActivity(new Intent(All_Products.this, Order_List_Customer.class));
             }

@@ -206,17 +206,6 @@ public class FirebaseModel implements Model{
                 snapField = snap.child("Brand");
                 product.setBrand((String) snapField.getValue());
                 snapField = snap.child("Price");
-
-                /*
-                Object tempObject = snapField.getValue();
-                Double tempDouble = new Double(0);
-                if (tempObject.getClass() == tempDouble.getClass())
-                    tempDouble = (double) tempObject;
-                else {
-                    Long tempLong2 = (long) tempObject;
-                    tempDouble = tempLong2.doubleValue();
-                }*/
-
                 product.setPrice(Double.valueOf((String) snapField.getValue()));
                 break;
             case IDobj.STORE:
@@ -331,8 +320,10 @@ public class FirebaseModel implements Model{
     @Override
     public void setRelationContext(IDobj obj1, IDobj obj2, String context) {
 
+        /* Causing bugs for adding product to order since database doesn't update fast enough
         if (!relationExists(obj1, obj2))
             return;
+         */
         // below here, the relation to add context to must exist
 
         DatabaseReference ref = refRoot;
@@ -345,7 +336,7 @@ public class FirebaseModel implements Model{
 
         ref = ref.child(dirCONTEXT);
 
-        if (context == null) {
+        if (context.isEmpty()) {
             ref.removeValue();
             return;
         }
