@@ -24,6 +24,7 @@ import com.example.b07_final_project.helper.Product_Card;
 import com.example.b07_final_project.helper.Singleton;
 import com.example.b07_final_project.helper.Store;
 
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 
 public class All_Products extends AppCompatActivity {
@@ -32,6 +33,7 @@ public class All_Products extends AppCompatActivity {
     private ListView product_listview;
     private TextView totalPrice;
     private TextView nameOfStore;
+    private TextView totalText;
 
     private ArrayList<Product_Card> productList;
     private Customer customer;
@@ -39,6 +41,8 @@ public class All_Products extends AppCompatActivity {
     private ArrayList<Product_> productListObjects;
     private Presenter singleton;
     private ListView listView;
+
+    private static final DecimalFormat priceFormat = new DecimalFormat("0.00");
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -83,6 +87,10 @@ public class All_Products extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 int totalProductsOrdered = 0;
+
+                // Total
+                Double total = 0.0;
+
                 // loop for all the items in listview
                 for (int i = 0; i < productList.size(); i++) {
                     // This is important for updating quantity values!!
@@ -101,6 +109,8 @@ public class All_Products extends AppCompatActivity {
                     if (0 < qtynum && qtynum <= 50) {
                         totalProductsOrdered += 1;
                         productList.get(i).quantity = String.valueOf(qtynum);
+                        total += Double.parseDouble(priceFormat.format(
+                                Double.parseDouble(productList.get(i).getPrice()) * qtynum));
                     } else {
                         productList.get(i).quantity = "0";
                     }
@@ -110,6 +120,10 @@ public class All_Products extends AppCompatActivity {
                     Toast.makeText(All_Products.this, "Insert a valid number between 0-50", Toast.LENGTH_LONG).show();
                     return;
                 }
+                // Total
+                totalText = findViewById(R.id.total);
+                totalText.setText("$" + priceFormat.format(total));
+
                 Order_ order = singleton.newOrder(customer, store);
                 for (Product_Card pc : productList)
                     // ignore any with quantity 0
