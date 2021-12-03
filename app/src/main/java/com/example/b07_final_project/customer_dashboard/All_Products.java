@@ -122,7 +122,7 @@ public class All_Products extends AppCompatActivity {
             String price = String.valueOf(p.getPrice());
 
 
-            Product_Card pc = new Product_Card(name, price, "0", brand);
+            Product_Card pc = new Product_Card(name, price, "", brand);
             pc.setID(p.getID());
 
             productList.add(pc);
