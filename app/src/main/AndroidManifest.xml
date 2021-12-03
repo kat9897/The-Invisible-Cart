@@ -22,7 +22,8 @@
             android:exported="false" />
         <activity
             android:name=".customer_dashboard.All_Products"
-            android:exported="false" />
+            android:exported="false"
+            android:windowSoftInputMode="adjustPan" />
         <activity
             android:name=".customer_dashboard.All_Store"
             android:exported="false" />

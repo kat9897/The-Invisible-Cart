@@ -86,8 +86,6 @@ public class All_Products extends AppCompatActivity {
         btnOrder.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                btnOrder.setText("ORDER PLACED");
-
                 int totalProductsOrdered = 0;
 
                 // Total
@@ -120,6 +118,7 @@ public class All_Products extends AppCompatActivity {
                 // Check if all products are empty
                 if (totalProductsOrdered == 0) {
                     Toast.makeText(All_Products.this, "Insert a valid number between 0-50", Toast.LENGTH_LONG).show();
+                    btnOrder.setText("ORDER");
                     return;
                 }
                 // Total
@@ -132,6 +131,7 @@ public class All_Products extends AppCompatActivity {
                     if (!pc.getQuantity().equals("0")) {
                         singleton.addProductToOrder(order, pc.getID(), Integer.valueOf(pc.getQuantity()));
                     }
+                btnOrder.setText("ORDER PLACED");
                     /* Checked before this
                     if (singleton.getProducts(order).isEmpty()) {
                         Toast.makeText(All_Products.this, "Please place an order with valid quantities.", Toast.LENGTH_LONG).show();
