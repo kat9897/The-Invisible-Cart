@@ -48,7 +48,7 @@ public class OrderPage_Customer extends AppCompatActivity {
         singleton = Singleton.getID();
         order = singleton.getViewedOrder();
         customer = singleton.getLoggedInCustomer();
-        String customerName = customer.getName();
+//        String customerName = customer.getName();
         productsInOrder = singleton.getProducts(order);
 
         // Display Store Name and add it to order page

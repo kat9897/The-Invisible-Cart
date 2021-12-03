@@ -51,14 +51,11 @@ public class OrderPage_Owner extends AppCompatActivity {
             String price = String.valueOf(product.getPrice());
             // shorten string to 2 decimals?
 
-            String quantity = "-1";
-            // String quantity = String.valueOf(singleton.getQuantity(order, product));
+            String quantity = String.valueOf(singleton.getQuantity(order, product));
 
             Product_Card productCard = new Product_Card(name, price, quantity, brand);
             productList.add(productCard);
         }
-
-        productList.add(new Product_Card("name", "price", "quantity", "brand"));
 
         CustomListAdapter adapter = new CustomListAdapter(this, R.layout.view_product_order_page_owner, productList);
         listView.setAdapter(adapter);
