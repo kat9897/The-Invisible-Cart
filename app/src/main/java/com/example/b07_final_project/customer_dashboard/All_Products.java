@@ -82,6 +82,8 @@ public class All_Products extends AppCompatActivity {
         btnOrder.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                btnOrder.setText("ORDER PLACED");
+
                 int totalProductsOrdered = 0;
                 // loop for all the items in listview
                 for (int i = 0; i < productList.size(); i++) {
