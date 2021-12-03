@@ -63,7 +63,7 @@ public class OrderPage_Customer extends AppCompatActivity {
         statusBtn.setText(orderStatus);
 
         ArrayList<Product_Card> productList = new ArrayList<>();
-
+        
         for (Product_ product : productsInOrder) {
 
             String name = product.getName();

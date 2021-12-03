@@ -111,16 +111,15 @@ public class All_Products extends AppCompatActivity {
         customer = singleton.getLoggedInCustomer();
         store = singleton.getViewedStore();
         productListObjects = singleton.getProducts(store);
-
+        // Set name of store at top
         nameOfStore.setText(store.getName());
 
-
+        // Add products to product list for store
         for (Product_ p : productListObjects) {
 
             String name = p.getName();
             String brand = p.getBrand();
             String price = String.valueOf(p.getPrice());
-
 
             Product_Card pc = new Product_Card(name, price, "", brand);
             pc.setID(p.getID());
@@ -134,29 +133,34 @@ public class All_Products extends AppCompatActivity {
         btnOrder.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                ArrayList<Product_Card> orderproducts = new ArrayList<>();
+                int totalProductsOrdered = 0;
                 // loop for all the items in listview
                 for (int i = 0; i < productList.size(); i++) {
-
-                    qty = findViewById(R.id.product_quantity);
+                    v =listView.getChildAt(i);
+                    qty = v.findViewById(R.id.product_quantity);
                     String quantity = qty.getText().toString();
+                    int qtynum;
 
-                    int qtynum = 0;
+                    if (quantity.isEmpty())
+                        qtynum = 0;
+                    else
+                        qtynum = Integer.parseInt(quantity);
 
-                    qtynum = Integer.parseInt(quantity);
-
-                    if (!(0 <= qtynum && qtynum <= 50)) {
-                        Toast.makeText(All_Products.this, "Insert a valid number between 0-50", Toast.LENGTH_LONG).show();
-                        return;
+                    if (0 < qtynum && qtynum <= 50) {
+                        totalProductsOrdered += 1;
+                        productList.get(i).quantity = String.valueOf(qtynum);
+                    } else {
+                        productList.get(i).quantity = "0";
                     }
-
-                    productList.get(i).quantity = String.valueOf(qtynum);
-
+                }
+                if (totalProductsOrdered == 0) {
+                    Toast.makeText(All_Products.this, "Insert a valid number between 0-50", Toast.LENGTH_LONG).show();
+                    return;
                 }
                 Order_ order = singleton.newOrder(customer, store);
                 for (Product_Card pc : productList)
                     // ignore any with quantity 0
-                    if (! pc.getQuantity().equals("0")) {
+                    if (!pc.getQuantity().equals("0")) {
                         singleton.addProductToOrder(order, pc.getID(), Integer.valueOf(pc.getQuantity()));
                     }
                     if (singleton.getProducts(order) == null) {
