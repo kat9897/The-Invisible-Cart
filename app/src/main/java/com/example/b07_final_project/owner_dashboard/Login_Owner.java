@@ -132,11 +132,9 @@ public class Login_Owner extends AppCompatActivity {
 
         Owner owner = singleton.loginOwner(email, password);
 
-        if (owner == null){
-
-            // login failed
-
-        } else {
+        if (owner == null)
+            Toast.makeText(Login_Owner.this, "Incorrect owner email or password.", Toast.LENGTH_SHORT).show();
+        else {
 
             // login succeeded
             Intent intent = new Intent(Login_Owner.this, Main_Owner.class);

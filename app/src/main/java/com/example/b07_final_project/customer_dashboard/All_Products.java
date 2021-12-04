@@ -9,6 +9,7 @@ import android.text.TextWatcher;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -29,6 +30,7 @@ import java.util.ArrayList;
 
 public class All_Products extends AppCompatActivity {
     private Button btnOrder;
+    private ImageView updateBtn;
     private EditText qty;
     private ListView product_listview;
     private TextView totalPrice;
@@ -83,6 +85,48 @@ public class All_Products extends AppCompatActivity {
         CustomListAdapter2 adapter = new CustomListAdapter2(this, R.layout.cardview_product_order, productList);
         listView.setAdapter(adapter);
 
+        updateBtn = findViewById(R.id.updatePrice);
+        updateBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // Total
+                Double total = 0.0;
+
+                // loop for all the items in listview
+                for (int i = 0; i < productList.size(); i++) {
+                    // This is important for updating quantity values!!
+                    v = listView.getChildAt(i);
+                    qty = v.findViewById(R.id.product_quantity);
+                    String quantity = qty.getText().toString();
+                    int qtynum;
+
+                    // If it's empty, make quantity 0, else set it equal to the int value
+                    if (quantity.isEmpty())
+                        qtynum = 0;
+                    else
+                        qtynum = Integer.parseInt(quantity);
+
+                    // check first if there are invalid inputs, if there are immediately
+                    // set total price to $0, send toast message, and exit!
+                    if (qtynum > 50) {
+                        productList.get(i).quantity = "0";
+                        totalText = findViewById(R.id.total);
+                        totalText.setText("$0.00");
+                        Toast.makeText(All_Products.this, "Insert a valid number between 0-50", Toast.LENGTH_LONG).show();
+                        return;
+                    }
+                    if (0 < qtynum && qtynum <= 50) {
+                        productList.get(i).quantity = String.valueOf(qtynum);
+                        total += Double.parseDouble(priceFormat.format(
+                                Double.parseDouble(productList.get(i).getPrice()) * qtynum));
+                    }
+                }
+                // Total
+                totalText = findViewById(R.id.total);
+                totalText.setText("$" + priceFormat.format(total));
+            }
+        });
+
         btnOrder.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -111,8 +155,11 @@ public class All_Products extends AppCompatActivity {
                         productList.get(i).quantity = String.valueOf(qtynum);
                         total += Double.parseDouble(priceFormat.format(
                                 Double.parseDouble(productList.get(i).getPrice()) * qtynum));
-                    } else {
+                    } if (qtynum > 50) {
+                        // if there's an invalid input, immediately send toast, and exit!!
                         productList.get(i).quantity = "0";
+                        Toast.makeText(All_Products.this, "Insert a valid number between 0-50", Toast.LENGTH_LONG).show();
+                        return;
                     }
                 }
                 // Check if all products are empty

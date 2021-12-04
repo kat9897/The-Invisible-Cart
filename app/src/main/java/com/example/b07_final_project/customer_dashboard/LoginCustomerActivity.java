@@ -135,11 +135,9 @@ public class LoginCustomerActivity extends AppCompatActivity {
 
         Customer customer = singleton.loginCustomer(email, password);
 
-        if (customer == null){
-
-            // login failed
-
-        } else {
+        if (customer == null)
+            Toast.makeText(LoginCustomerActivity.this, "Incorrect customer email or password.", Toast.LENGTH_SHORT).show();
+        else {
 
             // login succeeded
             Intent intent = new Intent(LoginCustomerActivity.this, Main_Customer.class);
