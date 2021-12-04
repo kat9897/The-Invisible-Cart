@@ -34,8 +34,8 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/heading_orders2"
         android:layout_alignParentStart="true"
-        android:layout_marginStart="9dp"
-        android:layout_marginTop="40dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="30dp"
         android:text="Customer Name"
         android:textSize="20dp" />
 
@@ -50,7 +50,7 @@
         android:layout_centerHorizontal="true"
         android:layout_marginStart="10dp"
         android:layout_marginLeft="10dp"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="30dp"
         android:layout_marginEnd="9dp"
         android:layout_marginRight="10dp"
         android:layout_marginBottom="130dp"
@@ -65,11 +65,20 @@
 
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            android:background="@drawable/background">
 
             <LinearLayout
+                android:id="@+id/lyout3"
                 android:layout_margin="8dp"
-                android:gravity="center_vertical"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentBottom="true"
+                android:layout_marginStart="4dp"
+                android:layout_marginTop="15dp"
+                android:layout_marginEnd="15dp"
+                android:layout_marginBottom="15dp"
+                android:gravity="center"
                 android:orientation="horizontal"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content">
@@ -87,7 +96,7 @@
                     android:layout_height="wrap_content"
                     android:text="$1000 "
                     android:textColor="@android:color/white"
-                    android:textSize="24dp" />
+                    android:textSize="20dp" />
 
             </LinearLayout>
 
@@ -95,10 +104,12 @@
                 android:id="@+id/complete"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_alignParentTop="true"
                 android:layout_alignParentEnd="true"
                 android:layout_alignParentBottom="true"
-                android:layout_marginEnd="11dp"
-                android:layout_marginBottom="8dp"
+                android:layout_marginTop="27dp"
+                android:layout_marginEnd="2dp"
+                android:layout_marginBottom="25dp"
                 android:backgroundTint="@color/btn_complete_color"
                 android:text="Complete"
                 android:textColor="@android:color/white" />

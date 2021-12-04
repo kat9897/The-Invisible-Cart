@@ -12,9 +12,6 @@
         android:usesCleartextTraffic="true"
         android:windowSoftInputMode="adjustResize">
         <activity
-            android:name=".customer_dashboard.BillingPage"
-            android:exported="false" />
-        <activity
             android:name=".customer_dashboard.OrderPage_Customer"
             android:exported="false" />
         <activity
