@@ -364,8 +364,12 @@ public class Singleton implements Presenter {
 
     @Override
     public int getQuantity(Order_ order, Product_ product) {
-
-        return Integer.valueOf(database.getRelationContext(order,  product));
+        String output =  database.getRelationContext(order,  product);
+        if(output == null ){
+            return 0;
+        }else{
+            return Integer.valueOf(output);
+        }
     }
 
     @Override

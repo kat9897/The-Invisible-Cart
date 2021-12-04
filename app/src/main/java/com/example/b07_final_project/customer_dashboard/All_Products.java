@@ -175,8 +175,10 @@ public class All_Products extends AppCompatActivity {
                 Order_ order = singleton.newOrder(customer, store);
                 for (Product_Card pc : productList)
                     // ignore any with quantity 0
-                    if (!pc.getQuantity().equals("0")) {
-                        singleton.addProductToOrder(order, pc.getID(), Integer.valueOf(pc.getQuantity()));
+                    if (!pc.getQuantity().equals("0") ) {
+                        if(!pc.getQuantity().equals("")){
+                            singleton.addProductToOrder(order, pc.getID(), Integer.valueOf(pc.getQuantity()));
+                        }
                     }
                 btnOrder.setText("ORDER PLACED");
                     /* Checked before this
@@ -184,7 +186,7 @@ public class All_Products extends AppCompatActivity {
                         Toast.makeText(All_Products.this, "Please place an order with valid quantities.", Toast.LENGTH_LONG).show();
                     }*/
                 // Intent
-                startActivity(new Intent(All_Products.this, Order_List_Customer.class));
+                startActivity(new Intent(All_Products.this, Main_Customer.class));
                 overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
             }
         });
