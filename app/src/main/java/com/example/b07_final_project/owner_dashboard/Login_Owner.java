@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.text.method.PasswordTransformationMethod;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
@@ -119,6 +120,8 @@ public class Login_Owner extends AppCompatActivity {
                     return;
                 }
 
+                edtEmail.setText("");
+                edtPassword.setText("");
                 // If entered Correctly then Login
                 login(email, password);
             }
@@ -196,6 +199,12 @@ public class Login_Owner extends AppCompatActivity {
     }
     */
 
+    @Override
+    public void onBackPressed() {
+        Intent intent = new Intent(Login_Owner.this, LoginCustomerActivity.class);
+        startActivity(intent);
+        overridePendingTransition(R.anim.slide_in_left,R.anim.slide_out_right);
+    }
 
     @Override
     public void finish() {

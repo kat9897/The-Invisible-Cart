@@ -59,7 +59,20 @@ public class All_Store extends AppCompatActivity {
                 Intent intent = new Intent(getApplicationContext(), All_Products.class);
                 intent.putExtra("heading_store", clickedStoreName);
                 startActivity(intent);
+                overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
             }
         });
+    }
+    @Override
+    public void onBackPressed() {
+        Intent intent = new Intent(All_Store.this, Main_Customer.class);
+        startActivity(intent);
+        overridePendingTransition(R.anim.slide_in_left,R.anim.slide_out_right);
+    }
+
+    @Override
+    public void finish() {
+        super.finish();
+        overridePendingTransition(R.anim.slide_in_left,R.anim.slide_out_right);
     }
 }

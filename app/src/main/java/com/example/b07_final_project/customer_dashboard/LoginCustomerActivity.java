@@ -110,6 +110,9 @@ public class LoginCustomerActivity extends AppCompatActivity {
                     return;
                 }
 
+                edtEmail.setText("");
+                edtPassword.setText("");
+
                 // If entered Correctly then Login
                 login(email, password);
             }
@@ -144,7 +147,16 @@ public class LoginCustomerActivity extends AppCompatActivity {
         }
     }
 
-    /*
+    @Override
+    public void onBackPressed() {
+        Intent intent = new Intent(Intent.ACTION_MAIN);
+        intent.addCategory(Intent.CATEGORY_HOME);
+        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);//***Change Here***
+        startActivity(intent);
+        finish();
+        System.exit(0);
+    }
+/*
     // Firebase Authentication
     private void login(String email, String password) {
         //https://firebase.google.com/docs/auth/android/password-auth#java_3

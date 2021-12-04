@@ -10,10 +10,10 @@
         android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_weight="50">
+        android:layout_weight="20">
 
         <TextView
-            android:gravity="center"
+            android:paddingStart="10dp"
             android:text="Name (Brand)"
             android:layout_width="match_parent"
             android:layout_height="30dp"
@@ -22,9 +22,10 @@
         <TextView
             android:id="@+id/product_price"
             android:layout_width="match_parent"
-            android:layout_height="32dp"
+            android:layout_height="30dp"
+            android:inputType="number"
             android:layout_below="@+id/product_name"
-            android:gravity="center"
+            android:paddingStart="10dp"
             android:text="Price" />
     </LinearLayout>
 
@@ -32,7 +33,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:layout_weight="50">
+        android:layout_weight="80">
 
         <EditText
             android:id="@+id/product_quantity"

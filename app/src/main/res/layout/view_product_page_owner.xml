@@ -12,7 +12,7 @@
         android:layout_width="match_parent"
         android:layout_height="60dp"
         android:id="@+id/product_name"
-        android:layout_weight="50"/>
+        android:layout_weight="30"/>
 
     <TextView
         android:gravity="center"
@@ -21,6 +21,6 @@
         android:layout_width="match_parent"
         android:layout_height="60dp"
         android:id="@+id/product_price"
-        android:layout_weight="50"/>
+        android:layout_weight="70"/>
 
 </LinearLayout>

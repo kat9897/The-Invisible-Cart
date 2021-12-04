@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+
     tools:context=".customer_dashboard.OrderPage_Customer">
 
     <TextView
@@ -20,7 +21,6 @@
         android:shadowColor="#303030"
         android:text="Order"
         android:textAlignment="center"
-        android:textColor="@color/black"
         android:textSize="40dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -60,35 +60,45 @@
 
     <androidx.cardview.widget.CardView
         android:layout_alignParentBottom="true"
-        app:cardBackgroundColor="@color/design_default_color_primary"
+        app:cardBackgroundColor="@color/default_1"
         android:layout_width="match_parent"
         android:layout_height="100dp">
 
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+
+            android:background="@drawable/background">
 
             <LinearLayout
-                android:layout_margin="8dp"
-                android:gravity="center_vertical"
-                android:orientation="horizontal"
+                android:id="@+id/lyout2"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentBottom="true"
+                android:layout_marginStart="4dp"
+                android:layout_marginTop="15dp"
+                android:layout_marginEnd="15dp"
+                android:layout_marginBottom="15dp"
+                android:gravity="center"
+                android:orientation="horizontal">
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Total: "
                     android:textColor="@android:color/white"
-                    android:textSize="20sp" />
+                    android:textSize="20dp" />
 
                 <TextView
                     android:id="@+id/total"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="$1000 "
+                    android:inputType="number"
+                    android:text="1000"
                     android:textColor="@android:color/white"
-                    android:textSize="24dp" />
+                    android:textSize="20dp" />
 
             </LinearLayout>
 
@@ -96,12 +106,14 @@
                 android:id="@+id/statusOrder"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_alignParentTop="true"
                 android:layout_alignParentEnd="true"
                 android:layout_alignParentBottom="true"
-                android:layout_marginEnd="0dp"
-                android:layout_marginBottom="1dp"
-                android:text="Status of Order"
+                android:layout_marginTop="27dp"
+                android:layout_marginEnd="2dp"
+                android:layout_marginBottom="25dp"
                 android:enabled="false"
+                android:text="Status of Order"
                 android:textColor="@android:color/white" />
 
         </RelativeLayout>

@@ -115,6 +115,10 @@ public class SignUpCustomerActivity extends AppCompatActivity {
                     Toast.makeText(SignUpCustomerActivity.this, "Your passwords do not match", Toast.LENGTH_SHORT).show();
                     return;
                 }
+                edtName.setText("");
+                edtEmail.setText("");
+                edtPassword.setText("");
+                edtConfirmPassword.setText("");
 
                 signIn(email, password);
 
@@ -122,6 +126,12 @@ public class SignUpCustomerActivity extends AppCompatActivity {
         });
     }
 
+    @Override
+    public void onBackPressed() {
+        Intent intent = new Intent(SignUpCustomerActivity.this, LoginCustomerActivity.class);
+        startActivity(intent);
+        overridePendingTransition(R.anim.slide_in_left,R.anim.slide_out_right);
+    }
 
     private void signIn(String email, String password) {
 

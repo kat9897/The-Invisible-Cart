@@ -2,6 +2,7 @@ package com.example.b07_final_project.owner_dashboard;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -94,5 +95,18 @@ public class OrderPage_Owner extends AppCompatActivity {
             btnComplete.setSelected(true);
         }
         btnComplete.setText(orderStatus);
+    }
+    @Override
+    public void onBackPressed() {
+        Intent intent = new Intent(OrderPage_Owner.this, Order_List_Owner.class);
+        startActivity(intent);
+        overridePendingTransition(R.anim.slide_in_left,R.anim.slide_out_right);
+    }
+
+
+    @Override
+    public void finish() {
+        super.finish();
+        overridePendingTransition(R.anim.slide_in_left,R.anim.slide_out_right);
     }
 }
