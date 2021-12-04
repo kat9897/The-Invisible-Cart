@@ -64,7 +64,7 @@ public class OrderPage_Customer extends AppCompatActivity {
 
         // Display Status
         int orderStatusNum = order.getStatus();
-        orderStatus = "Not ready for pick up";
+        orderStatus = "Order In Process";
         if (orderStatusNum == Order_.COMPLETE){
             orderStatus = "Ready for pick up";
         }

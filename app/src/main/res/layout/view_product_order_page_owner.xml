@@ -17,6 +17,9 @@
             android:text="Name (Brand)"
             android:layout_width="match_parent"
             android:layout_height="30dp"
+            android:layout_marginTop="10dp"
+            android:fontFamily="@font/avenir_roman"
+            android:textSize="17dp"
             android:id="@+id/product_name"/>
 
         <TextView
@@ -25,6 +28,8 @@
             android:layout_width="match_parent"
             android:layout_height="30dp"
             android:id="@+id/product_quantity"
+            android:textSize="17dp"
+            android:fontFamily="@font/avenir_roman"
             android:layout_below = "@+id/product_name"/>
     </LinearLayout>
 
@@ -32,9 +37,12 @@
         android:gravity="center"
         android:textAlignment="center"
         android:text="Price"
+        android:textSize="17dp"
         android:layout_width="match_parent"
         android:layout_height="60dp"
         android:id="@+id/product_price"
+        android:fontFamily="@font/avenir_roman"
+        android:layout_marginTop="8dp"
         android:layout_weight="70"/>
 
 </LinearLayout>

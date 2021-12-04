@@ -12,6 +12,8 @@
         android:layout_width="match_parent"
         android:layout_height="60dp"
         android:id="@+id/product_name"
+        android:fontFamily="@font/avenir_roman"
+        android:textSize="17dp"
         android:layout_weight="30"/>
 
     <TextView
@@ -20,6 +22,8 @@
         android:text="Price"
         android:layout_width="match_parent"
         android:layout_height="60dp"
+        android:textSize="17dp"
+        android:fontFamily="@font/avenir_roman"
         android:id="@+id/product_price"
         android:layout_weight="70"/>
 
