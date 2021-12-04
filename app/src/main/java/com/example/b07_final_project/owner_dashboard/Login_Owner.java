@@ -1,13 +1,11 @@
 package com.example.b07_final_project.owner_dashboard;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.text.method.PasswordTransformationMethod;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
@@ -18,23 +16,9 @@ import android.widget.Toast;
 
 import com.example.b07_final_project.R;
 import com.example.b07_final_project.customer_dashboard.LoginCustomerActivity;
-import com.example.b07_final_project.customer_dashboard.Main_Customer;
-import com.example.b07_final_project.helper.Customer;
 import com.example.b07_final_project.helper.Owner;
 import com.example.b07_final_project.helper.Presenter;
 import com.example.b07_final_project.helper.Singleton;
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
-
-/*
-import com.google.firebase.auth.AuthResult;
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
- */
 
 import java.util.regex.Pattern;
 
@@ -144,60 +128,6 @@ public class Login_Owner extends AppCompatActivity {
 
         }
     }
-
-
-    /*
-    private void login(String email, String password) {
-        //https://firebase.google.com/docs/auth/android/password-auth#java_3
-
-        mAuth.signInWithEmailAndPassword(email, password)
-                .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
-                    @Override
-                    public void onComplete(@NonNull Task<AuthResult> task) {
-                        if (task.isSuccessful()) {
-                            // Login in success, Move to MainActivity
-
-                            String uid = task.getResult().getUser().getUid();
-
-                            firebaseDatabase = FirebaseDatabase.getInstance().getReference();
-                            firebaseDatabase.child("Owner").child(uid).child("userType").addListenerForSingleValueEvent(new ValueEventListener() {
-                                @Override
-                                public void onDataChange(@NonNull DataSnapshot snapshot) {
-                                    if (snapshot.getValue(Integer.class) == null){
-                                        Toast.makeText(getApplicationContext(), "Login in as Customer account", Toast.LENGTH_SHORT).show();
-                                    }
-                                    else {
-                                        int usertype = snapshot.getValue(Integer.class);
-
-                                        if (usertype == 1) {
-
-                                            Intent intent = new Intent(Login_Owner.this, Main_Owner.class);
-                                            intent.putExtra("Ownerid", uid);
-
-                                            startActivity(intent);
-                                            overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
-                                        } else {
-                                            Toast.makeText(getApplicationContext(), "Login in as customer", Toast.LENGTH_SHORT).show();
-                                        }
-                                    }
-                                }
-
-                                @Override
-                                public void onCancelled(@NonNull DatabaseError error) {
-
-                                }
-                            });
-
-
-                        } else {
-                            // If sign in fails, display a message to the user.
-                            Toast.makeText(getApplicationContext(), task.getException().getLocalizedMessage(), Toast.LENGTH_SHORT).show();
-                            System.out.println("onComplete: " + task.getException().getMessage());
-                        }
-                    }
-                });
-    }
-    */
 
     @Override
     public void onBackPressed() {

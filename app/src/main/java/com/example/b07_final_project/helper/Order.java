@@ -42,23 +42,4 @@ public class Order {
             return "no valid status found.";
         }
     }
-
-//    public String printProducts(Order order) {
-//        String SEPARATOR = "";
-//        StringBuilder compiledString = new StringBuilder();
-//        for (product : order.products) {
-//            compiledString.append(SEPARATOR);
-//            compiledString.append(product.getName());
-//            SEPARATOR = ", ";
-//        }
-//        String actualString = compiledString.toString();
-//        return actualString;
-//    }
-//
-//    @Override
-//    public String toString() {
-//        return "Order id: " + getOrderId() + ", by customer: " + getCustomer().getName() + ", " +
-//                "with order status: " + statusMeaning() +
-//                ", and list of products: " + printProducts() + ".";
-//    }
 }

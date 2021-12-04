@@ -4,8 +4,6 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.text.Editable;
-import android.text.TextWatcher;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -15,7 +13,6 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.b07_final_project.R;
-import com.example.b07_final_project.helper.CustomListAdapter;
 import com.example.b07_final_project.helper.CustomListAdapter2;
 import com.example.b07_final_project.helper.Customer;
 import com.example.b07_final_project.helper.Order_;
@@ -32,8 +29,6 @@ public class All_Products extends AppCompatActivity {
     private Button btnOrder;
     private ImageView updateBtn;
     private EditText qty;
-    private ListView product_listview;
-    private TextView totalPrice;
     private TextView nameOfStore;
     private TextView totalText;
 
@@ -54,9 +49,7 @@ public class All_Products extends AppCompatActivity {
         getSupportActionBar().hide();
 
         btnOrder = findViewById(R.id.Order);
-        qty = (EditText) findViewById(R.id.product_quantity);
-        product_listview = findViewById(R.id.productListView);
-        totalPrice = findViewById(R.id.total);
+        qty = findViewById(R.id.product_quantity);
         nameOfStore = findViewById(R.id.heading_store);
 
         singleton = Singleton.getID();

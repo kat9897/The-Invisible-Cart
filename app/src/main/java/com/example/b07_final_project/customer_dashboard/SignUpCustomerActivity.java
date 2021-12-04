@@ -1,6 +1,5 @@
 package com.example.b07_final_project.customer_dashboard;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
@@ -12,22 +11,9 @@ import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.EditText;
-import android.widget.Switch;
 import android.widget.Toast;
 
-/*
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
-import com.google.firebase.auth.AuthResult;
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
- */
-
-
 import com.example.b07_final_project.R;
-import com.example.b07_final_project.helper.Customer;
 import com.example.b07_final_project.helper.Presenter;
 import com.example.b07_final_project.helper.Singleton;
 
@@ -50,10 +36,8 @@ public class SignUpCustomerActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sign_up_customer);
-//        R.layout.activity_sign_up_customer
         // Hide TitleBar
         getSupportActionBar().hide();
-        //mAuth = FirebaseAuth.getInstance(); // Initialize Firebase Authentication
         edtName = findViewById(R.id.edtTxtName_signincustomer);
         edtEmail = findViewById(R.id.edtTxtEmail_signincustomer);
         edtPassword = findViewById(R.id.edtTxtPassword_signincustomer);
@@ -151,50 +135,6 @@ public class SignUpCustomerActivity extends AppCompatActivity {
         overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
 
     }
-
-    /*
-    private void signIn(String email, String password) {
-        //https://firebase.google.com/docs/auth/android/password-auth#java_3
-        mAuth.createUserWithEmailAndPassword(email, password)
-                .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
-                    @Override
-                    public void onComplete(@NonNull Task<AuthResult> task) {
-                        if (task.isSuccessful()) {
-
-                            String uid = task.getResult().getUser().getUid();
-                            Customers u = new Customers(uid,name,"",email,password);
-                            firebaseDatabase = FirebaseDatabase.getInstance().getReference().child("Users").child("Customer").child(uid);
-
-                            firebaseDatabase.child(mAuth.getCurrentUser().getUid()).setValue(u)
-                                    .addOnCompleteListener(new OnCompleteListener<Void>() {
-                                        @Override
-                                        public void onComplete(@NonNull Task<Void> task) {
-                                            if (task.isSuccessful()) {
-                                                Toast.makeText(SignUpCustomerActivity.this, "User registered to database", Toast.LENGTH_SHORT).show();
-                                            } else {
-                                                System.out.println("onComplete: " + task.getException().getMessage());
-                                            }
-                                        }
-                                    });
-
-
-                            // Sign in success, Move to MainActivity
-                            FirebaseUser user = mAuth.getCurrentUser();
-                            Toast.makeText(SignUpCustomerActivity.this,"Account Created",Toast.LENGTH_LONG).show();
-                            finish();
-                            Intent intent = new Intent(SignUpCustomerActivity.this, MainActivity.class);
-                            intent.putExtra("Userid", uid);
-                            startActivity(intent);
-                            overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
-                        } else {
-                            // If sign in fails, display a message to the user.
-                            Toast.makeText(getApplicationContext(), task.getException().getLocalizedMessage(), Toast.LENGTH_SHORT).show();
-                            System.out.println("onComplete: " + task.getException().getMessage());
-                        }
-                    }
-                });
-    }
-    */
 
     @Override
     public void finish() {

@@ -1,6 +1,5 @@
 package com.example.b07_final_project.customer_dashboard;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
@@ -13,13 +12,7 @@ import android.widget.ListView;
 import com.example.b07_final_project.helper.Presenter;
 import com.example.b07_final_project.helper.Singleton;
 import com.example.b07_final_project.helper.Store;
-import com.example.b07_final_project.customer_dashboard.OrderPage_Customer;
 import com.example.b07_final_project.R;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 
