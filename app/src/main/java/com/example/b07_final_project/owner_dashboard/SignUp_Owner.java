@@ -93,6 +93,7 @@ public class SignUp_Owner extends AppCompatActivity implements  MVPview{
         edtEmail.setText("");
         edtPassword.setText("");
         edtConfirmPassword.setText("");
+        edtphn.setText("");
         edtstorename.setText("");
     }
 
