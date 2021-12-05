@@ -87,6 +87,20 @@ public class Singleton implements Presenter {
     }
 
     @Override
+    public boolean storeExists(String storeName) {
+
+        ArrayList<IDobj> stores = database.getAllIDobj(IDobj.STORE);
+
+        for (IDobj o : stores){
+            Store store = (Store) o;
+
+            if (store.getName().equals(storeName))
+                return true;
+        }
+        return false;
+    }
+
+    @Override
     public Boolean ownerExists(String email){
 
         ArrayList<IDobj> owners = database.getAllIDobj(IDobj.OWNER);
@@ -337,21 +351,6 @@ public class Singleton implements Presenter {
         return allCustomerOrders(customer);
     }
 
-
-    @Override
-    public boolean storeExists(String storename) {
-
-        ArrayList<IDobj> stores = database.getAllIDobj(IDobj.STORE);
-
-        for (IDobj o : stores){
-            Store store = (Store) o;
-
-            if (store.getName().equals(storename))
-                return true;
-        }
-        return false;
-    }
-
     @Override
     public void setQuantity(Order_ order, Product_ product, int quantity) {
 
@@ -376,6 +375,9 @@ public class Singleton implements Presenter {
         database.setRelationContext(order, product, Integer.toString(quantity));
     }
 
-
+    @Override
+    public void setCurrentLogin(IDobj newLogin) {
+        currentLogin = newLogin;
+    }
 
 }

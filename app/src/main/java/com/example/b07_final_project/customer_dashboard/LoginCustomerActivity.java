@@ -16,24 +16,26 @@ import android.widget.Toast;
 
 import com.example.b07_final_project.R;
 import com.example.b07_final_project.helper.Customer;
+import com.example.b07_final_project.helper.LoginPresenter;
+import com.example.b07_final_project.helper.MVPview;
 import com.example.b07_final_project.helper.Presenter;
 import com.example.b07_final_project.helper.Singleton;
 import com.example.b07_final_project.owner_dashboard.Login_Owner;
 
 import java.util.regex.Pattern;
 
-public class LoginCustomerActivity extends AppCompatActivity {
+public class LoginCustomerActivity extends AppCompatActivity implements MVPview {
 
     EditText edtEmail, edtPassword;
     Button btnLogin, btnSignUp;
     Switch swtchtoOwnerMode;
     CheckBox showpassword;
-    public static final Pattern VALID_EMAIL_ADDRESS_REGEX = Pattern.compile("^[A-Z0-9._%+-]+@[A-Z0-9.-]+\\.[A-Z]{2,6}$", Pattern.CASE_INSENSITIVE);
 
     //FirebaseAuth mAuth;
     //DatabaseReference firebaseDatabase;
 
-    Presenter singleton; // for accessing Singleton (Presenter)
+    LoginPresenter presenter; // for accessing Presenter
+    MVPview thisActivity = this;
 
 
     @Override
@@ -52,7 +54,7 @@ public class LoginCustomerActivity extends AppCompatActivity {
         swtchtoOwnerMode = findViewById(R.id.switchtoOwnerMode);
 
         //initialize Singleton (Presenter)
-        singleton = Singleton.getID();
+        presenter = LoginPresenter.getID();
 
         swtchtoOwnerMode.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -79,30 +81,12 @@ public class LoginCustomerActivity extends AppCompatActivity {
         btnLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
                 String email = edtEmail.getText().toString();
                 String password = edtPassword.getText().toString();
                 //check if stings are empty
 
-                //Email
-                if(TextUtils.isEmpty(email)){ //email is empty
-                    Toast.makeText(LoginCustomerActivity.this, "Please enter email", Toast.LENGTH_SHORT).show();
-                    return;
-                }       else if (!VALID_EMAIL_ADDRESS_REGEX.matcher(email).find()){
-                    Toast.makeText(LoginCustomerActivity.this, "Please enter a valid email", Toast.LENGTH_SHORT).show();
-                    return;
-                }
-
-                //Password
-                if(TextUtils.isEmpty(password)){ //password is empty
-                    Toast.makeText(LoginCustomerActivity.this, "Enter Password", Toast.LENGTH_SHORT).show();
-                    return;
-                }
-
-                edtEmail.setText("");
-                edtPassword.setText("");
-
-                // If entered Correctly then Login
-                login(email, password);
+                presenter.customerLoginClicked(thisActivity, email, password);
             }
         });
 
@@ -117,22 +101,18 @@ public class LoginCustomerActivity extends AppCompatActivity {
         });
     }
 
+    public void emptyTextBoxes(){
+        edtEmail.setText("");
+        edtPassword.setText("");
+    }
 
+    public void customerLoggedIn() {
 
-    private void login(String email, String password) {
+        // login succeeded
+        Intent intent = new Intent(LoginCustomerActivity.this, Main_Customer.class);
 
-        Customer customer = singleton.loginCustomer(email, password);
-
-        if (customer == null)
-            Toast.makeText(LoginCustomerActivity.this, "Incorrect customer email or password.", Toast.LENGTH_SHORT).show();
-        else {
-
-            // login succeeded
-            Intent intent = new Intent(LoginCustomerActivity.this, Main_Customer.class);
-
-            startActivity(intent);
-            overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
-        }
+        startActivity(intent);
+        overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
     }
 
     @Override
