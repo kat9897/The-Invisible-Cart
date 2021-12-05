@@ -4,24 +4,15 @@ public class Users {
     private String name,PhoneNumber, Email, Password, Uid;
     // 0 for customer
     // 1 for Owner
-//    private int userType;
     public Users(String uid,String name, String phoneNumber, String email, String password) {
         this.name = name;
         PhoneNumber = phoneNumber;
         Email = email;
         Password = password;
         this.Uid = uid;
-//        this.userType = userType;
 
     }
 
-//    public int getUserType() {
-//        return userType;
-//    }
-//
-//    public void setUserType(int userType) {
-//        this.userType = userType;
-//    }
 
     public String getName() {
         return name;

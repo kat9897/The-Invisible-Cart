@@ -4,7 +4,6 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.View;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -54,7 +53,6 @@ public class OrderPage_Customer extends AppCompatActivity {
         singleton = Singleton.getID();
         order = singleton.getViewedOrder();
         customer = singleton.getLoggedInCustomer();
-//        String customerName = customer.getName();
         productsInOrder = singleton.getProducts(order);
 
         // Display Store Name and add it to order page

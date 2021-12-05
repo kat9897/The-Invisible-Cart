@@ -1,7 +1,6 @@
 package com.example.b07_final_project.helper;
 
 import java.util.ArrayList;
-import java.util.regex.Pattern;
 
 public class Singleton implements Presenter {
 

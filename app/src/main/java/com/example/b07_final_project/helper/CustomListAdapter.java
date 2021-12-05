@@ -18,12 +18,6 @@ public class CustomListAdapter extends ArrayAdapter<Product_Card> {
     private Context mContext;
     private int mResource;
 
-    private static class ViewHolder{
-        TextView name;
-        TextView price;
-        TextView quantity;
-        TextView brand;
-    }
     public CustomListAdapter(Context context, int resource, ArrayList<Product_Card> objects) {
         super(context, resource, objects);
         mContext = context;
@@ -38,14 +32,12 @@ public class CustomListAdapter extends ArrayAdapter<Product_Card> {
         String quantity = getItem(position).getQuantity();
         String brand = getItem(position).getBrand();
 
-        Product_Card product = new Product_Card(name, price, quantity, brand);
-
         LayoutInflater inflater = LayoutInflater.from(mContext);
         convertView = inflater.inflate(mResource, parent, false);
 
-        TextView tvName = (TextView) convertView.findViewById(R.id.product_name);
-        TextView tvPrice = (TextView) convertView.findViewById(R.id.product_price);
-        TextView tvQuantity = (TextView) convertView.findViewById(R.id.product_quantity);
+        TextView tvName = convertView.findViewById(R.id.product_name);
+        TextView tvPrice = convertView.findViewById(R.id.product_price);
+        TextView tvQuantity = convertView.findViewById(R.id.product_quantity);
 
         tvName.setText(name + " (" + brand + ")");
         tvPrice.setText("$" + price);

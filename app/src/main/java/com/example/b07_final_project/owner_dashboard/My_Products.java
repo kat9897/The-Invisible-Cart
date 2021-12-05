@@ -12,7 +12,6 @@ import com.example.b07_final_project.helper.Presenter;
 import com.example.b07_final_project.helper.Product_;
 import com.example.b07_final_project.helper.Product_Card;
 import com.example.b07_final_project.R;
-import com.example.b07_final_project.helper.CustomListAdapter;
 import com.example.b07_final_project.helper.Singleton;
 
 import java.util.ArrayList;
@@ -41,7 +40,6 @@ public class My_Products extends AppCompatActivity {
             String name = product.getName();
             String brand = product.getBrand();
             String price = String.valueOf(product.getPrice());
-            // shorten string to 2 decimals?
 
             Product_Card productCard = new Product_Card(name, price, brand);
             productList.add(productCard);

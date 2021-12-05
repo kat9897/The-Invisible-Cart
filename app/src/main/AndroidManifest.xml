@@ -12,6 +12,16 @@
         android:usesCleartextTraffic="true"
         android:windowSoftInputMode="adjustResize">
         <activity
+            android:name=".StartActivity"
+            android:exported="true" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+
+        </activity>
+        <activity
             android:name=".customer_dashboard.OrderPage_Customer"
             android:exported="false" />
         <activity
@@ -19,8 +29,8 @@
             android:exported="false" />
         <activity
             android:name=".customer_dashboard.All_Products"
-            android:windowSoftInputMode="adjustPan"
-            android:exported="false" />
+            android:exported="false"
+            android:windowSoftInputMode="adjustPan" />
         <activity
             android:name=".customer_dashboard.All_Store"
             android:exported="false" />
@@ -57,11 +67,7 @@
         <activity
             android:name=".customer_dashboard.LoginCustomerActivity"
             android:exported="true">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
     </application>
 
