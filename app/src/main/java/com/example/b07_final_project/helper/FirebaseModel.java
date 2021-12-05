@@ -53,7 +53,7 @@ public class FirebaseModel implements Model{
         waiting = true;
 
         for (int i = 0; i < 10; i++) {
-            if (waiting = false)
+            if (waiting == false)
                 break;
 
             try {wait(50);} catch (Exception e) {}
