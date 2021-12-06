@@ -1,6 +1,8 @@
 package com.example.b07_final_project.helper;
 
+import android.content.Context;
 import android.text.TextUtils;
+import android.view.View;
 import android.widget.Toast;
 
 import com.example.b07_final_project.customer_dashboard.LoginCustomerActivity;
@@ -166,24 +168,28 @@ public class LoginPresenter implements LoginPresenterInterface {
         return owner;
     }
 
+
+
+
     @Override
     public void customerLoginClicked(MVPview view, String email, String password) {
 
+
         //Email
-        if (TextUtils.isEmpty(email)) { //email is empty
+        if (email.equals("")) { //email is empty
             String msg = displayMessage("Please enter email");
-            view.makeToast(view, msg);
+            view.makeToast(view,msg);
             return;
         } else if (!VALID_EMAIL_ADDRESS_REGEX.matcher(email).find()) {
             String msg = displayMessage("Please enter a valid email");
-            Toast.makeText((LoginCustomerActivity) view, msg, Toast.LENGTH_SHORT).show();
+            view.makeToast(view,msg);
             return;
         }
 
         //Password
-        if (TextUtils.isEmpty(password)) { //password is empty
+        if (password.equals("")) { //password is empty
             String msg = displayMessage("Enter Password");
-            Toast.makeText((LoginCustomerActivity) view, msg, Toast.LENGTH_SHORT).show();
+            view.makeToast(view,msg);
             return;
         }
 
@@ -191,7 +197,7 @@ public class LoginPresenter implements LoginPresenterInterface {
 
         if (customer == null) {
             String msg = displayMessage("Incorrect customer email or password.");
-            Toast.makeText((LoginCustomerActivity) view, msg, Toast.LENGTH_SHORT).show();
+            view.makeToast(view,msg);
             return;
         }
 
@@ -207,18 +213,18 @@ public class LoginPresenter implements LoginPresenterInterface {
         //Email
         if(TextUtils.isEmpty(email)){ //email is empty
             String msg = displayMessage("Please enter email");
-            Toast.makeText((Login_Owner) view, msg, Toast.LENGTH_SHORT).show();
+            view.makeToast(view,msg);
             return;
         }       else if (!VALID_EMAIL_ADDRESS_REGEX.matcher(email).find()){
             String msg = displayMessage("Please enter a valid email");
-            Toast.makeText((Login_Owner) view, msg, Toast.LENGTH_SHORT).show();
+            view.makeToast(view,msg);
             return;
         }
 
         //Password
         if(TextUtils.isEmpty(password)){ //password is empty
             String msg = displayMessage("Enter Password");
-            Toast.makeText((Login_Owner) view, msg, Toast.LENGTH_SHORT).show();
+            view.makeToast(view,msg);
             return;
         }
 
@@ -226,7 +232,7 @@ public class LoginPresenter implements LoginPresenterInterface {
 
         if (owner == null) {
             String msg = displayMessage("Incorrect owner email or password.");
-            Toast.makeText((Login_Owner) view, msg, Toast.LENGTH_SHORT).show();
+            view.makeToast(view,msg);
             return;
         }
 
@@ -244,7 +250,7 @@ public class LoginPresenter implements LoginPresenterInterface {
         //Name
         if(name.equals("")){ //name is empty
             String msg = displayMessage("Please enter Name");
-            view.makeToast(view, msg);
+            view.makeToast(view,msg);
             //stop further execution
             return;
         }
@@ -252,36 +258,36 @@ public class LoginPresenter implements LoginPresenterInterface {
         //Email
         if(email.equals("")){ //email is empty
             String msg = displayMessage("Please enter email");
-            view.makeToast(view, msg);
+            view.makeToast(view,msg);
             return;
         }else if (!VALID_EMAIL_ADDRESS_REGEX.matcher(email).find()){
             String msg = displayMessage("Please enter a valid email");
-            view.makeToast(view, msg);
+            view.makeToast(view,msg);
             return;
         }
 
         //Password
         if(password.equals("")){ //password is empty
             String msg = displayMessage("Please enter Password");
-            view.makeToast(view, msg);
+            view.makeToast(view,msg);
             return;
         }else if(password.length() < 8){
             String msg = displayMessage("Password must have at least 8 characters");
-            view.makeToast(view, msg);
+            view.makeToast(view,msg);
             return;
         }
 
         //Confirm Password
         if(!password.equals(confirmpassword)){
             String msg = displayMessage("Your passwords do not match");
-            view.makeToast(view, msg);
+            view.makeToast(view,msg);
             return;
         }
 
         if (customerExists(email)){
             // customer already exists
             String msg = displayMessage("Customer Already Exists");
-            view.makeToast(view, msg);
+            view.makeToast(view,msg);
             return;
         }
 
@@ -304,7 +310,7 @@ public class LoginPresenter implements LoginPresenterInterface {
             return;
         } else if(storeExists(storeName)){
             String msg = displayMessage("Store Name already exists");
-            view.makeToast(view, msg);
+            view.makeToast(view,msg);
             return;
         }
         //Email

@@ -10,6 +10,13 @@ import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
+import android.app.Activity;
+import android.app.Instrumentation;
+import android.provider.Browser;
+import android.text.TextUtils;
+import android.widget.Button;
+
+import com.example.b07_final_project.customer_dashboard.Main_Customer;
 import android.text.TextUtils;
 
 import com.example.b07_final_project.helper.Customer;
@@ -54,14 +61,17 @@ public class LoginPresenterTester {
 
     private final String correctEmail = "test1@gmail.com";
     private final String incorrectEmail = "test2@gmail.com";
-    private final String invalidEmail = "kdj/!gmseilcom";
+    private final String invalidEmail = "testgmail.com";
+    private final String unregisteredEmail = "nouserfound@gmail.com";
+    private final String badFormatEmail = "abcdefg";
+    private final String emptyStr = "";
     private final String correctPassword = "12345678";
     private final String incorrectPassword = "abcdefg";
     private final String correctStoreName = "Store Name";
     private final String incorrectStoreName = "Not Store Name";
     private final String correctCustomerName = "Customer Name";
     private final String correctOwnerName = "Owner Name";
-    private final String correctPhoneNumber = "1112223334";
+    private final String correctPhoneNumber = "1234567890";
     private final String incorrectPhoneNumber = "abc123";
 
 
@@ -86,7 +96,6 @@ public class LoginPresenterTester {
         assertNotNull(presenter2);
         assertEquals(presenter1, presenter2);
     }
-
 
 
     @Test
@@ -343,138 +352,181 @@ public class LoginPresenterTester {
         assertEquals(result, owner);
     }
 
-
-    //  when(.()).thenReturn();
-    //  verify().();
-    //  verify(, never()).(anyObject());
-
-
-    /*
-    @Override
-    public void customerLoginClicked(MVPview view, String email, String password) {
-
-        //Email
-        if (TextUtils.isEmpty(email)) { //email is empty
-            Toast.makeText((LoginCustomerActivity) view, "Please enter email", Toast.LENGTH_SHORT).show();
-            return;
-        } else if (!VALID_EMAIL_ADDRESS_REGEX.matcher(email).find()) {
-            Toast.makeText((LoginCustomerActivity) view, "Please enter a valid email", Toast.LENGTH_SHORT).show();
-            return;
-        }
-
-        //Password
-        if (TextUtils.isEmpty(password)) { //password is empty
-            Toast.makeText((LoginCustomerActivity) view, "Enter Password", Toast.LENGTH_SHORT).show();
-            return;
-        }
-
-        Customer customer = loginCustomer(email, password);
-
-        if (customer == null) {
-            Toast.makeText((LoginCustomerActivity) view, "Incorrect customer email or password.", Toast.LENGTH_SHORT).show();
-            return;
-        }
-
-        ((LoginCustomerActivity)view).emptyTextBoxes();
-
-        // If entered Correctly then Login
-        ((LoginCustomerActivity)view).customerLoggedIn();
+    @Test
+    public void ownerSignupClicked_emptyStoreName_test() {
+        LoginPresenter presenter = LoginPresenter.Initialize(model, singleton);
+        presenter.ownerSignupClicked(view, correctOwnerName, correctEmail, correctPassword, correctPassword, correctPhoneNumber, "");
+        verify(view).makeToast(view, "Enter a store Name");
     }
 
-    @Override
-    public void customerSignupClicked(MVPview view, String name, String email, String password, String confirmpassword) {
+    @Test
+    public void ownerSignupClicked_existingStoreName_test() {
+        ArrayList<IDobj> stores = new ArrayList<>();
+        stores.add(store);
+        when(model.getAllIDobj(IDobj.STORE)).thenReturn(stores);
+        when(store.getName()).thenReturn(incorrectStoreName);
 
-        //check if stings are empty using TextUtils
-        //Name
-        if(TextUtils.isEmpty(name)){ //email is empty
-            Toast.makeText((SignUpCustomerActivity) view, "Please enter Name", Toast.LENGTH_SHORT).show();
-            //stop further execution
-            return;
-        }
+        LoginPresenter presenter = LoginPresenter.Initialize(model, singleton);
 
-        //Email
-        if(TextUtils.isEmpty(email)){ //email is empty
-            Toast.makeText((SignUpCustomerActivity) view, "Please enter email", Toast.LENGTH_SHORT).show();
-            return;
-        }else if (!VALID_EMAIL_ADDRESS_REGEX.matcher(email).find()){
-            Toast.makeText((SignUpCustomerActivity) view, "Please enter a valid email", Toast.LENGTH_SHORT).show();
-            return;
-        }
-
-        //Password
-        if(TextUtils.isEmpty(password)){ //password is empty
-            Toast.makeText((SignUpCustomerActivity) view, "Please enter Password", Toast.LENGTH_SHORT).show();
-            return;
-        }else if(password.length() < 8){
-            Toast.makeText((SignUpCustomerActivity) view, "Password must have at least 8 characters", Toast.LENGTH_SHORT).show();
-            return;
-        }
-
-        //Confirm Password
-        if(!password.equals(confirmpassword)){
-            Toast.makeText((SignUpCustomerActivity) view, "Your passwords do not match", Toast.LENGTH_SHORT).show();
-            return;
-        }
-
-        if (customerExists(email)){
-            // customer already exists
-            Toast.makeText((SignUpCustomerActivity) view, "Customer Already Exists", Toast.LENGTH_SHORT).show();
-            return;
-        }
-
-        ((SignUpCustomerActivity)view).emptyTextBoxes();
-
-        // also logs you in
-        newCustomer(email, name, password);
-
-        ((SignUpCustomerActivity)view).customerSignedUp();
-
+        presenter.ownerSignupClicked(view, correctOwnerName, correctEmail, correctPassword, correctPassword, correctPhoneNumber, incorrectStoreName);
+        verify(view).makeToast(view, "Store Name already exists");
     }
 
-    @Override
+    @Test
+    public void ownerSignupClicked_emptyEmail_test() {
+        LoginPresenter presenter = LoginPresenter.Initialize(model, singleton);
+        presenter.ownerSignupClicked(view, correctOwnerName, "", correctPassword, correctPassword, correctPhoneNumber, correctStoreName);
+        verify(view).makeToast(view, "Please enter email");
+    }
+
+    @Test
+    public void ownerSignupClicked_invalidEmail_test() {
+        LoginPresenter presenter = LoginPresenter.Initialize(model, singleton);
+        presenter.ownerSignupClicked(view, correctOwnerName, invalidEmail, correctPassword, correctPassword, correctPhoneNumber, correctStoreName);
+        verify(view).makeToast(view, "Please enter a valid email");
+    }
+
+    @Test
+    public void ownerSignupClicked_existingEmail_test() {
+        ArrayList<IDobj> owners = new ArrayList<>();
+        owners.add(owner);
+        when(model.getAllIDobj(IDobj.OWNER)).thenReturn(owners);
+        when(owner.getEmail()).thenReturn(incorrectEmail);
+
+        LoginPresenter presenter = LoginPresenter.Initialize(model, singleton);
+
+        presenter.ownerSignupClicked(view, correctOwnerName, incorrectEmail, correctPassword, correctPassword, correctPhoneNumber, correctStoreName);
+        verify(view).makeToast(view, "Owner already exists");
+    }
+
+    @Test
+    public void ownerSignupClicked_emptyPhoneNumber_test() {
+        LoginPresenter presenter = LoginPresenter.Initialize(model, singleton);
+        presenter.ownerSignupClicked(view, correctOwnerName, correctEmail, correctPassword, correctPassword, "", correctStoreName);
+        verify(view).makeToast(view, "Please enter Phone number");
+    }
+
+    @Test
+    public void ownerSignupClicked_incorrectPhoneNumber_test() {
+        LoginPresenter presenter = LoginPresenter.Initialize(model, singleton);
+        presenter.ownerSignupClicked(view, correctOwnerName, correctEmail, correctPassword, correctPassword, incorrectPhoneNumber, correctStoreName);
+        verify(view).makeToast(view, "Please enter a valid Phone Number");
+    }
+
+    @Test
+    public void ownerSignupClicked_emptyPassword_test() {
+        LoginPresenter presenter = LoginPresenter.Initialize(model, singleton);
+        presenter.ownerSignupClicked(view, correctOwnerName, correctEmail, "", correctPassword, correctPhoneNumber, correctStoreName);
+        verify(view).makeToast(view, "Please enter Password");
+    }
+
+    @Test
+    public void ownerSignupClicked_incorrectPassword_test() {
+        LoginPresenter presenter = LoginPresenter.Initialize(model, singleton);
+        presenter.ownerSignupClicked(view, correctOwnerName, correctEmail, incorrectPassword, incorrectPassword, correctPhoneNumber, correctStoreName);
+        verify(view).makeToast(view, "Password must have at least 8 characters");
+    }
+
+    @Test
+    public void ownerSignupClicked_incorrectConfirmPassword_test() {
+        LoginPresenter presenter = LoginPresenter.Initialize(model, singleton);
+        presenter.ownerSignupClicked(view, correctOwnerName, correctEmail, correctPassword, incorrectPassword, correctPhoneNumber, correctStoreName);
+        verify(view).makeToast(view, "Your passwords do not match");
+    }
+
+    @Test
+    public void ownerSignupClicked_loginSuccess_test() {
+
+        // for store exists
+        ArrayList<IDobj> stores = new ArrayList<>();
+        when(model.getAllIDobj(IDobj.STORE)).thenReturn(stores);
+
+        // for owner exists
+        ArrayList<IDobj> owners = new ArrayList<>();
+        when(model.getAllIDobj(IDobj.OWNER)).thenReturn(owners);
+
+        // for new owner
+        when(model.newIDobj(IDobj.OWNER)).thenReturn(owner);
+        when(model.newIDobj(IDobj.STORE)).thenReturn(store);
+
+        LoginPresenter presenter = LoginPresenter.Initialize(model, singleton);
+
+        presenter.ownerSignupClicked(view, correctOwnerName, correctEmail, correctPassword, correctPassword, correctPhoneNumber, correctStoreName);
+        //Owner result = presenter.newOwner(correctEmail, correctOwnerName, correctPassword, correctPhoneNumber, correctStoreName);
+
+        //assertEquals(result, owner);
+
+
+        verify(view).emptyTextBoxes();
+        verify(view).signupOrLogin();
+
+        //newOwner called successfully
+        InOrder order = Mockito.inOrder(singleton, owner, store);
+        order.verify(owner).setEmail(correctEmail);
+        order.verify(owner).setPassword(correctPassword);
+        order.verify(owner).setName(correctOwnerName);
+        order.verify(owner).setPhoneNumber(correctPhoneNumber);
+        order.verify(owner).save();
+        order.verify(store).setName(correctStoreName);
+        order.verify(store).save();
+        order.verify(singleton).setCurrentLogin(owner);
+    }
+}
+
+/*
+
+//Store Name
+@Override
     public void ownerSignupClicked(MVPview view, String name, String email, String password, String confirmPassword, String phoneNumber, String storeName) {
-
-        //check if stings are empty using TextUtils
-        //Store Name
-        if ( TextUtils.isEmpty(storeName)){
-            Toast.makeText((SignUp_Owner) view, "Enter a store Name", Toast.LENGTH_SHORT).show();
+        if (storeName.equals("")){
+            String msg = displayMessage("Enter a store Name");
+            view.makeToast(view, msg);
             return;
         } else if(storeExists(storeName)){
-            Toast.makeText((SignUp_Owner) view, "Store Name already exists", Toast.LENGTH_SHORT).show();
+            String msg = displayMessage("Store Name already exists");
+            view.makeToast(view, msg);
             return;
         }
         //Email
-        if (TextUtils.isEmpty(email)) { //email is empty
-            Toast.makeText((SignUp_Owner) view, "Please enter email", Toast.LENGTH_SHORT).show();
+        if (email.equals("")) { //email is empty
+            String msg = displayMessage("Please enter email");
+            view.makeToast(view, msg);
             return;
         } else if (!VALID_EMAIL_ADDRESS_REGEX.matcher(email).find()) {
-            Toast.makeText((SignUp_Owner) view, "Please enter a valid email", Toast.LENGTH_SHORT).show();
+            String msg = displayMessage("Please enter a valid email");
+            view.makeToast(view, msg);
             return;
         } else if(ownerExists(email)){
-            Toast.makeText((SignUp_Owner) view, "Owner already exists", Toast.LENGTH_SHORT).show();
+            String msg = displayMessage("Owner already exists");
+            view.makeToast(view, msg);
             return;
         }
         //Phone
-        if (TextUtils.isEmpty(email)) { //email is empty
-            Toast.makeText((SignUp_Owner) view, "Please enter Phone number", Toast.LENGTH_SHORT).show();
+        if (phoneNumber.equals("")) { //phone number is empty
+            String msg = displayMessage("Please enter Phone number");
+            view.makeToast(view, msg);
             return;
         } else if (!VALID_PHNNUMBER_REGEX.matcher(phoneNumber).find()) {
-            Toast.makeText((SignUp_Owner) view, "Please enter a valid Phone Number", Toast.LENGTH_SHORT).show();
+            String msg = displayMessage("Please enter a valid Phone Number");
+            view.makeToast(view, msg);
             return;
         }
 
         //Password
-        if (TextUtils.isEmpty(password)) { //password is empty
-            Toast.makeText((SignUp_Owner) view, "Please enter Password", Toast.LENGTH_SHORT).show();
+        if (password.equals("")) { //password is empty
+            String msg = displayMessage("Please enter Password");
+            view.makeToast(view, msg);
             return;
         } else if (password.length() < 8) {
-            Toast.makeText((SignUp_Owner) view, "Password must have at least 8 characters", Toast.LENGTH_SHORT).show();
+            String msg = displayMessage("Password must have at least 8 characters");
+            view.makeToast(view, msg);
             return;
         }
 
         //Confirm Password
         if (!password.equals(confirmPassword)) {
-            Toast.makeText((SignUp_Owner) view, "Your passwords do not match", Toast.LENGTH_SHORT).show();
+            String msg = displayMessage("Your passwords do not match");
+            view.makeToast(view, msg);
             return;
         }
 
@@ -484,7 +536,5 @@ public class LoginPresenterTester {
         ((SignUp_Owner) view).emptyTextBoxes();
 
         ((SignUp_Owner) view).ownerSignedUp();
-
-     */
-
-}
+    }
+ */

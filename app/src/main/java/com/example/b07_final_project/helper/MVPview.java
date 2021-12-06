@@ -1,7 +1,9 @@
 package com.example.b07_final_project.helper;
 
-public interface MVPview {
+import android.content.Context;
+import android.widget.Toast;
 
+public interface MVPview {
     void makeToast(MVPview toastView, String message);
 
     void emptyTextBoxes();
