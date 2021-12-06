@@ -43,6 +43,11 @@ public class LoginPresenter implements LoginPresenterInterface {
     // methods
 
     @Override
+    public String displayMessage(String message) {
+        return message;
+    }
+
+    @Override
     public Customer loginCustomer(String email, String password) {
 
         ArrayList<IDobj> customers = database.getAllIDobj(IDobj.CUSTOMER);
@@ -166,23 +171,27 @@ public class LoginPresenter implements LoginPresenterInterface {
 
         //Email
         if (TextUtils.isEmpty(email)) { //email is empty
-            Toast.makeText((LoginCustomerActivity) view, "Please enter email", Toast.LENGTH_SHORT).show();
+            String msg = displayMessage("Please enter email");
+            Toast.makeText((LoginCustomerActivity) view, msg, Toast.LENGTH_SHORT).show();
             return;
         } else if (!VALID_EMAIL_ADDRESS_REGEX.matcher(email).find()) {
-            Toast.makeText((LoginCustomerActivity) view, "Please enter a valid email", Toast.LENGTH_SHORT).show();
+            String msg = displayMessage("Please enter a valid email");
+            Toast.makeText((LoginCustomerActivity) view, msg, Toast.LENGTH_SHORT).show();
             return;
         }
 
         //Password
         if (TextUtils.isEmpty(password)) { //password is empty
-            Toast.makeText((LoginCustomerActivity) view, "Enter Password", Toast.LENGTH_SHORT).show();
+            String msg = displayMessage("Enter Password");
+            Toast.makeText((LoginCustomerActivity) view, msg, Toast.LENGTH_SHORT).show();
             return;
         }
 
         Customer customer = loginCustomer(email, password);
 
         if (customer == null) {
-            Toast.makeText((LoginCustomerActivity) view, "Incorrect customer email or password.", Toast.LENGTH_SHORT).show();
+            String msg = displayMessage("Incorrect customer email or password.");
+            Toast.makeText((LoginCustomerActivity) view, msg, Toast.LENGTH_SHORT).show();
             return;
         }
 
@@ -197,23 +206,27 @@ public class LoginPresenter implements LoginPresenterInterface {
 
         //Email
         if(TextUtils.isEmpty(email)){ //email is empty
-            Toast.makeText((Login_Owner) view, "Please enter email", Toast.LENGTH_SHORT).show();
+            String msg = displayMessage("Please enter email");
+            Toast.makeText((Login_Owner) view, msg, Toast.LENGTH_SHORT).show();
             return;
         }       else if (!VALID_EMAIL_ADDRESS_REGEX.matcher(email).find()){
-            Toast.makeText((Login_Owner) view, "Please enter a valid email", Toast.LENGTH_SHORT).show();
+            String msg = displayMessage("Please enter a valid email");
+            Toast.makeText((Login_Owner) view, msg, Toast.LENGTH_SHORT).show();
             return;
         }
 
         //Password
         if(TextUtils.isEmpty(password)){ //password is empty
-            Toast.makeText((Login_Owner) view, "Enter Password", Toast.LENGTH_SHORT).show();
+            String msg = displayMessage("Enter Password");
+            Toast.makeText((Login_Owner) view, msg, Toast.LENGTH_SHORT).show();
             return;
         }
 
         Owner owner = loginOwner(email, password);
 
         if (owner == null) {
-            Toast.makeText((Login_Owner) view, "Incorrect owner email or password.", Toast.LENGTH_SHORT).show();
+            String msg = displayMessage("Incorrect owner email or password.");
+            Toast.makeText((Login_Owner) view, msg, Toast.LENGTH_SHORT).show();
             return;
         }
 
@@ -230,38 +243,45 @@ public class LoginPresenter implements LoginPresenterInterface {
         //check if stings are empty using TextUtils
         //Name
         if(TextUtils.isEmpty(name)){ //email is empty
-            Toast.makeText((SignUpCustomerActivity) view, "Please enter Name", Toast.LENGTH_SHORT).show();
+            String msg = displayMessage("Please enter Name");
+            Toast.makeText((SignUpCustomerActivity) view, msg, Toast.LENGTH_SHORT).show();
             //stop further execution
             return;
         }
 
         //Email
         if(TextUtils.isEmpty(email)){ //email is empty
-            Toast.makeText((SignUpCustomerActivity) view, "Please enter email", Toast.LENGTH_SHORT).show();
+            String msg = displayMessage("Please enter email");
+            Toast.makeText((SignUpCustomerActivity) view, msg, Toast.LENGTH_SHORT).show();
             return;
         }else if (!VALID_EMAIL_ADDRESS_REGEX.matcher(email).find()){
-            Toast.makeText((SignUpCustomerActivity) view, "Please enter a valid email", Toast.LENGTH_SHORT).show();
+            String msg = displayMessage("Please enter a valid email");
+            Toast.makeText((SignUpCustomerActivity) view, msg, Toast.LENGTH_SHORT).show();
             return;
         }
 
         //Password
         if(TextUtils.isEmpty(password)){ //password is empty
-            Toast.makeText((SignUpCustomerActivity) view, "Please enter Password", Toast.LENGTH_SHORT).show();
+            String msg = displayMessage("Please enter Password");
+            Toast.makeText((SignUpCustomerActivity) view, msg, Toast.LENGTH_SHORT).show();
             return;
         }else if(password.length() < 8){
-            Toast.makeText((SignUpCustomerActivity) view, "Password must have at least 8 characters", Toast.LENGTH_SHORT).show();
+            String msg = displayMessage("Password must have at least 8 characters");
+            Toast.makeText((SignUpCustomerActivity) view, msg, Toast.LENGTH_SHORT).show();
             return;
         }
 
         //Confirm Password
         if(!password.equals(confirmpassword)){
-            Toast.makeText((SignUpCustomerActivity) view, "Your passwords do not match", Toast.LENGTH_SHORT).show();
+            String msg = displayMessage("Your passwords do not match");
+            Toast.makeText((SignUpCustomerActivity) view, msg, Toast.LENGTH_SHORT).show();
             return;
         }
 
         if (customerExists(email)){
             // customer already exists
-            Toast.makeText((SignUpCustomerActivity) view, "Customer Already Exists", Toast.LENGTH_SHORT).show();
+            String msg = displayMessage("Customer Already Exists");
+            Toast.makeText((SignUpCustomerActivity) view, msg, Toast.LENGTH_SHORT).show();
             return;
         }
 
@@ -280,44 +300,54 @@ public class LoginPresenter implements LoginPresenterInterface {
         //check if stings are empty using TextUtils
         //Store Name
         if ( TextUtils.isEmpty(storeName)){
-            Toast.makeText((SignUp_Owner) view, "Enter a store Name", Toast.LENGTH_SHORT).show();
+            String msg = displayMessage("Enter a store Name");
+            Toast.makeText((SignUp_Owner) view, msg, Toast.LENGTH_SHORT).show();
             return;
         } else if(storeExists(storeName)){
-            Toast.makeText((SignUp_Owner) view, "Store Name already exists", Toast.LENGTH_SHORT).show();
+            String msg = displayMessage("Store Name already exists");
+            Toast.makeText((SignUp_Owner) view, msg, Toast.LENGTH_SHORT).show();
             return;
         }
         //Email
         if (TextUtils.isEmpty(email)) { //email is empty
-            Toast.makeText((SignUp_Owner) view, "Please enter email", Toast.LENGTH_SHORT).show();
+            String msg = displayMessage("Please enter email");
+            Toast.makeText((SignUp_Owner) view, msg, Toast.LENGTH_SHORT).show();
             return;
         } else if (!VALID_EMAIL_ADDRESS_REGEX.matcher(email).find()) {
-            Toast.makeText((SignUp_Owner) view, "Please enter a valid email", Toast.LENGTH_SHORT).show();
+            String msg = displayMessage("Please enter a valid email");
+            Toast.makeText((SignUp_Owner) view, msg, Toast.LENGTH_SHORT).show();
             return;
         } else if(ownerExists(email)){
-            Toast.makeText((SignUp_Owner) view, "Owner already exists", Toast.LENGTH_SHORT).show();
+            String msg = displayMessage("Owner already exists");
+            Toast.makeText((SignUp_Owner) view, msg, Toast.LENGTH_SHORT).show();
             return;
         }
         //Phone
         if (TextUtils.isEmpty(email)) { //email is empty
-            Toast.makeText((SignUp_Owner) view, "Please enter Phone number", Toast.LENGTH_SHORT).show();
+            String msg = displayMessage("Please enter Phone number");
+            Toast.makeText((SignUp_Owner) view, msg, Toast.LENGTH_SHORT).show();
             return;
         } else if (!VALID_PHNNUMBER_REGEX.matcher(phoneNumber).find()) {
-            Toast.makeText((SignUp_Owner) view, "Please enter a valid Phone Number", Toast.LENGTH_SHORT).show();
+            String msg = displayMessage("Please enter a valid Phone Number");
+            Toast.makeText((SignUp_Owner) view, msg, Toast.LENGTH_SHORT).show();
             return;
         }
 
         //Password
         if (TextUtils.isEmpty(password)) { //password is empty
-            Toast.makeText((SignUp_Owner) view, "Please enter Password", Toast.LENGTH_SHORT).show();
+            String msg = displayMessage("Please enter Password");
+            Toast.makeText((SignUp_Owner) view, msg, Toast.LENGTH_SHORT).show();
             return;
         } else if (password.length() < 8) {
-            Toast.makeText((SignUp_Owner) view, "Password must have at least 8 characters", Toast.LENGTH_SHORT).show();
+            String msg = displayMessage("Password must have at least 8 characters");
+            Toast.makeText((SignUp_Owner) view, msg, Toast.LENGTH_SHORT).show();
             return;
         }
 
         //Confirm Password
         if (!password.equals(confirmPassword)) {
-            Toast.makeText((SignUp_Owner) view, "Your passwords do not match", Toast.LENGTH_SHORT).show();
+            String msg = displayMessage("Your passwords do not match");
+            Toast.makeText((SignUp_Owner) view, msg, Toast.LENGTH_SHORT).show();
             return;
         }
 
