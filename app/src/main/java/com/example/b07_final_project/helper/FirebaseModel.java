@@ -26,6 +26,8 @@ public class FirebaseModel implements Model{
     private final String dirRELATION = "Relation";
     private final String dirCONTEXT = "Context";
 
+    private boolean waiting = false;
+
 
     FirebaseModel() {
 
@@ -36,6 +38,7 @@ public class FirebaseModel implements Model{
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 dataRoot = dataSnapshot;
+                waiting = false;
             }
 
             @Override
@@ -45,6 +48,18 @@ public class FirebaseModel implements Model{
     }
 
     // methods
+
+    private void waitForUpdate() {
+        waiting = true;
+
+        for (int i = 0; i < 10; i++) {
+            if (waiting == false)
+                break;
+
+            try {wait(50);} catch (Exception e) {}
+        }
+        waiting = false;
+    }
 
     private DatabaseReference moveToChild(DatabaseReference ref, int type) {
         switch(type) {
@@ -89,6 +104,7 @@ public class FirebaseModel implements Model{
 
         refField = ref.child(dirID);
         refField.setValue(key);
+        waitForUpdate();
 
         IDobj obj;
 
@@ -162,6 +178,7 @@ public class FirebaseModel implements Model{
                 refField.setValue(customer.getNextOrderNumber());
                 break;
         }
+        waitForUpdate();
     }
 
     @Override
@@ -279,6 +296,7 @@ public class FirebaseModel implements Model{
 
         addOneWayRelation(obj1, obj2);
         addOneWayRelation(obj2, obj1);
+        waitForUpdate();
     }
 
     @Override
@@ -340,6 +358,7 @@ public class FirebaseModel implements Model{
             return;
         }
         ref.setValue(context);
+        waitForUpdate();
     }
 
     @Override

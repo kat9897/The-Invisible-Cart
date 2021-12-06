@@ -46,5 +46,8 @@ public interface Presenter {
     ArrayList<Product_> getProducts(Store store);
 
     void viewStore(Store store);
+
+    void setCurrentLogin(IDobj newLogin);
+
 }
 

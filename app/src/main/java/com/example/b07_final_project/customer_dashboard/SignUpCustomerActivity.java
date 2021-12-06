@@ -14,20 +14,22 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.example.b07_final_project.R;
+import com.example.b07_final_project.helper.LoginPresenter;
+import com.example.b07_final_project.helper.MVPview;
 import com.example.b07_final_project.helper.Presenter;
 import com.example.b07_final_project.helper.Singleton;
 
 import java.util.regex.Pattern;
 
-public class SignUpCustomerActivity extends AppCompatActivity {
+public class SignUpCustomerActivity extends AppCompatActivity implements MVPview {
 
     private EditText edtName, edtEmail, edtPassword, edtConfirmPassword;
     private Button btnSignUp;
     private CheckBox showpassword;
-    public static final Pattern VALID_EMAIL_ADDRESS_REGEX = Pattern.compile("^[A-Z0-9._%+-]+@[A-Z0-9.-]+\\.[A-Z]{2,6}$", Pattern.CASE_INSENSITIVE);
     private String name;
 
-    Presenter singleton = Singleton.getID();
+    LoginPresenter presenter = LoginPresenter.getID();
+    MVPview thisActivity = this;
 
     //FirebaseAuth mAuth;
     //DatabaseReference firebaseDatabase;
@@ -68,44 +70,7 @@ public class SignUpCustomerActivity extends AppCompatActivity {
                 String confirmpassword = edtConfirmPassword.getText().toString().trim();
                 name = edtName.getText().toString().trim();
 
-                //check if stings are empty using TextUtils
-                //Name
-                if(TextUtils.isEmpty(name)){ //email is empty
-                    Toast.makeText(SignUpCustomerActivity.this, "Please enter Name", Toast.LENGTH_SHORT).show();
-                    //stop further execution
-                    return;
-                }
-
-                //Email
-                if(TextUtils.isEmpty(email)){ //email is empty
-                    Toast.makeText(SignUpCustomerActivity.this, "Please enter email", Toast.LENGTH_SHORT).show();
-                    return;
-                }else if (!VALID_EMAIL_ADDRESS_REGEX.matcher(email).find()){
-                    Toast.makeText(SignUpCustomerActivity.this, "Please enter a valid email", Toast.LENGTH_SHORT).show();
-                    return;
-                }
-
-                //Password
-                if(TextUtils.isEmpty(password)){ //password is empty
-                    Toast.makeText(SignUpCustomerActivity.this, "Please enter Password", Toast.LENGTH_SHORT).show();
-                    return;
-                }else if(password.length() < 8){
-                    Toast.makeText(SignUpCustomerActivity.this, "Password must have at least 8 characters", Toast.LENGTH_SHORT).show();
-                    return;
-                }
-
-                //Confirm Password
-                if(!password.equals(confirmpassword)){
-                    Toast.makeText(SignUpCustomerActivity.this, "Your passwords do not match", Toast.LENGTH_SHORT).show();
-                    return;
-                }
-                edtName.setText("");
-                edtEmail.setText("");
-                edtPassword.setText("");
-                edtConfirmPassword.setText("");
-
-                signIn(email, password);
-
+                presenter.customerSignupClicked(thisActivity, name, email, password, confirmpassword);
             }
         });
     }
@@ -117,16 +82,14 @@ public class SignUpCustomerActivity extends AppCompatActivity {
         overridePendingTransition(R.anim.slide_in_left,R.anim.slide_out_right);
     }
 
-    private void signIn(String email, String password) {
+    public void emptyTextBoxes(){
+        edtName.setText("");
+        edtEmail.setText("");
+        edtPassword.setText("");
+        edtConfirmPassword.setText("");
+    }
 
-        if (singleton.customerExists(email)){
-            // customer already exists
-            Toast.makeText(this, "Customer Already Exists", Toast.LENGTH_SHORT).show();
-            return;
-        }
-
-        // also logs you in
-        singleton.newCustomer(email, name, password);
+    public void customerSignedUp() {
 
         // login succeeded
         Intent intent = new Intent(SignUpCustomerActivity.this, Main_Customer.class);
