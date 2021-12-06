@@ -85,6 +85,11 @@ public class SignUpCustomerActivity extends AppCompatActivity implements MVPview
         overridePendingTransition(R.anim.slide_in_left,R.anim.slide_out_right);
     }
 
+    @Override
+    public void makeToast(MVPview toastView, String message) {
+        Toast.makeText((SignUpCustomerActivity) toastView, message, Toast.LENGTH_SHORT).show();
+    }
+
     public void emptyTextBoxes(){
         edtName.setText("");
         edtEmail.setText("");

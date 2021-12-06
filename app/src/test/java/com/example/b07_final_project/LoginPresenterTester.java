@@ -339,45 +339,6 @@ public class LoginPresenterTester {
 
     /*
     @Override
-    public Customer newCustomer(String email, String name, String password) {
-
-        Customer customer = (Customer) database.newIDobj(IDobj.CUSTOMER);
-
-        customer.setEmail(email);
-        customer.setName(name);
-        customer.setPassword(password);
-
-        customer.save();
-
-        singleton.setCurrentLogin(customer);
-
-        return customer;
-    }
-
-    @Override
-    public Owner newOwner(String email, String name, String password, String phoneNumber, String storename) {
-
-        Owner owner = (Owner) database.newIDobj(IDobj.OWNER);
-        Store store = (Store) database.newIDobj(IDobj.STORE);
-
-        database.addRelation(owner, store);
-
-        owner.setEmail(email);
-        owner.setPassword(password);
-        owner.setName(name);
-        owner.setPhoneNumber(phoneNumber);
-
-        owner.save();
-
-        store.setName(storename);
-        store.save();
-
-        singleton.setCurrentLogin(owner);
-
-        return owner;
-    }
-
-    @Override
     public void customerLoginClicked(MVPview view, String email, String password) {
 
         //Email

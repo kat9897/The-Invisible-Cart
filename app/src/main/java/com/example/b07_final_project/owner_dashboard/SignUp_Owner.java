@@ -14,6 +14,7 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.example.b07_final_project.R;
+import com.example.b07_final_project.customer_dashboard.LoginCustomerActivity;
 import com.example.b07_final_project.helper.FirebaseModel;
 import com.example.b07_final_project.helper.LoginPresenter;
 import com.example.b07_final_project.helper.MVPview;
@@ -88,6 +89,11 @@ public class SignUp_Owner extends AppCompatActivity implements  MVPview{
             }
         });
 
+    }
+
+    @Override
+    public void makeToast(MVPview toastView, String message) {
+        Toast.makeText((SignUp_Owner) toastView, message, Toast.LENGTH_SHORT).show();
     }
 
     public void emptyTextBoxes(){

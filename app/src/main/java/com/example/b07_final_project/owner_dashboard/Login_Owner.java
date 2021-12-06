@@ -102,6 +102,11 @@ public class Login_Owner extends AppCompatActivity implements MVPview {
         });
     }
 
+    @Override
+    public void makeToast(MVPview toastView, String message) {
+        Toast.makeText((Login_Owner) toastView, message, Toast.LENGTH_SHORT).show();
+    }
+
     public void emptyTextBoxes(){
         edtEmail.setText("");
         edtPassword.setText("");

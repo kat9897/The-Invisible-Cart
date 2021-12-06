@@ -103,6 +103,11 @@ public class LoginCustomerActivity extends AppCompatActivity implements MVPview 
         });
     }
 
+    @Override
+    public void makeToast(MVPview toastView, String message) {
+        Toast.makeText((LoginCustomerActivity) toastView, message, Toast.LENGTH_SHORT).show();
+    }
+
     public void emptyTextBoxes(){
         edtEmail.setText("");
         edtPassword.setText("");
