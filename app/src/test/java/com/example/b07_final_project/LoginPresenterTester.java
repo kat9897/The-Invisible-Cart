@@ -10,13 +10,6 @@ import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
-import android.app.Activity;
-import android.app.Instrumentation;
-import android.provider.Browser;
-import android.text.TextUtils;
-import android.widget.Button;
-
-import com.example.b07_final_project.customer_dashboard.Main_Customer;
 import android.text.TextUtils;
 
 import com.example.b07_final_project.helper.Customer;
@@ -96,6 +89,7 @@ public class LoginPresenterTester {
         assertNotNull(presenter2);
         assertEquals(presenter1, presenter2);
     }
+
 
 
     @Test
@@ -352,6 +346,90 @@ public class LoginPresenterTester {
         assertEquals(result, owner);
     }
 
+    @Test // When  email  is empty
+    public void customerLoginClicked() {
+        LoginPresenter presenter = LoginPresenter.Initialize(model, singleton);
+        presenter.customerLoginClicked(view, "", correctPassword);
+        verify(view).makeToast(view, "Please enter email");
+    }
+    @Test // When  email  is invalid
+    public void customerLoginClicked1() {
+        LoginPresenter presenter = LoginPresenter.Initialize(model, singleton);
+        presenter.customerLoginClicked(view, invalidEmail, correctPassword);
+        verify(view).makeToast(view, "Please enter a valid email");
+    }
+    @Test // When password is empty
+    public void customerLoginClicked2() {
+        LoginPresenter presenter = LoginPresenter.Initialize(model, singleton);
+        presenter.customerLoginClicked(view, correctEmail, "");
+        verify(view).makeToast(view, "Enter Password");
+    }
+    @Test // No customer found
+    public void customerLoginClicked3() {
+        LoginPresenter presenter = LoginPresenter.Initialize(model, singleton);
+        presenter.customerLoginClicked(view, unregisteredEmail, "xyz");
+        verify(view).makeToast(view, "Incorrect customer email or password.");
+    }
+    @Test // Logged in
+    public void customerLoginClicked4(){
+
+        ArrayList<IDobj> customers = new ArrayList<>();
+        customers.add(customer);
+
+        when(model.getAllIDobj(IDobj.CUSTOMER)).thenReturn(customers);
+        when(customer.getEmail()).thenReturn(correctEmail);
+        when(customer.getPassword()).thenReturn(correctPassword);
+
+        LoginPresenter presenter = LoginPresenter.Initialize(model, singleton);
+        presenter.customerLoginClicked(view, correctEmail, correctPassword);
+        verify(view).emptyTextBoxes();
+        verify(view).signupOrLogin();
+    }
+
+    @Test // When  email  is empty
+    public void ownerLoginClicked_emptyEmail_test() {
+        LoginPresenter presenter = LoginPresenter.Initialize(model, singleton);
+        presenter.ownerLoginClicked(view, "", correctPassword);
+        verify(view).makeToast(view, "Please enter email");
+    }
+
+    @Test // When  email  is invalid
+    public void ownerLoginClicked_invalidEmail_test() {
+        LoginPresenter presenter = LoginPresenter.Initialize(model, singleton);
+        presenter.ownerLoginClicked(view, invalidEmail, correctPassword);
+        verify(view).makeToast(view, "Please enter a valid email");
+    }
+
+    @Test // When password is empty
+    public void ownerLoginClicked_emptyPassword_test() {
+        LoginPresenter presenter = LoginPresenter.Initialize(model, singleton);
+        presenter.ownerLoginClicked(view, correctEmail, "");
+        verify(view).makeToast(view, "Enter Password");
+    }
+
+    @Test // No owner found
+    public void ownerLoginClicked_noOwner_test() {
+        LoginPresenter presenter = LoginPresenter.Initialize(model, singleton);
+        presenter.ownerLoginClicked(view, unregisteredEmail, "xyz");
+        verify(view).makeToast(view, "Incorrect owner email or password.");
+    }
+
+    @Test // Logged in
+    public void ownerLoginClicked_loginSuccess_test(){
+
+        ArrayList<IDobj> owners = new ArrayList<>();
+        owners.add(owner);
+
+        when(model.getAllIDobj(IDobj.OWNER)).thenReturn(owners);
+        when(owner.getEmail()).thenReturn(correctEmail);
+        when(owner.getPassword()).thenReturn(correctPassword);
+
+        LoginPresenter presenter = LoginPresenter.Initialize(model, singleton);
+        presenter.ownerLoginClicked(view, correctEmail, correctPassword);
+        verify(view).emptyTextBoxes();
+        verify(view).signupOrLogin();
+    }
+
     @Test
     public void ownerSignupClicked_emptyStoreName_test() {
         LoginPresenter presenter = LoginPresenter.Initialize(model, singleton);
@@ -471,70 +549,87 @@ public class LoginPresenterTester {
         order.verify(store).save();
         order.verify(singleton).setCurrentLogin(owner);
     }
-}
 
-/*
-
-//Store Name
-@Override
-    public void ownerSignupClicked(MVPview view, String name, String email, String password, String confirmPassword, String phoneNumber, String storeName) {
-        if (storeName.equals("")){
-            String msg = displayMessage("Enter a store Name");
-            view.makeToast(view, msg);
-            return;
-        } else if(storeExists(storeName)){
-            String msg = displayMessage("Store Name already exists");
-            view.makeToast(view, msg);
-            return;
-        }
-        //Email
-        if (email.equals("")) { //email is empty
-            String msg = displayMessage("Please enter email");
-            view.makeToast(view, msg);
-            return;
-        } else if (!VALID_EMAIL_ADDRESS_REGEX.matcher(email).find()) {
-            String msg = displayMessage("Please enter a valid email");
-            view.makeToast(view, msg);
-            return;
-        } else if(ownerExists(email)){
-            String msg = displayMessage("Owner already exists");
-            view.makeToast(view, msg);
-            return;
-        }
-        //Phone
-        if (phoneNumber.equals("")) { //phone number is empty
-            String msg = displayMessage("Please enter Phone number");
-            view.makeToast(view, msg);
-            return;
-        } else if (!VALID_PHNNUMBER_REGEX.matcher(phoneNumber).find()) {
-            String msg = displayMessage("Please enter a valid Phone Number");
-            view.makeToast(view, msg);
-            return;
-        }
-
-        //Password
-        if (password.equals("")) { //password is empty
-            String msg = displayMessage("Please enter Password");
-            view.makeToast(view, msg);
-            return;
-        } else if (password.length() < 8) {
-            String msg = displayMessage("Password must have at least 8 characters");
-            view.makeToast(view, msg);
-            return;
-        }
-
-        //Confirm Password
-        if (!password.equals(confirmPassword)) {
-            String msg = displayMessage("Your passwords do not match");
-            view.makeToast(view, msg);
-            return;
-        }
-
-        // also logs you in
-        newOwner(email, name, password, phoneNumber, storeName);
-
-        ((SignUp_Owner) view).emptyTextBoxes();
-
-        ((SignUp_Owner) view).ownerSignedUp();
+    @Test
+    public void customerSignupClicked_Test_name_empty() {
+        LoginPresenter presenter = LoginPresenter.Initialize(model, singleton);
+        presenter.customerSignupClicked(view, "", correctEmail, correctPassword, correctPassword);
+        verify(view).makeToast(view, "Please enter Name");
     }
- */
+
+    @Test
+    public void customerSignupClicked_Test_email_empty() {
+        LoginPresenter presenter = LoginPresenter.Initialize(model, singleton);
+        presenter.customerSignupClicked(view, correctCustomerName, "", correctPassword, correctPassword);
+        verify(view).makeToast(view, "Please enter email");
+    }
+
+    @Test
+    public void customerSignupClicked_Test_email_invalid() {
+        LoginPresenter presenter = LoginPresenter.Initialize(model, singleton);
+        presenter.customerSignupClicked(view, correctCustomerName, invalidEmail, correctPassword, correctPassword);
+        verify(view).makeToast(view, "Please enter a valid email");
+    }
+
+    @Test
+    public void customerSignupClicked_Test_password_empty() {
+        LoginPresenter presenter = LoginPresenter.Initialize(model, singleton);
+        presenter.customerSignupClicked(view, correctCustomerName, correctEmail, "", correctPassword);
+        verify(view).makeToast(view, "Please enter Password");
+    }
+
+    @Test
+    public void customerSignupClicked_Test_password_invalid() {
+        LoginPresenter presenter = LoginPresenter.Initialize(model, singleton);
+        presenter.customerSignupClicked(view, correctCustomerName, correctEmail, incorrectPassword, correctPassword);
+        verify(view).makeToast(view, "Password must have at least 8 characters");
+    }
+
+    @Test
+    public void customerSignupClicked_Test_confirmPassword_invalid() {
+        LoginPresenter presenter = LoginPresenter.Initialize(model, singleton);
+        presenter.customerSignupClicked(view, correctCustomerName, correctEmail, correctPassword, incorrectPassword);
+        verify(view).makeToast(view, "Your passwords do not match");
+    }
+
+    @Test
+    public  void customerSignup_Clicked_Test_customer_exist(){
+        LoginPresenter presenter = LoginPresenter.Initialize(model, singleton);
+        ArrayList<IDobj> customers = new ArrayList<>();
+        customers.add(customer);
+        when(model.getAllIDobj(IDobj.CUSTOMER)).thenReturn(customers);
+        when(customer.getEmail()).thenReturn(correctEmail);
+        presenter.customerSignupClicked(view, correctCustomerName, correctEmail, correctPassword, correctPassword);
+        verify(view).makeToast(view, "Customer Already Exists");
+    }
+
+    @Test
+    public void customerSignupClicked_loginSuccess_test() {
+
+        // for customer exists
+        ArrayList<IDobj> customers = new ArrayList<>();
+        when(model.getAllIDobj(IDobj.CUSTOMER)).thenReturn(customers);
+
+        // for new owner
+        when(model.newIDobj(IDobj.CUSTOMER)).thenReturn(customer);
+
+        LoginPresenter presenter = LoginPresenter.Initialize(model, singleton);
+
+        presenter.customerSignupClicked(view, correctCustomerName, correctEmail, correctPassword, correctPassword);
+        //Owner result = presenter.newOwner(correctEmail, correctOwnerName, correctPassword, correctPhoneNumber, correctStoreName);
+
+        //assertEquals(result, owner);
+
+
+        verify(view).emptyTextBoxes();
+        verify(view).signupOrLogin();
+
+        //newCustomer called successfully
+        InOrder order = Mockito.inOrder(singleton, customer);
+        order.verify(customer).setEmail(correctEmail);
+        order.verify(customer).setName(correctCustomerName);
+        order.verify(customer).setPassword(correctPassword);
+        order.verify(customer).save();
+        order.verify(singleton).setCurrentLogin(customer);
+    }
+}
