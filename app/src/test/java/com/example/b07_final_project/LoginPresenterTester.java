@@ -286,7 +286,58 @@ public class LoginPresenterTester {
         assertTrue(result);
     }
 
+    @Test
+    public void ownerLoginClicked_test_email_empty() {
+
+        ArrayList<IDobj> owners = new ArrayList<>();
+        owners.add(owner);
+
+        when(model.getAllIDobj(IDobj.OWNER)).thenReturn(owners);
+        when(owner.getEmail()).thenReturn(correctEmail);
+
+        LoginPresenter presenter = LoginPresenter.Initialize(model, singleton);
+
+        boolean result = presenter.ownerExists(correctEmail);
+
+        assertTrue(result);
+    }
+
     /*
+    @Override
+    public void ownerLoginClicked(MVPview view, String email, String password) {
+
+        //Email
+        if(TextUtils.isEmpty(email)){ //email is empty
+            String msg = displayMessage("Please enter email");
+            Toast.makeText((Login_Owner) view, msg, Toast.LENGTH_SHORT).show();
+            return;
+        }       else if (!VALID_EMAIL_ADDRESS_REGEX.matcher(email).find()){
+            String msg = displayMessage("Please enter a valid email");
+            Toast.makeText((Login_Owner) view, msg, Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+        //Password
+        if(TextUtils.isEmpty(password)){ //password is empty
+            String msg = displayMessage("Enter Password");
+            Toast.makeText((Login_Owner) view, msg, Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+        Owner owner = loginOwner(email, password);
+
+        if (owner == null) {
+            String msg = displayMessage("Incorrect owner email or password.");
+            Toast.makeText((Login_Owner) view, msg, Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+        ((Login_Owner)view).emptyTextBoxes();
+
+        // If entered Correctly then Login
+        ((Login_Owner)view).ownerLoggedIn();
+    }
+
     @Test
     public void newCustomer_test() {
 
@@ -384,38 +435,6 @@ public class LoginPresenterTester {
         // If entered Correctly then Login
         ((LoginCustomerActivity)view).customerLoggedIn();
     }
-
-    @Override
-    public void ownerLoginClicked(MVPview view, String email, String password) {
-
-        //Email
-        if(TextUtils.isEmpty(email)){ //email is empty
-            Toast.makeText((Login_Owner) view, "Please enter email", Toast.LENGTH_SHORT).show();
-            return;
-        }       else if (!VALID_EMAIL_ADDRESS_REGEX.matcher(email).find()){
-            Toast.makeText((Login_Owner) view, "Please enter a valid email", Toast.LENGTH_SHORT).show();
-            return;
-        }
-
-        //Password
-        if(TextUtils.isEmpty(password)){ //password is empty
-            Toast.makeText((Login_Owner) view, "Enter Password", Toast.LENGTH_SHORT).show();
-            return;
-        }
-
-        Owner owner = loginOwner(email, password);
-
-        if (owner == null) {
-            Toast.makeText((Login_Owner) view, "Incorrect owner email or password.", Toast.LENGTH_SHORT).show();
-            return;
-        }
-
-        ((Login_Owner)view).emptyTextBoxes();
-
-        // If entered Correctly then Login
-        ((Login_Owner)view).ownerLoggedIn();
-    }
-
 
     @Override
     public void customerSignupClicked(MVPview view, String name, String email, String password, String confirmpassword) {
