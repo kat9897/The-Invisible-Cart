@@ -242,46 +242,46 @@ public class LoginPresenter implements LoginPresenterInterface {
 
         //check if stings are empty using TextUtils
         //Name
-        if(TextUtils.isEmpty(name)){ //email is empty
+        if(name.equals("")){ //name is empty
             String msg = displayMessage("Please enter Name");
-            Toast.makeText((SignUpCustomerActivity) view, msg, Toast.LENGTH_SHORT).show();
+            view.makeToast(view, msg);
             //stop further execution
             return;
         }
 
         //Email
-        if(TextUtils.isEmpty(email)){ //email is empty
+        if(email.equals("")){ //email is empty
             String msg = displayMessage("Please enter email");
-            Toast.makeText((SignUpCustomerActivity) view, msg, Toast.LENGTH_SHORT).show();
+            view.makeToast(view, msg);
             return;
         }else if (!VALID_EMAIL_ADDRESS_REGEX.matcher(email).find()){
             String msg = displayMessage("Please enter a valid email");
-            Toast.makeText((SignUpCustomerActivity) view, msg, Toast.LENGTH_SHORT).show();
+            view.makeToast(view, msg);
             return;
         }
 
         //Password
-        if(TextUtils.isEmpty(password)){ //password is empty
+        if(password.equals("")){ //password is empty
             String msg = displayMessage("Please enter Password");
-            Toast.makeText((SignUpCustomerActivity) view, msg, Toast.LENGTH_SHORT).show();
+            view.makeToast(view, msg);
             return;
         }else if(password.length() < 8){
             String msg = displayMessage("Password must have at least 8 characters");
-            Toast.makeText((SignUpCustomerActivity) view, msg, Toast.LENGTH_SHORT).show();
+            view.makeToast(view, msg);
             return;
         }
 
         //Confirm Password
         if(!password.equals(confirmpassword)){
             String msg = displayMessage("Your passwords do not match");
-            Toast.makeText((SignUpCustomerActivity) view, msg, Toast.LENGTH_SHORT).show();
+            view.makeToast(view, msg);
             return;
         }
 
         if (customerExists(email)){
             // customer already exists
             String msg = displayMessage("Customer Already Exists");
-            Toast.makeText((SignUpCustomerActivity) view, msg, Toast.LENGTH_SHORT).show();
+            view.makeToast(view, msg);
             return;
         }
 

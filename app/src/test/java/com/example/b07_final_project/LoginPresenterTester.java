@@ -10,7 +10,6 @@ import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 import com.example.b07_final_project.helper.Customer;
-import com.example.b07_final_project.helper.FirebaseModel;
 import com.example.b07_final_project.helper.IDobj;
 import com.example.b07_final_project.helper.LoginPresenter;
 import com.example.b07_final_project.helper.MVPview;
@@ -58,6 +57,7 @@ public class LoginPresenterTester {
     private final String correctCustomerName = "Customer Name";
     private final String correctOwnerName = "Owner Name";
     private final String correctPhoneNumber = "1112223334";
+    private final String invalidEmail = "tewsste";
 
 
     // Tests
@@ -336,7 +336,6 @@ public class LoginPresenterTester {
     //  verify().();
     //  verify(, never()).(anyObject());
 
-
     /*
     @Override
     public void customerLoginClicked(MVPview view, String email, String password) {
@@ -367,14 +366,67 @@ public class LoginPresenterTester {
 
         // If entered Correctly then Login
         ((LoginCustomerActivity)view).customerLoggedIn();
+    }*/
+
+    @Test
+    public void customerSignupClicked_Test_name_empty() {
+        LoginPresenter presenter = LoginPresenter.Initialize(model, singleton);
+        presenter.customerSignupClicked(view, "", correctEmail, correctPassword, correctPassword);
+        verify(view).makeToast(view, "Please enter Name");
     }
 
-    @Override
+    @Test
+    public void customerSignupClicked_Test_email_empty() {
+        LoginPresenter presenter = LoginPresenter.Initialize(model, singleton);
+        presenter.customerSignupClicked(view, correctCustomerName, "", correctPassword, correctPassword);
+        verify(view).makeToast(view, "Please enter email");
+    }
+
+    @Test
+    public void customerSignupClicked_Test_email_invalid() {
+        LoginPresenter presenter = LoginPresenter.Initialize(model, singleton);
+        presenter.customerSignupClicked(view, correctCustomerName, invalidEmail, correctPassword, correctPassword);
+        verify(view).makeToast(view, "Please enter a valid email");
+    }
+
+    @Test
+    public void customerSignupClicked_Test_password_empty() {
+        LoginPresenter presenter = LoginPresenter.Initialize(model, singleton);
+        presenter.customerSignupClicked(view, correctCustomerName, correctEmail, "", correctPassword);
+        verify(view).makeToast(view, "Please enter Password");
+    }
+
+    @Test
+    public void customerSignupClicked_Test_password_invalid() {
+        LoginPresenter presenter = LoginPresenter.Initialize(model, singleton);
+        presenter.customerSignupClicked(view, correctCustomerName, correctEmail, incorrectPassword, correctPassword);
+        verify(view).makeToast(view, "Password must have at least 8 characters");
+    }
+
+    @Test
+    public void customerSignupClicked_Test_confirmPassword_invalid() {
+        LoginPresenter presenter = LoginPresenter.Initialize(model, singleton);
+        presenter.customerSignupClicked(view, correctCustomerName, correctEmail, correctPassword, incorrectPassword);
+        verify(view).makeToast(view, "Your passwords do not match");
+    }
+
+    @Test
+    public  void customerSignup_Clicked_Test_customer_exist(){
+        LoginPresenter presenter = LoginPresenter.Initialize(model, singleton);
+        ArrayList<IDobj> customers = new ArrayList<>();
+        customers.add(customer);
+        when(model.getAllIDobj(IDobj.CUSTOMER)).thenReturn(customers);
+        when(customer.getEmail()).thenReturn(correctEmail);
+        presenter.customerSignupClicked(view, correctCustomerName, correctEmail, correctPassword, correctPassword);
+        verify(view).makeToast(view, "Customer Already Exists");
+    }
+
+    /*@Override
     public void customerSignupClicked(MVPview view, String name, String email, String password, String confirmpassword) {
 
         //check if stings are empty using TextUtils
         //Name
-        if(TextUtils.isEmpty(name)){ //email is empty
+        if(TextUtils.isEmpty(name)){ //name is empty
             Toast.makeText((SignUpCustomerActivity) view, "Please enter Name", Toast.LENGTH_SHORT).show();
             //stop further execution
             return;
@@ -417,9 +469,9 @@ public class LoginPresenterTester {
 
         ((SignUpCustomerActivity)view).customerSignedUp();
 
-    }
+    }*/
 
-    @Override
+    /*@Override
     public void ownerSignupClicked(MVPview view, String name, String email, String password, String confirmPassword, String phoneNumber, String storeName) {
 
         //check if stings are empty using TextUtils
