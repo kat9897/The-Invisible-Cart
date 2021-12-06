@@ -16,6 +16,7 @@ import android.widget.Toast;
 
 import com.example.b07_final_project.R;
 import com.example.b07_final_project.helper.Customer;
+import com.example.b07_final_project.helper.FirebaseModel;
 import com.example.b07_final_project.helper.LoginPresenter;
 import com.example.b07_final_project.helper.MVPview;
 import com.example.b07_final_project.helper.Presenter;
@@ -54,6 +55,7 @@ public class LoginCustomerActivity extends AppCompatActivity implements MVPview 
         swtchtoOwnerMode = findViewById(R.id.switchtoOwnerMode);
 
         //initialize Singleton (Presenter)
+        if (LoginPresenter.getID() == null) {LoginPresenter.Initialize(new FirebaseModel(), Singleton.getID());}
         presenter = LoginPresenter.getID();
 
         swtchtoOwnerMode.setOnClickListener(new View.OnClickListener() {

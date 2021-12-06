@@ -15,9 +15,7 @@ import com.example.b07_final_project.helper.IDobj;
 import com.example.b07_final_project.helper.LoginPresenter;
 import com.example.b07_final_project.helper.MVPview;
 import com.example.b07_final_project.helper.Model;
-import com.example.b07_final_project.helper.Order;
 import com.example.b07_final_project.helper.Owner;
-import com.example.b07_final_project.helper.Presenter;
 import com.example.b07_final_project.helper.Singleton;
 import com.example.b07_final_project.helper.Store;
 
@@ -65,14 +63,16 @@ public class LoginPresenterTester {
     // Tests
 
     @Test
-    public void getID_test() {
+    public void AAA_getID_test() { // starts with AAA to make it the first unit test (was risk of missing a bug if it was not the first)
 
-        LoginPresenter presenter = LoginPresenter.Initialize(model, singleton);
-        assertNotNull(presenter);
+        LoginPresenter.Initialize(model, singleton);
 
         LoginPresenter presenter1 = LoginPresenter.getID();
         assertNotNull(presenter1);
-        assertEquals(presenter, presenter1);
+
+        LoginPresenter presenter2 = LoginPresenter.getID();
+        assertNotNull(presenter2);
+        assertEquals(presenter1, presenter2);
     }
 
 

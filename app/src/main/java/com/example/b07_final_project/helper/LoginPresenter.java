@@ -15,7 +15,7 @@ public class LoginPresenter implements LoginPresenterInterface {
 
     // for accessing LoginPresenter
 
-    private static LoginPresenter ID;
+    private static LoginPresenter ID = null;
     private final Presenter singleton;
 
     public static LoginPresenter Initialize(Model database, Presenter newSingleton) {
@@ -24,7 +24,7 @@ public class LoginPresenter implements LoginPresenterInterface {
     }
 
     public static LoginPresenter getID() {
-        // precondition: should not be called before Initialize(...)
+        // Precondition: Initialize(...) should be called before getID() can be used
         return ID;
     }
 

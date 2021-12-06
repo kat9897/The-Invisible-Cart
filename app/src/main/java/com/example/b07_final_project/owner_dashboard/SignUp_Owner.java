@@ -14,6 +14,7 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.example.b07_final_project.R;
+import com.example.b07_final_project.helper.FirebaseModel;
 import com.example.b07_final_project.helper.LoginPresenter;
 import com.example.b07_final_project.helper.MVPview;
 import com.example.b07_final_project.helper.Presenter;
@@ -35,7 +36,7 @@ public class SignUp_Owner extends AppCompatActivity implements  MVPview{
     //DatabaseReference firebaseDatabase;
     //FirebaseDatabase db;
 
-    LoginPresenter presenter = LoginPresenter.getID();
+    LoginPresenter presenter;
     MVPview thisActivity = this;
 
     @Override
@@ -57,7 +58,8 @@ public class SignUp_Owner extends AppCompatActivity implements  MVPview{
         edtstorename = findViewById(R.id.Store_Name);
         showpassword = findViewById(R.id.showpassword_signinowner1);
 
-
+        if (LoginPresenter.getID() == null) {LoginPresenter.Initialize(new FirebaseModel(), Singleton.getID());}
+        presenter = LoginPresenter.getID();
 
         showpassword.setOnClickListener(new View.OnClickListener() {
             @Override
