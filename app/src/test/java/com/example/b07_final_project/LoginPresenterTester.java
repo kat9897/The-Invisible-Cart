@@ -25,6 +25,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InOrder;
 import org.mockito.Mock;
+import org.mockito.Mockito;
 import org.mockito.runners.MockitoJUnitRunner;
 
 import java.util.ArrayList;
@@ -52,13 +53,13 @@ public class LoginPresenterTester {
 
     private final String correctEmail = "test1@gmail.com";
     private final String incorrectEmail = "test2@gmail.com";
-    private final String badFormatEmail = "abcdefg";
-    private final String emptyStr = "";
     private final String correctPassword = "12345678";
     private final String incorrectPassword = "abcdefg";
     private final String correctStoreName = "Store Name";
     private final String incorrectStoreName = "Not Store Name";
     private final String correctCustomerName = "Customer Name";
+    private final String correctOwnerName = "Owner Name";
+    private final String correctPhoneNumber = "1112223334";
 
 
     // Tests
@@ -66,11 +67,12 @@ public class LoginPresenterTester {
     @Test
     public void getID_test() {
 
-        LoginPresenter presenter = LoginPresenter.getID();
+        LoginPresenter presenter = LoginPresenter.Initialize(model, singleton);
         assertNotNull(presenter);
 
-        LoginPresenter presenter2 = LoginPresenter.getID();
-        assertEquals(presenter, presenter2);
+        LoginPresenter presenter1 = LoginPresenter.getID();
+        assertNotNull(presenter1);
+        assertEquals(presenter, presenter1);
     }
 
 
@@ -286,57 +288,6 @@ public class LoginPresenterTester {
         assertTrue(result);
     }
 
-    @Test
-    public void ownerLoginClicked_test_email_empty() {
-
-        ArrayList<IDobj> owners = new ArrayList<>();
-        owners.add(owner);
-
-        when(model.getAllIDobj(IDobj.OWNER)).thenReturn(owners);
-        when(owner.getEmail()).thenReturn(correctEmail);
-
-        LoginPresenter presenter = LoginPresenter.Initialize(model, singleton);
-
-        boolean result = presenter.ownerExists(correctEmail);
-
-        assertTrue(result);
-    }
-
-    /*
-    @Override
-    public void ownerLoginClicked(MVPview view, String email, String password) {
-
-        //Email
-        if(TextUtils.isEmpty(email)){ //email is empty
-            String msg = displayMessage("Please enter email");
-            Toast.makeText((Login_Owner) view, msg, Toast.LENGTH_SHORT).show();
-            return;
-        }       else if (!VALID_EMAIL_ADDRESS_REGEX.matcher(email).find()){
-            String msg = displayMessage("Please enter a valid email");
-            Toast.makeText((Login_Owner) view, msg, Toast.LENGTH_SHORT).show();
-            return;
-        }
-
-        //Password
-        if(TextUtils.isEmpty(password)){ //password is empty
-            String msg = displayMessage("Enter Password");
-            Toast.makeText((Login_Owner) view, msg, Toast.LENGTH_SHORT).show();
-            return;
-        }
-
-        Owner owner = loginOwner(email, password);
-
-        if (owner == null) {
-            String msg = displayMessage("Incorrect owner email or password.");
-            Toast.makeText((Login_Owner) view, msg, Toast.LENGTH_SHORT).show();
-            return;
-        }
-
-        ((Login_Owner)view).emptyTextBoxes();
-
-        // If entered Correctly then Login
-        ((Login_Owner)view).ownerLoggedIn();
-    }
 
     @Test
     public void newCustomer_test() {
@@ -347,17 +298,38 @@ public class LoginPresenterTester {
 
         Customer result = presenter.newCustomer(correctEmail, correctCustomerName, correctPassword);
 
-        InOrder order = new InOrder(model,);
-        order.
-        customer.setEmail(email);
-        customer.setName(name);
-        customer.setPassword(password);
-        customer.save();
-        singleton.setCurrentLogin(customer);
+        InOrder order = Mockito.inOrder(singleton, customer);
+        order.verify(customer).setEmail(correctEmail);
+        order.verify(customer).setName(correctCustomerName);
+        order.verify(customer).setPassword(correctPassword);
+        order.verify(customer).save();
+        order.verify(singleton).setCurrentLogin(customer);
 
         assertEquals(result, customer);
     }
- */
+
+    @Test
+    public void newOwner_test() {
+
+        when(model.newIDobj(IDobj.OWNER)).thenReturn(owner);
+        when(model.newIDobj(IDobj.STORE)).thenReturn(store);
+
+        LoginPresenter presenter = LoginPresenter.Initialize(model, singleton);
+
+        Owner result = presenter.newOwner(correctEmail, correctOwnerName, correctPassword, correctPhoneNumber, correctStoreName);
+
+        InOrder order = Mockito.inOrder(singleton, owner, store);
+        order.verify(owner).setEmail(correctEmail);
+        order.verify(owner).setPassword(correctPassword);
+        order.verify(owner).setName(correctOwnerName);
+        order.verify(owner).setPhoneNumber(correctPhoneNumber);
+        order.verify(owner).save();
+        order.verify(store).setName(correctStoreName);
+        order.verify(store).save();
+        order.verify(singleton).setCurrentLogin(owner);
+
+        assertEquals(result, owner);
+    }
 
 
     //  when(.()).thenReturn();
