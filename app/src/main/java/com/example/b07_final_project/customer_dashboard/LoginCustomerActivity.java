@@ -108,12 +108,14 @@ public class LoginCustomerActivity extends AppCompatActivity implements MVPview 
         Toast.makeText((LoginCustomerActivity) toastView, message, Toast.LENGTH_SHORT).show();
     }
 
+    @Override
     public void emptyTextBoxes(){
         edtEmail.setText("");
         edtPassword.setText("");
     }
 
-    public void customerLoggedIn() {
+    @Override
+    public void signupOrLogin() {
 
         // login succeeded
         Intent intent = new Intent(LoginCustomerActivity.this, Main_Customer.class);

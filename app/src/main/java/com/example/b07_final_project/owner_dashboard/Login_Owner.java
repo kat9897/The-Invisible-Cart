@@ -107,12 +107,14 @@ public class Login_Owner extends AppCompatActivity implements MVPview {
         Toast.makeText((Login_Owner) toastView, message, Toast.LENGTH_SHORT).show();
     }
 
+    @Override
     public void emptyTextBoxes(){
         edtEmail.setText("");
         edtPassword.setText("");
     }
 
-    public void ownerLoggedIn() {
+    @Override
+    public void signupOrLogin() {
 
         // login succeeded
         Intent intent = new Intent(Login_Owner.this, Main_Owner.class);
