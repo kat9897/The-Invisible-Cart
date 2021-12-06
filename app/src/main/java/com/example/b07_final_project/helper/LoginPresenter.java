@@ -24,8 +24,7 @@ public class LoginPresenter implements LoginPresenterInterface {
     }
 
     public static LoginPresenter getID() {
-        if (ID == null)
-            ID = new LoginPresenter(new FirebaseModel(), Singleton.getID());
+        // precondition: should not be called before Initialize(...)
         return ID;
     }
 
