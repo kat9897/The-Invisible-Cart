@@ -90,6 +90,7 @@ public class SignUpCustomerActivity extends AppCompatActivity implements MVPview
         Toast.makeText((SignUpCustomerActivity) toastView, message, Toast.LENGTH_SHORT).show();
     }
 
+    @Override
     public void emptyTextBoxes(){
         edtName.setText("");
         edtEmail.setText("");
@@ -97,7 +98,8 @@ public class SignUpCustomerActivity extends AppCompatActivity implements MVPview
         edtConfirmPassword.setText("");
     }
 
-    public void customerSignedUp() {
+    @Override
+    public void signupOrLogin() {
 
         // login succeeded
         Intent intent = new Intent(SignUpCustomerActivity.this, Main_Customer.class);

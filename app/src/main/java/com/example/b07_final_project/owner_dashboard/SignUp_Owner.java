@@ -96,6 +96,7 @@ public class SignUp_Owner extends AppCompatActivity implements  MVPview{
         Toast.makeText((SignUp_Owner) toastView, message, Toast.LENGTH_SHORT).show();
     }
 
+    @Override
     public void emptyTextBoxes(){
         edtName.setText("");
         edtEmail.setText("");
@@ -105,7 +106,8 @@ public class SignUp_Owner extends AppCompatActivity implements  MVPview{
         edtstorename.setText("");
     }
 
-    public void ownerSignedUp() {
+    @Override
+    public void signupOrLogin() {
 
         // login succeeded
         Intent intent = new Intent(SignUp_Owner.this, Main_Owner.class);

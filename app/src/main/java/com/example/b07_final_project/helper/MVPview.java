@@ -4,4 +4,8 @@ public interface MVPview {
 
     void makeToast(MVPview toastView, String message);
 
+    void emptyTextBoxes();
+
+    void signupOrLogin();
+
 }

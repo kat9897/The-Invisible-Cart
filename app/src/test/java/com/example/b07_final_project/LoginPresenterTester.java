@@ -2,12 +2,15 @@ package com.example.b07_final_project;
 
 import static junit.framework.TestCase.assertEquals;
 import static junit.framework.TestCase.assertNotNull;
+import static org.hamcrest.MatcherAssert.assertThat;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 import static org.mockito.Matchers.anyObject;
 import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
+
+import android.text.TextUtils;
 
 import com.example.b07_final_project.helper.Customer;
 import com.example.b07_final_project.helper.IDobj;
@@ -17,6 +20,7 @@ import com.example.b07_final_project.helper.Model;
 import com.example.b07_final_project.helper.Owner;
 import com.example.b07_final_project.helper.Singleton;
 import com.example.b07_final_project.helper.Store;
+import com.example.b07_final_project.owner_dashboard.SignUp_Owner;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -50,6 +54,7 @@ public class LoginPresenterTester {
 
     private final String correctEmail = "test1@gmail.com";
     private final String incorrectEmail = "test2@gmail.com";
+    private final String invalidEmail = "kdj/!gmseilcom";
     private final String correctPassword = "12345678";
     private final String incorrectPassword = "abcdefg";
     private final String correctStoreName = "Store Name";
@@ -57,15 +62,22 @@ public class LoginPresenterTester {
     private final String correctCustomerName = "Customer Name";
     private final String correctOwnerName = "Owner Name";
     private final String correctPhoneNumber = "1112223334";
-    private final String invalidEmail = "tewsste";
+    private final String incorrectPhoneNumber = "abc123";
 
 
     // Tests
 
     @Test
-    public void AAA_getID_test() { // starts with AAA to make it the first unit test (was risk of missing a bug if it was not the first)
+    public void AAAA_Initialize_test() { // starts with AAA to make it the first unit test (was risk of missing a bug if it was not the first)
 
-        LoginPresenter.Initialize(model, singleton);
+        LoginPresenter presenter = LoginPresenter.Initialize(model, singleton);
+        assertNotNull(presenter);
+    }
+
+    @Test
+    public void AAAB_getID_test() { // starts with AAA to make it the first unit test (was risk of missing a bug if it was not the first)
+
+        LoginPresenter.Initialize(model, singleton); // to meet precondition for getID()
 
         LoginPresenter presenter1 = LoginPresenter.getID();
         assertNotNull(presenter1);
@@ -336,6 +348,7 @@ public class LoginPresenterTester {
     //  verify().();
     //  verify(, never()).(anyObject());
 
+
     /*
     @Override
     public void customerLoginClicked(MVPview view, String email, String password) {
@@ -366,67 +379,14 @@ public class LoginPresenterTester {
 
         // If entered Correctly then Login
         ((LoginCustomerActivity)view).customerLoggedIn();
-    }*/
-
-    @Test
-    public void customerSignupClicked_Test_name_empty() {
-        LoginPresenter presenter = LoginPresenter.Initialize(model, singleton);
-        presenter.customerSignupClicked(view, "", correctEmail, correctPassword, correctPassword);
-        verify(view).makeToast(view, "Please enter Name");
     }
 
-    @Test
-    public void customerSignupClicked_Test_email_empty() {
-        LoginPresenter presenter = LoginPresenter.Initialize(model, singleton);
-        presenter.customerSignupClicked(view, correctCustomerName, "", correctPassword, correctPassword);
-        verify(view).makeToast(view, "Please enter email");
-    }
-
-    @Test
-    public void customerSignupClicked_Test_email_invalid() {
-        LoginPresenter presenter = LoginPresenter.Initialize(model, singleton);
-        presenter.customerSignupClicked(view, correctCustomerName, invalidEmail, correctPassword, correctPassword);
-        verify(view).makeToast(view, "Please enter a valid email");
-    }
-
-    @Test
-    public void customerSignupClicked_Test_password_empty() {
-        LoginPresenter presenter = LoginPresenter.Initialize(model, singleton);
-        presenter.customerSignupClicked(view, correctCustomerName, correctEmail, "", correctPassword);
-        verify(view).makeToast(view, "Please enter Password");
-    }
-
-    @Test
-    public void customerSignupClicked_Test_password_invalid() {
-        LoginPresenter presenter = LoginPresenter.Initialize(model, singleton);
-        presenter.customerSignupClicked(view, correctCustomerName, correctEmail, incorrectPassword, correctPassword);
-        verify(view).makeToast(view, "Password must have at least 8 characters");
-    }
-
-    @Test
-    public void customerSignupClicked_Test_confirmPassword_invalid() {
-        LoginPresenter presenter = LoginPresenter.Initialize(model, singleton);
-        presenter.customerSignupClicked(view, correctCustomerName, correctEmail, correctPassword, incorrectPassword);
-        verify(view).makeToast(view, "Your passwords do not match");
-    }
-
-    @Test
-    public  void customerSignup_Clicked_Test_customer_exist(){
-        LoginPresenter presenter = LoginPresenter.Initialize(model, singleton);
-        ArrayList<IDobj> customers = new ArrayList<>();
-        customers.add(customer);
-        when(model.getAllIDobj(IDobj.CUSTOMER)).thenReturn(customers);
-        when(customer.getEmail()).thenReturn(correctEmail);
-        presenter.customerSignupClicked(view, correctCustomerName, correctEmail, correctPassword, correctPassword);
-        verify(view).makeToast(view, "Customer Already Exists");
-    }
-
-    /*@Override
+    @Override
     public void customerSignupClicked(MVPview view, String name, String email, String password, String confirmpassword) {
 
         //check if stings are empty using TextUtils
         //Name
-        if(TextUtils.isEmpty(name)){ //name is empty
+        if(TextUtils.isEmpty(name)){ //email is empty
             Toast.makeText((SignUpCustomerActivity) view, "Please enter Name", Toast.LENGTH_SHORT).show();
             //stop further execution
             return;
@@ -469,9 +429,9 @@ public class LoginPresenterTester {
 
         ((SignUpCustomerActivity)view).customerSignedUp();
 
-    }*/
+    }
 
-    /*@Override
+    @Override
     public void ownerSignupClicked(MVPview view, String name, String email, String password, String confirmPassword, String phoneNumber, String storeName) {
 
         //check if stings are empty using TextUtils
