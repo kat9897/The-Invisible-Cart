@@ -10,6 +10,13 @@ import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
+import android.app.Activity;
+import android.app.Instrumentation;
+import android.provider.Browser;
+import android.text.TextUtils;
+import android.widget.Button;
+
+import com.example.b07_final_project.customer_dashboard.Main_Customer;
 import android.text.TextUtils;
 
 import com.example.b07_final_project.helper.Customer;
@@ -55,14 +62,17 @@ public class LoginPresenterTester {
 
     private final String correctEmail = "test1@gmail.com";
     private final String incorrectEmail = "test2@gmail.com";
-    private final String invalidEmail = "kdj/!gmseilcom";
+    private final String invalidEmail = "testgmail.com";
+    private final String unregisteredEmail = "nouserfound@gmail.com";
+    private final String badFormatEmail = "abcdefg";
+    private final String emptyStr = "";
     private final String correctPassword = "12345678";
     private final String incorrectPassword = "abcdefg";
     private final String correctStoreName = "Store Name";
     private final String incorrectStoreName = "Not Store Name";
     private final String correctCustomerName = "Customer Name";
     private final String correctOwnerName = "Owner Name";
-    private final String correctPhoneNumber = "1112223334";
+    private final String correctPhoneNumber = "1234567890";
     private final String incorrectPhoneNumber = "abc123";
 
 
@@ -342,6 +352,50 @@ public class LoginPresenterTester {
 
         assertEquals(result, owner);
     }
+
+    @Test // When  email  is empty
+    public void customerLoginClicked() {
+        LoginPresenter presenter = LoginPresenter.Initialize(model, singleton);
+        presenter.customerLoginClicked(view, "", correctPassword);
+        verify(view).makeToast(view, "Please enter email");
+    }
+    @Test // When  email  is invalid
+    public void customerLoginClicked1() {
+        LoginPresenter presenter = LoginPresenter.Initialize(model, singleton);
+        presenter.customerLoginClicked(view, invalidEmail, correctPassword);
+        verify(view).makeToast(view, "Please enter a valid email");
+    }
+    @Test // When password is empty
+    public void customerLoginClicked2() {
+        LoginPresenter presenter = LoginPresenter.Initialize(model, singleton);
+        presenter.customerLoginClicked(view, correctEmail, "");
+        verify(view).makeToast(view, "Enter Password");
+    }
+    @Test // No customer found
+    public void customerLoginClicked3() {
+        LoginPresenter presenter = LoginPresenter.Initialize(model, singleton);
+        presenter.customerLoginClicked(view, unregisteredEmail, "xyz");
+        verify(view).makeToast(view, "Incorrect customer email or password.");
+    }
+    @Test // Logged in
+    public void customerLoginClicked4(){
+
+        ArrayList<IDobj> customers = new ArrayList<>();
+        customers.add(customer);
+
+        when(model.getAllIDobj(IDobj.CUSTOMER)).thenReturn(customers);
+        when(customer.getEmail()).thenReturn(correctEmail);
+        when(customer.getPassword()).thenReturn(correctPassword);
+
+        LoginPresenter presenter = LoginPresenter.Initialize(model, singleton);
+        presenter.customerLoginClicked(view, correctEmail, correctPassword);
+        verify(view).emptyTextBoxes();
+        verify(view).signupOrLogin();
+    }
+
+
+
+
 
     @Test
     public void ownerSignupClicked_emptyStoreName_test() {
