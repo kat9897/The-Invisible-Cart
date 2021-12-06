@@ -172,7 +172,7 @@ public class LoginPresenter implements LoginPresenterInterface {
         //Email
         if (TextUtils.isEmpty(email)) { //email is empty
             String msg = displayMessage("Please enter email");
-            Toast.makeText((LoginCustomerActivity) view, msg, Toast.LENGTH_SHORT).show();
+            view.makeToast(view, msg);
             return;
         } else if (!VALID_EMAIL_ADDRESS_REGEX.matcher(email).find()) {
             String msg = displayMessage("Please enter a valid email");

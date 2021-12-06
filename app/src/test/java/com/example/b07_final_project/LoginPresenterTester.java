@@ -63,9 +63,16 @@ public class LoginPresenterTester {
     // Tests
 
     @Test
-    public void AAA_getID_test() { // starts with AAA to make it the first unit test (was risk of missing a bug if it was not the first)
+    public void AAAA_Initialize_test() { // starts with AAA to make it the first unit test (was risk of missing a bug if it was not the first)
 
-        LoginPresenter.Initialize(model, singleton);
+        LoginPresenter presenter = LoginPresenter.Initialize(model, singleton);
+        assertNotNull(presenter);
+    }
+
+    @Test
+    public void AAAB_getID_test() { // starts with AAA to make it the first unit test (was risk of missing a bug if it was not the first)
+
+        LoginPresenter.Initialize(model, singleton); // to meet precondition for getID()
 
         LoginPresenter presenter1 = LoginPresenter.getID();
         assertNotNull(presenter1);
