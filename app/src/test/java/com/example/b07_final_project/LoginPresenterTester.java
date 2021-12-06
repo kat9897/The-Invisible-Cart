@@ -393,7 +393,49 @@ public class LoginPresenterTester {
         verify(view).signupOrLogin();
     }
 
+    @Test // When  email  is empty
+    public void ownerLoginClicked_emptyEmail_test() {
+        LoginPresenter presenter = LoginPresenter.Initialize(model, singleton);
+        presenter.ownerLoginClicked(view, "", correctPassword);
+        verify(view).makeToast(view, "Please enter email");
+    }
 
+    @Test // When  email  is invalid
+    public void ownerLoginClicked_invalidEmail_test() {
+        LoginPresenter presenter = LoginPresenter.Initialize(model, singleton);
+        presenter.ownerLoginClicked(view, invalidEmail, correctPassword);
+        verify(view).makeToast(view, "Please enter a valid email");
+    }
+
+    @Test // When password is empty
+    public void ownerLoginClicked_emptyPassword_test() {
+        LoginPresenter presenter = LoginPresenter.Initialize(model, singleton);
+        presenter.ownerLoginClicked(view, correctEmail, "");
+        verify(view).makeToast(view, "Enter Password");
+    }
+
+    @Test // No owner found
+    public void ownerLoginClicked_noOwner_test() {
+        LoginPresenter presenter = LoginPresenter.Initialize(model, singleton);
+        presenter.ownerLoginClicked(view, unregisteredEmail, "xyz");
+        verify(view).makeToast(view, "Incorrect owner email or password.");
+    }
+
+    @Test // Logged in
+    public void ownerLoginClicked_loginSuccess_test(){
+
+        ArrayList<IDobj> owners = new ArrayList<>();
+        owners.add(owner);
+
+        when(model.getAllIDobj(IDobj.OWNER)).thenReturn(owners);
+        when(owner.getEmail()).thenReturn(correctEmail);
+        when(owner.getPassword()).thenReturn(correctPassword);
+
+        LoginPresenter presenter = LoginPresenter.Initialize(model, singleton);
+        presenter.ownerLoginClicked(view, correctEmail, correctPassword);
+        verify(view).emptyTextBoxes();
+        verify(view).signupOrLogin();
+    }
 
 
 
@@ -497,10 +539,6 @@ public class LoginPresenterTester {
         LoginPresenter presenter = LoginPresenter.Initialize(model, singleton);
 
         presenter.ownerSignupClicked(view, correctOwnerName, correctEmail, correctPassword, correctPassword, correctPhoneNumber, correctStoreName);
-        //Owner result = presenter.newOwner(correctEmail, correctOwnerName, correctPassword, correctPhoneNumber, correctStoreName);
-
-        //assertEquals(result, owner);
-
 
         verify(view).emptyTextBoxes();
         verify(view).signupOrLogin();
@@ -517,69 +555,3 @@ public class LoginPresenterTester {
         order.verify(singleton).setCurrentLogin(owner);
     }
 }
-
-/*
-
-//Store Name
-@Override
-    public void ownerSignupClicked(MVPview view, String name, String email, String password, String confirmPassword, String phoneNumber, String storeName) {
-        if (storeName.equals("")){
-            String msg = displayMessage("Enter a store Name");
-            view.makeToast(view, msg);
-            return;
-        } else if(storeExists(storeName)){
-            String msg = displayMessage("Store Name already exists");
-            view.makeToast(view, msg);
-            return;
-        }
-        //Email
-        if (email.equals("")) { //email is empty
-            String msg = displayMessage("Please enter email");
-            view.makeToast(view, msg);
-            return;
-        } else if (!VALID_EMAIL_ADDRESS_REGEX.matcher(email).find()) {
-            String msg = displayMessage("Please enter a valid email");
-            view.makeToast(view, msg);
-            return;
-        } else if(ownerExists(email)){
-            String msg = displayMessage("Owner already exists");
-            view.makeToast(view, msg);
-            return;
-        }
-        //Phone
-        if (phoneNumber.equals("")) { //phone number is empty
-            String msg = displayMessage("Please enter Phone number");
-            view.makeToast(view, msg);
-            return;
-        } else if (!VALID_PHNNUMBER_REGEX.matcher(phoneNumber).find()) {
-            String msg = displayMessage("Please enter a valid Phone Number");
-            view.makeToast(view, msg);
-            return;
-        }
-
-        //Password
-        if (password.equals("")) { //password is empty
-            String msg = displayMessage("Please enter Password");
-            view.makeToast(view, msg);
-            return;
-        } else if (password.length() < 8) {
-            String msg = displayMessage("Password must have at least 8 characters");
-            view.makeToast(view, msg);
-            return;
-        }
-
-        //Confirm Password
-        if (!password.equals(confirmPassword)) {
-            String msg = displayMessage("Your passwords do not match");
-            view.makeToast(view, msg);
-            return;
-        }
-
-        // also logs you in
-        newOwner(email, name, password, phoneNumber, storeName);
-
-        ((SignUp_Owner) view).emptyTextBoxes();
-
-        ((SignUp_Owner) view).ownerSignedUp();
-    }
- */

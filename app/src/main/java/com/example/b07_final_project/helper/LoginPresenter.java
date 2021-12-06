@@ -211,7 +211,7 @@ public class LoginPresenter implements LoginPresenterInterface {
     public void ownerLoginClicked(MVPview view, String email, String password) {
 
         //Email
-        if(TextUtils.isEmpty(email)){ //email is empty
+        if(email.equals("")){ //email is empty
             String msg = displayMessage("Please enter email");
             view.makeToast(view,msg);
             return;
@@ -222,7 +222,7 @@ public class LoginPresenter implements LoginPresenterInterface {
         }
 
         //Password
-        if(TextUtils.isEmpty(password)){ //password is empty
+        if(password.equals("")){ //password is empty
             String msg = displayMessage("Enter Password");
             view.makeToast(view,msg);
             return;
