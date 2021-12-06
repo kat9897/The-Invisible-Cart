@@ -2,7 +2,9 @@ package com.example.b07_final_project;
 
 import com.example.b07_final_project.helper.FirebaseModel;
 import com.example.b07_final_project.helper.LoginPresenter;
+import com.example.b07_final_project.helper.MVPview;
 import com.example.b07_final_project.helper.Model;
+import com.example.b07_final_project.helper.Presenter;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -13,12 +15,20 @@ import org.mockito.runners.MockitoJUnitRunner;
 public class LoginPresenterTester {
 
     @Mock
-    Model model = new FirebaseModel();
+    Model model;
 
-    LoginPresenter presenter = LoginPresenter.Initialize(model);
+    @Mock
+    Presenter singleton;
+
+    LoginPresenter presenter = LoginPresenter.Initialize(model, singleton);
+
+    @Mock
+    MVPview view;
 
     @Test
     public void loginCustomer_test1() {
+
+
 
         assert true;
 

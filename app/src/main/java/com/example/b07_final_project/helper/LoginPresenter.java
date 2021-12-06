@@ -16,27 +16,25 @@ public class LoginPresenter implements LoginPresenterInterface {
     // for accessing LoginPresenter
 
     private static LoginPresenter ID;
+    private final Presenter singleton;
 
-    public static LoginPresenter Initialize(Model database) {
-        ID = new LoginPresenter(database);
+    public static LoginPresenter Initialize(Model database, Presenter newSingleton) {
+        ID = new LoginPresenter(database, newSingleton);
         return ID;
     }
 
     public static LoginPresenter getID() {
         if (ID == null)
-            ID = new LoginPresenter(new FirebaseModel());
+            ID = new LoginPresenter(new FirebaseModel(), Singleton.getID());
         return ID;
     }
 
     private final Model database;
 
-    private LoginPresenter(Model newDatabase) {
+    private LoginPresenter(Model newDatabase, Presenter newSingleton) {
         database = newDatabase;
+        singleton = newSingleton;
     }
-
-    // for setting program state (login specifically)
-
-    private final Presenter singleton = Singleton.getID();
 
     // constants
 
