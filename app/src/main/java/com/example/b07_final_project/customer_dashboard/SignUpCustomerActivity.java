@@ -14,6 +14,7 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.example.b07_final_project.R;
+import com.example.b07_final_project.helper.FirebaseModel;
 import com.example.b07_final_project.helper.LoginPresenter;
 import com.example.b07_final_project.helper.MVPview;
 import com.example.b07_final_project.helper.Presenter;
@@ -28,7 +29,8 @@ public class SignUpCustomerActivity extends AppCompatActivity implements MVPview
     private CheckBox showpassword;
     private String name;
 
-    LoginPresenter presenter = LoginPresenter.getID();
+    LoginPresenter presenter;
+
     MVPview thisActivity = this;
 
     //FirebaseAuth mAuth;
@@ -47,7 +49,8 @@ public class SignUpCustomerActivity extends AppCompatActivity implements MVPview
         btnSignUp = findViewById(R.id.btnsignIn_signincustomer);
         showpassword = findViewById(R.id.showpassword);
 
-
+        if (LoginPresenter.getID() == null) {LoginPresenter.Initialize(new FirebaseModel(), Singleton.getID());}
+        presenter = LoginPresenter.getID();
 
         showpassword.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -82,6 +85,12 @@ public class SignUpCustomerActivity extends AppCompatActivity implements MVPview
         overridePendingTransition(R.anim.slide_in_left,R.anim.slide_out_right);
     }
 
+    @Override
+    public void makeToast(MVPview toastView, String message) {
+        Toast.makeText((SignUpCustomerActivity) toastView, message, Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
     public void emptyTextBoxes(){
         edtName.setText("");
         edtEmail.setText("");
@@ -89,7 +98,8 @@ public class SignUpCustomerActivity extends AppCompatActivity implements MVPview
         edtConfirmPassword.setText("");
     }
 
-    public void customerSignedUp() {
+    @Override
+    public void signupOrLogin() {
 
         // login succeeded
         Intent intent = new Intent(SignUpCustomerActivity.this, Main_Customer.class);
