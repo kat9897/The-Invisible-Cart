@@ -17,16 +17,21 @@ public class LoginPresenter implements LoginPresenterInterface {
 
     private static LoginPresenter ID;
 
+    public static LoginPresenter Initialize(Model database) {
+        ID = new LoginPresenter(database);
+        return ID;
+    }
+
     public static LoginPresenter getID() {
         if (ID == null)
-            ID = new LoginPresenter();
+            ID = new LoginPresenter(new FirebaseModel());
         return ID;
     }
 
     private final Model database;
 
-    private LoginPresenter() {
-        database = new FirebaseModel();
+    private LoginPresenter(Model newDatabase) {
+        database = newDatabase;
     }
 
     // for setting program state (login specifically)

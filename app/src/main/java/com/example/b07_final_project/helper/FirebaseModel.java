@@ -29,7 +29,7 @@ public class FirebaseModel implements Model{
     private boolean waiting = false;
 
 
-    FirebaseModel() {
+    public FirebaseModel() {
 
         database = FirebaseDatabase.getInstance();
         refRoot = database.getReference();//.child(dirROOT);
