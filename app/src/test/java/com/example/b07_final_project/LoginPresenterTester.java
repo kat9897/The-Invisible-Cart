@@ -416,7 +416,6 @@ public class LoginPresenterTester {
 
     @Test // Logged in
     public void ownerLoginClicked_loginSuccess_test(){
-
         ArrayList<IDobj> owners = new ArrayList<>();
         owners.add(owner);
 
@@ -530,10 +529,6 @@ public class LoginPresenterTester {
         LoginPresenter presenter = LoginPresenter.Initialize(model, singleton);
 
         presenter.ownerSignupClicked(view, correctOwnerName, correctEmail, correctPassword, correctPassword, correctPhoneNumber, correctStoreName);
-        //Owner result = presenter.newOwner(correctEmail, correctOwnerName, correctPassword, correctPhoneNumber, correctStoreName);
-
-        //assertEquals(result, owner);
-
 
         verify(view).emptyTextBoxes();
         verify(view).signupOrLogin();
