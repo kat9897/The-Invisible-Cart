@@ -143,7 +143,7 @@ public class All_Products extends AppCompatActivity {
                         qtynum = Integer.parseInt(quantity);
 
                     // check if it's a valid input
-                    if (0 < qtynum && qtynum <= 50) {
+                    if (0 <= qtynum && qtynum <= 50) {
                         totalProductsOrdered += 1;
                         productList.get(i).quantity = String.valueOf(qtynum);
                         total += Double.parseDouble(priceFormat.format(
