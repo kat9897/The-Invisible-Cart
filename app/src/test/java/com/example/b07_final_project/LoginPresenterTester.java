@@ -10,17 +10,9 @@ import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
-import android.app.Activity;
-import android.app.Instrumentation;
-import android.provider.Browser;
-import android.text.TextUtils;
-import android.widget.Button;
-
-import com.example.b07_final_project.customer_dashboard.Main_Customer;
 import android.text.TextUtils;
 
 import com.example.b07_final_project.helper.Customer;
-import com.example.b07_final_project.helper.FirebaseModel;
 import com.example.b07_final_project.helper.IDobj;
 import com.example.b07_final_project.helper.LoginPresenter;
 import com.example.b07_final_project.helper.MVPview;
@@ -97,6 +89,7 @@ public class LoginPresenterTester {
         assertNotNull(presenter2);
         assertEquals(presenter1, presenter2);
     }
+
 
 
     @Test
@@ -423,7 +416,6 @@ public class LoginPresenterTester {
 
     @Test // Logged in
     public void ownerLoginClicked_loginSuccess_test(){
-
         ArrayList<IDobj> owners = new ArrayList<>();
         owners.add(owner);
 
@@ -436,8 +428,6 @@ public class LoginPresenterTester {
         verify(view).emptyTextBoxes();
         verify(view).signupOrLogin();
     }
-
-
 
     @Test
     public void ownerSignupClicked_emptyStoreName_test() {
@@ -553,5 +543,88 @@ public class LoginPresenterTester {
         order.verify(store).setName(correctStoreName);
         order.verify(store).save();
         order.verify(singleton).setCurrentLogin(owner);
+    }
+
+    @Test
+    public void customerSignupClicked_Test_name_empty() {
+        LoginPresenter presenter = LoginPresenter.Initialize(model, singleton);
+        presenter.customerSignupClicked(view, "", correctEmail, correctPassword, correctPassword);
+        verify(view).makeToast(view, "Please enter Name");
+    }
+
+    @Test
+    public void customerSignupClicked_Test_email_empty() {
+        LoginPresenter presenter = LoginPresenter.Initialize(model, singleton);
+        presenter.customerSignupClicked(view, correctCustomerName, "", correctPassword, correctPassword);
+        verify(view).makeToast(view, "Please enter email");
+    }
+
+    @Test
+    public void customerSignupClicked_Test_email_invalid() {
+        LoginPresenter presenter = LoginPresenter.Initialize(model, singleton);
+        presenter.customerSignupClicked(view, correctCustomerName, invalidEmail, correctPassword, correctPassword);
+        verify(view).makeToast(view, "Please enter a valid email");
+    }
+
+    @Test
+    public void customerSignupClicked_Test_password_empty() {
+        LoginPresenter presenter = LoginPresenter.Initialize(model, singleton);
+        presenter.customerSignupClicked(view, correctCustomerName, correctEmail, "", correctPassword);
+        verify(view).makeToast(view, "Please enter Password");
+    }
+
+    @Test
+    public void customerSignupClicked_Test_password_invalid() {
+        LoginPresenter presenter = LoginPresenter.Initialize(model, singleton);
+        presenter.customerSignupClicked(view, correctCustomerName, correctEmail, incorrectPassword, correctPassword);
+        verify(view).makeToast(view, "Password must have at least 8 characters");
+    }
+
+    @Test
+    public void customerSignupClicked_Test_confirmPassword_invalid() {
+        LoginPresenter presenter = LoginPresenter.Initialize(model, singleton);
+        presenter.customerSignupClicked(view, correctCustomerName, correctEmail, correctPassword, incorrectPassword);
+        verify(view).makeToast(view, "Your passwords do not match");
+    }
+
+    @Test
+    public  void customerSignup_Clicked_Test_customer_exist(){
+        LoginPresenter presenter = LoginPresenter.Initialize(model, singleton);
+        ArrayList<IDobj> customers = new ArrayList<>();
+        customers.add(customer);
+        when(model.getAllIDobj(IDobj.CUSTOMER)).thenReturn(customers);
+        when(customer.getEmail()).thenReturn(correctEmail);
+        presenter.customerSignupClicked(view, correctCustomerName, correctEmail, correctPassword, correctPassword);
+        verify(view).makeToast(view, "Customer Already Exists");
+    }
+
+    @Test
+    public void customerSignupClicked_loginSuccess_test() {
+
+        // for customer exists
+        ArrayList<IDobj> customers = new ArrayList<>();
+        when(model.getAllIDobj(IDobj.CUSTOMER)).thenReturn(customers);
+
+        // for new owner
+        when(model.newIDobj(IDobj.CUSTOMER)).thenReturn(customer);
+
+        LoginPresenter presenter = LoginPresenter.Initialize(model, singleton);
+
+        presenter.customerSignupClicked(view, correctCustomerName, correctEmail, correctPassword, correctPassword);
+        //Owner result = presenter.newOwner(correctEmail, correctOwnerName, correctPassword, correctPhoneNumber, correctStoreName);
+
+        //assertEquals(result, owner);
+
+
+        verify(view).emptyTextBoxes();
+        verify(view).signupOrLogin();
+
+        //newCustomer called successfully
+        InOrder order = Mockito.inOrder(singleton, customer);
+        order.verify(customer).setEmail(correctEmail);
+        order.verify(customer).setName(correctCustomerName);
+        order.verify(customer).setPassword(correctPassword);
+        order.verify(customer).save();
+        order.verify(singleton).setCurrentLogin(customer);
     }
 }

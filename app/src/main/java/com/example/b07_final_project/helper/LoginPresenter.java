@@ -248,7 +248,7 @@ public class LoginPresenter implements LoginPresenterInterface {
 
         //check if stings are empty using TextUtils
         //Name
-        if(TextUtils.isEmpty(name)){ //email is empty
+        if(name.equals("")){ //name is empty
             String msg = displayMessage("Please enter Name");
             view.makeToast(view,msg);
             //stop further execution
@@ -256,7 +256,7 @@ public class LoginPresenter implements LoginPresenterInterface {
         }
 
         //Email
-        if(TextUtils.isEmpty(email)){ //email is empty
+        if(email.equals("")){ //email is empty
             String msg = displayMessage("Please enter email");
             view.makeToast(view,msg);
             return;
@@ -267,7 +267,7 @@ public class LoginPresenter implements LoginPresenterInterface {
         }
 
         //Password
-        if(TextUtils.isEmpty(password)){ //password is empty
+        if(password.equals("")){ //password is empty
             String msg = displayMessage("Please enter Password");
             view.makeToast(view,msg);
             return;
@@ -291,10 +291,9 @@ public class LoginPresenter implements LoginPresenterInterface {
             return;
         }
 
-        (view).emptyTextBoxes();
-
-        // also logs you in
         newCustomer(email, name, password);
+
+        (view).emptyTextBoxes();
 
         (view).signupOrLogin();
 
