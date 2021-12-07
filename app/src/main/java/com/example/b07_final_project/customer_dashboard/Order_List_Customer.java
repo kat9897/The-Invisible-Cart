@@ -1,6 +1,5 @@
 package com.example.b07_final_project.customer_dashboard;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
@@ -12,7 +11,7 @@ import android.widget.ListView;
 
 import com.example.b07_final_project.R;
 import com.example.b07_final_project.helper.Customer;
-import com.example.b07_final_project.helper.Order_;
+import com.example.b07_final_project.helper.Order;
 import com.example.b07_final_project.helper.Presenter;
 import com.example.b07_final_project.helper.Singleton;
 
@@ -33,10 +32,10 @@ public class Order_List_Customer extends AppCompatActivity {
 
         Presenter singleton = Singleton.getID();
         Customer customer = singleton.getLoggedInCustomer();
-        ArrayList<Order_> orders = singleton.getOrders(customer);
+        ArrayList<Order> orders = singleton.getOrders(customer);
 
         int j = 1;
-        for (Order_ o : orders) {
+        for (Order o : orders) {
             list.add("Order number " + j);
             j++;
         }

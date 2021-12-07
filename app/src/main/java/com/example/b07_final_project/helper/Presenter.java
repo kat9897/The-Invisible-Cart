@@ -17,33 +17,33 @@ public interface Presenter {
     Customer newCustomer(String email, String name, String password);
     Owner newOwner(String email, String name, String password, String phoneNumber, String storename);
     // newOwner also creates a new store and also logs you in
-    Order_ newOrder(Customer customer, Store store); // changes currentOrder to this order
-    Product_ newProduct(String pdtName, Double pdtPrice, String pdtBrand);
+    Order newOrder(Customer customer, Store store); // changes currentOrder to this order
+    Product newProduct(String pdtName, Double pdtPrice, String pdtBrand);
 
     Owner getLoggedInOwner();
     Customer getLoggedInCustomer();
 
     ArrayList<Store> allStores();
-    ArrayList<Order_> allCustomerOrders(Customer customer);
-    ArrayList<Order_> allCustomerOrders(); // assumes logged in customer
+    ArrayList<Order> allCustomerOrders(Customer customer);
+    ArrayList<Order> allCustomerOrders(); // assumes logged in customer
 
-    void viewOrder(Order_ order);
-    Order_ getViewedOrder();
+    void viewOrder(Order order);
+    Order getViewedOrder();
     Store getViewedStore();
 
-    void setQuantity(Order_ order, Product_ product, int quantity);
-    int getQuantity(Order_ order, Product_ product);
+    void setQuantity(Order order, Product product, int quantity);
+    int getQuantity(Order order, Product product);
 
-    void addProductToOrder(Order_ order, String product_id, int quantity);
+    void addProductToOrder(Order order, String product_id, int quantity);
 
-    Customer getCustomer(Order_ order);
+    Customer getCustomer(Order order);
     Store getStore(Owner owner);
-    Store getStore(Order_ order);
-        ArrayList<Order_> getOrders(Owner owner); // Gets orders for the store, not the owner
-    ArrayList<Order_> getOrders(Customer customer);
-    ArrayList<Product_> getProducts(Order_ order);
-    ArrayList<Product_> getProducts(Owner owner);
-    ArrayList<Product_> getProducts(Store store);
+    Store getStore(Order order);
+        ArrayList<Order> getOrders(Owner owner); // Gets orders for the store, not the owner
+    ArrayList<Order> getOrders(Customer customer);
+    ArrayList<Product> getProducts(Order order);
+    ArrayList<Product> getProducts(Owner owner);
+    ArrayList<Product> getProducts(Store store);
 
     void viewStore(Store store);
 

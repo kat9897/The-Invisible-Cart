@@ -24,7 +24,7 @@ public class Singleton implements Presenter {
 
     private IDobj currentLogin = null;
     private Store currentStore = null;
-    private Order_ currentOrder = null;
+    private Order currentOrder = null;
 
     // methods
 
@@ -177,16 +177,16 @@ public class Singleton implements Presenter {
 
     // Get store for customer order
     @Override
-    public Store getStore(Order_ order) {
+    public Store getStore(Order order) {
         ArrayList<IDobj> owners_store = database.getRelations(order, IDobj.STORE);
         IDobj store = owners_store.get(0);
         return (Store) store;
     }
 
     @Override
-    public Product_ newProduct(String pdtName, Double pdtPrice, String pdtBrand) {
+    public Product newProduct(String pdtName, Double pdtPrice, String pdtBrand) {
 
-        Product_ product = (Product_) database.newIDobj(IDobj.PRODUCT);
+        Product product = (Product) database.newIDobj(IDobj.PRODUCT);
         Store store = getStore(getLoggedInOwner());
         database.addRelation(product, store);
 
@@ -201,9 +201,9 @@ public class Singleton implements Presenter {
     }
 
     @Override
-    public Order_ newOrder(Customer customer, Store store) {
+    public Order newOrder(Customer customer, Store store) {
 
-        Order_ order = (Order_) database.newIDobj(IDobj.ORDER);
+        Order order = (Order) database.newIDobj(IDobj.ORDER);
         database.addRelation(order, customer);
         database.addRelation(order, store);
 
@@ -217,7 +217,7 @@ public class Singleton implements Presenter {
     }
 
     @Override
-    public void viewOrder(Order_ order){
+    public void viewOrder(Order order){
         this.currentOrder = order;
     }
 
@@ -240,7 +240,7 @@ public class Singleton implements Presenter {
     }
 
     @Override
-    public Order_ getViewedOrder(){
+    public Order getViewedOrder(){
         return this.currentOrder;
     }
 
@@ -250,74 +250,74 @@ public class Singleton implements Presenter {
     }
 
     @Override
-    public Customer getCustomer(Order_ order){
+    public Customer getCustomer(Order order){
         ArrayList<IDobj> orders_Customer = database.getRelations(order, IDobj.CUSTOMER);
 
         return (Customer) orders_Customer.get(0);
     }
 
     @Override
-    public ArrayList<Product_> getProducts(Order_ order){
+    public ArrayList<Product> getProducts(Order order){
         ArrayList<IDobj> idobj_list = database.getRelations(order, IDobj.PRODUCT);
 
-        ArrayList<Product_> product_List = new ArrayList<>();
+        ArrayList<Product> product_List = new ArrayList<>();
 
         for(IDobj object : idobj_list){
-            product_List.add((Product_)object);
+            product_List.add((Product)object);
         }
 
         return product_List;
     }
 
     @Override
-    public ArrayList<Product_> getProducts(Owner owner){
+    public ArrayList<Product> getProducts(Owner owner){
         Store store = getStore(owner);
         ArrayList<IDobj> idobj_list = database.getRelations(store, IDobj.PRODUCT);
 
-        ArrayList<Product_> product_List = new ArrayList<>();
+        ArrayList<Product> product_List = new ArrayList<>();
 
         for(IDobj object : idobj_list){
-            product_List.add((Product_)object);
+            product_List.add((Product)object);
         }
 
         return product_List;
     }
 
     @Override
-    public ArrayList<Product_> getProducts(Store store) {
+    public ArrayList<Product> getProducts(Store store) {
         ArrayList<IDobj> idobj_list = database.getRelations(store, IDobj.PRODUCT);
 
-        ArrayList<Product_> product_List = new ArrayList<>();
+        ArrayList<Product> product_List = new ArrayList<>();
 
         for(IDobj object : idobj_list){
-            product_List.add((Product_)object);
+            product_List.add((Product)object);
         }
 
         return product_List;
     }
 
     @Override
-    public ArrayList<Order_> getOrders(Owner owner){
+    public ArrayList<Order> getOrders(Owner owner){
         Store store = getStore(owner);
         ArrayList<IDobj> idobj_list = database.getRelations(store, IDobj.ORDER);
 
-        ArrayList<Order_> order_List = new ArrayList<>();
+        ArrayList<Order> order_List = new ArrayList<>();
 
         for(IDobj object : idobj_list){
-            order_List.add((Order_)object);
+            order_List.add((Order)object);
         }
 
         return order_List;
     }
 
     @Override
-    public ArrayList<Order_> getOrders(Customer customer) {
+    public ArrayList<Order> getOrders(Customer customer) {
         ArrayList<IDobj> idobj_list = database.getRelations(customer, IDobj.ORDER);
 
-        ArrayList<Order_> order_List = new ArrayList<>();
+        ArrayList<Order> order_List = new ArrayList<>();
 
         for(IDobj object : idobj_list){
-            order_List.add((Order_)object);
+            order_List.add((Order)object);
         }
 
         return order_List;
@@ -325,13 +325,13 @@ public class Singleton implements Presenter {
 
 
     @Override
-    public ArrayList<Order_> allCustomerOrders(Customer customer) {
+    public ArrayList<Order> allCustomerOrders(Customer customer) {
 
         ArrayList<IDobj> orders = database.getRelations(customer, IDobj.ORDER);
-        ArrayList<Order_> output = new ArrayList<>();
+        ArrayList<Order> output = new ArrayList<>();
 
         for (IDobj o : orders){
-            Order_ order = (Order_) o;
+            Order order = (Order) o;
             output.add(order);
         }
 
@@ -339,7 +339,7 @@ public class Singleton implements Presenter {
     }
 
     @Override
-    public ArrayList<Order_> allCustomerOrders() { // assumes logged in customer
+    public ArrayList<Order> allCustomerOrders() { // assumes logged in customer
 
         if (this.currentLogin == null)
             return null;
@@ -352,14 +352,14 @@ public class Singleton implements Presenter {
     }
 
     @Override
-    public void setQuantity(Order_ order, Product_ product, int quantity) {
+    public void setQuantity(Order order, Product product, int quantity) {
 
         database.addRelation(order, product);
         database.setRelationContext(order, product, Integer.toString(quantity));
     }
 
     @Override
-    public int getQuantity(Order_ order, Product_ product) {
+    public int getQuantity(Order order, Product product) {
         String output =  database.getRelationContext(order,  product);
         if(output == null ){
             return 0;
@@ -369,8 +369,8 @@ public class Singleton implements Presenter {
     }
 
     @Override
-    public void addProductToOrder(Order_ order, String product_id, int quantity) {
-        Product_ product = new Product_(product_id);
+    public void addProductToOrder(Order order, String product_id, int quantity) {
+        Product product = new Product(product_id);
         database.addRelation(order, product);
         database.setRelationContext(order, product, Integer.toString(quantity));
     }

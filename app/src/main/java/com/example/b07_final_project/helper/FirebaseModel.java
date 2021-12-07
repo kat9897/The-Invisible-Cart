@@ -110,13 +110,13 @@ public class FirebaseModel implements Model{
 
         switch (type){
             case IDobj.ORDER:
-                obj = new Order_(key);
+                obj = new Order(key);
             break;
             case IDobj.OWNER:
                 obj = new Owner(key);
             break;
             case IDobj.PRODUCT:
-                obj = new Product_(key);
+                obj = new Product(key);
             break;
             case IDobj.STORE:
                 obj = new Store(key);
@@ -137,7 +137,7 @@ public class FirebaseModel implements Model{
 
         switch (obj.getType()) {
             case IDobj.ORDER:
-                Order_ order = (Order_) obj;
+                Order order = (Order) obj;
                 refField = ref.child("Status");
                 refField.setValue(order.getStatus());
                 break;
@@ -153,7 +153,7 @@ public class FirebaseModel implements Model{
                 refField.setValue(owner.getPhoneNumber());
                 break;
             case IDobj.PRODUCT:
-                Product_ product = (Product_) obj;
+                Product product = (Product) obj;
                 refField = ref.child("Name");
                 refField.setValue(product.getName());
                 refField = ref.child("Brand");
@@ -196,7 +196,7 @@ public class FirebaseModel implements Model{
 
         switch (type) {
             case IDobj.ORDER:
-                Order_ order = new Order_(ID);
+                Order order = new Order(ID);
                 obj = order;
                 snapField = snap.child("Status");
                 Long tempLong1 = (long) snapField.getValue();
@@ -215,7 +215,7 @@ public class FirebaseModel implements Model{
                 owner.setPhoneNumber((String) snapField.getValue());
                 break;
             case IDobj.PRODUCT:
-                Product_ product = new Product_(ID);
+                Product product = new Product(ID);
                 obj = product;
                 snapField = snap.child("Name");
                 product.setName((String) snapField.getValue());
