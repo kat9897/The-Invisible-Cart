@@ -12,9 +12,9 @@ import android.widget.TextView;
 import com.example.b07_final_project.helper.CustomListAdapter;
 import com.example.b07_final_project.R;
 import com.example.b07_final_project.helper.Customer;
-import com.example.b07_final_project.helper.Order_;
+import com.example.b07_final_project.helper.Order;
 import com.example.b07_final_project.helper.Presenter;
-import com.example.b07_final_project.helper.Product_;
+import com.example.b07_final_project.helper.Product;
 import com.example.b07_final_project.helper.Product_Card;
 import com.example.b07_final_project.helper.Singleton;
 
@@ -38,9 +38,9 @@ public class OrderPage_Owner extends AppCompatActivity {
         getSupportActionBar().hide();
         ListView listView = (ListView) findViewById(R.id.productListView);
 
-        Order_ order = singleton.getViewedOrder();
+        Order order = singleton.getViewedOrder();
         Customer customer = singleton.getCustomer(order);
-        ArrayList<Product_> productsInOrder = singleton.getProducts(order);
+        ArrayList<Product> productsInOrder = singleton.getProducts(order);
 
         displayCustomerName = findViewById(R.id.custName);
         displayCustomerName.setText(customer.getName());
@@ -50,7 +50,7 @@ public class OrderPage_Owner extends AppCompatActivity {
 
         ArrayList<Product_Card> productList = new ArrayList<>();
 
-        for (Product_ product : productsInOrder) {
+        for (Product product : productsInOrder) {
 
             String name = product.getName();
             String brand = product.getBrand();
@@ -81,14 +81,14 @@ public class OrderPage_Owner extends AppCompatActivity {
                 button.setSelected(!button.isSelected()); // Button colour changes from Blue to Green
                 button.setSelected(true); // Button stays Green
                 // Status becomes Ready for Pick Up
-                order.setStatus(Order_.COMPLETE);
+                order.setStatus(Order.COMPLETE);
                 order.save();
             }
         });
         // Button needs to stay COMPLETED + Green if previously clicked when going back to this Order Page
         String orderStatus = "COMPLETE";
         int orderStatusNum = order.getStatus();
-        if (orderStatusNum == Order_.COMPLETE){
+        if (orderStatusNum == Order.COMPLETE){
             btnComplete.setEnabled(false);
             orderStatus = "COMPLETED";
             btnComplete.setSelected(!btnComplete.isSelected());

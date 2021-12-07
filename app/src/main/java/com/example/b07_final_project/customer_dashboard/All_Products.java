@@ -15,9 +15,9 @@ import android.widget.Toast;
 import com.example.b07_final_project.R;
 import com.example.b07_final_project.helper.CustomListAdapter2;
 import com.example.b07_final_project.helper.Customer;
-import com.example.b07_final_project.helper.Order_;
+import com.example.b07_final_project.helper.Order;
 import com.example.b07_final_project.helper.Presenter;
-import com.example.b07_final_project.helper.Product_;
+import com.example.b07_final_project.helper.Product;
 import com.example.b07_final_project.helper.Product_Card;
 import com.example.b07_final_project.helper.Singleton;
 import com.example.b07_final_project.helper.Store;
@@ -35,7 +35,7 @@ public class All_Products extends AppCompatActivity {
     private ArrayList<Product_Card> productList;
     private Customer customer;
     private Store store;
-    private ArrayList<Product_> productListObjects;
+    private ArrayList<Product> productListObjects;
     private Presenter singleton;
     private ListView listView;
 
@@ -63,7 +63,7 @@ public class All_Products extends AppCompatActivity {
         nameOfStore.setText(store.getName());
 
         // Add products to product list for store
-        for (Product_ p : productListObjects) {
+        for (Product p : productListObjects) {
 
             String name = p.getName();
             String brand = p.getBrand();
@@ -165,7 +165,7 @@ public class All_Products extends AppCompatActivity {
                 totalText = findViewById(R.id.total);
                 totalText.setText("$" + priceFormat.format(total));
 
-                Order_ order = singleton.newOrder(customer, store);
+                Order order = singleton.newOrder(customer, store);
                 for (Product_Card pc : productList)
                     // ignore any with quantity 0
                     if (!pc.getQuantity().equals("0") ) {

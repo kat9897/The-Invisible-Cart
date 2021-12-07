@@ -9,7 +9,7 @@ import android.widget.ListView;
 import com.example.b07_final_project.helper.CustomListAdapter1;
 import com.example.b07_final_project.helper.Owner;
 import com.example.b07_final_project.helper.Presenter;
-import com.example.b07_final_project.helper.Product_;
+import com.example.b07_final_project.helper.Product;
 import com.example.b07_final_project.helper.Product_Card;
 import com.example.b07_final_project.R;
 import com.example.b07_final_project.helper.Singleton;
@@ -31,11 +31,11 @@ public class My_Products extends AppCompatActivity {
 
         Owner owner = singleton.getLoggedInOwner();
 
-        ArrayList<Product_> productsInStore = singleton.getProducts(owner);
+        ArrayList<Product> productsInStore = singleton.getProducts(owner);
 
         ArrayList<Product_Card> productList = new ArrayList<>();
 
-        for (Product_ product : productsInStore) {
+        for (Product product : productsInStore) {
 
             String name = product.getName();
             String brand = product.getBrand();

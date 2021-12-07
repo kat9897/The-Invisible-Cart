@@ -10,7 +10,7 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
 import com.example.b07_final_project.R;
-import com.example.b07_final_project.helper.Order_;
+import com.example.b07_final_project.helper.Order;
 import com.example.b07_final_project.helper.Owner;
 import com.example.b07_final_project.helper.Presenter;
 import com.example.b07_final_project.helper.Singleton;
@@ -35,7 +35,7 @@ public class Order_List_Owner extends AppCompatActivity {
         ArrayList<String> orderListStrings = new ArrayList<>();
 
         Owner owner = singleton.getLoggedInOwner();
-        ArrayList<Order_> orderListObjects = singleton.getOrders(owner);
+        ArrayList<Order> orderListObjects = singleton.getOrders(owner);
 
 
         for (int i = 1; i <= orderListObjects.size(); i++)

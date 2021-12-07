@@ -12,9 +12,9 @@ import com.example.b07_final_project.R;
 import com.example.b07_final_project.helper.CustomListAdapter;
 import com.example.b07_final_project.helper.CustomListAdapter2;
 import com.example.b07_final_project.helper.Customer;
-import com.example.b07_final_project.helper.Order_;
+import com.example.b07_final_project.helper.Order;
 import com.example.b07_final_project.helper.Presenter;
-import com.example.b07_final_project.helper.Product_;
+import com.example.b07_final_project.helper.Product;
 import com.example.b07_final_project.helper.Product_Card;
 import com.example.b07_final_project.helper.Singleton;
 import com.example.b07_final_project.helper.Store;
@@ -32,9 +32,9 @@ public class OrderPage_Customer extends AppCompatActivity {
 
     private Store store;
     private Presenter singleton;
-    private Order_ order;
+    private Order order;
     private Customer customer;
-    private ArrayList<Product_> productsInOrder;
+    private ArrayList<Product> productsInOrder;
 
     private static final DecimalFormat priceFormat = new DecimalFormat("0.00");
     private CustomListAdapter2 dataAdapter = null;
@@ -63,7 +63,7 @@ public class OrderPage_Customer extends AppCompatActivity {
         // Display Status
         int orderStatusNum = order.getStatus();
         orderStatus = "Order In Process";
-        if (orderStatusNum == Order_.COMPLETE){
+        if (orderStatusNum == Order.COMPLETE){
             orderStatus = "Ready for pick up";
         }
         statusBtn = findViewById(R.id.statusOrder);
@@ -74,7 +74,7 @@ public class OrderPage_Customer extends AppCompatActivity {
 
         ArrayList<Product_Card> productList = new ArrayList<>();
         
-        for (Product_ product : productsInOrder) {
+        for (Product product : productsInOrder) {
 
             String name = product.getName();
             String brand = product.getBrand();

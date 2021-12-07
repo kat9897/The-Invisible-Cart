@@ -1,34 +1,42 @@
 package com.example.b07_final_project.helper;
 
-public class Product {
-    private int id;
-    private String name;
-    private double price;
-    private String brand;
+public class Product extends IDobj {
 
-    public Product() {
-    }
-    public Product(int id, String name, double price, String brand) {
-        this.id = id;
-        this.name = name;
-        this.price = price;
-        this.brand = brand;
+	private String name;
+	private String brand;
+	private double price;
 
-    }
-    public int getId() { return id; }
-    public String getName() { return name; }
-    public double getPrice() { return price; }
-    public String getBrand() { return brand; }
+	public String getName() {
+		return name;
+	}
 
-    public void setId(int id) { this.id = id; }
-    public void setName(String name) { this.name = name; }
-    public void setPrice(double price) { this.price = price; }
-    public void setBrand(String brand) { this.brand = brand; }
+	public void setName(String name) {
+		this.name = name;
+	}
 
-    @Override
-    public String toString() {
-        return "Product id: " + id + ", name: " + name + ", price: " + price +
-                ", and brand: " + brand;
-    }
+	public String getBrand() {
+		return brand;
+	}
+
+	public void setBrand(String brand) {
+		this.brand = brand;
+	}
+
+	public double getPrice() {
+		return price;
+	}
+
+	public void setPrice(double price) {
+		this.price = price;
+	}
+
+	@Override
+	public int getType() {
+		return IDobj.PRODUCT;
+	}
+
+	public Product(String ID) {
+		super(ID);
+	}
 
 }

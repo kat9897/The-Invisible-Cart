@@ -12,7 +12,7 @@ import android.widget.Toast;
 
 import com.example.b07_final_project.helper.Presenter;
 import com.example.b07_final_project.R;
-import com.example.b07_final_project.helper.Product_;
+import com.example.b07_final_project.helper.Product;
 import com.example.b07_final_project.helper.Singleton;
 
 public class Add_New_Product extends AppCompatActivity {
@@ -66,7 +66,7 @@ public class Add_New_Product extends AppCompatActivity {
     }
     public void addNewProduct(String pdtName, Double pdtPrice, String pdtBrand) {
 
-        Product_ product = singleton.newProduct(pdtName, pdtPrice, pdtBrand);
+        Product product = singleton.newProduct(pdtName, pdtPrice, pdtBrand);
 
         Intent intent = new Intent(Add_New_Product.this, My_Products.class);
         Toast.makeText(Add_New_Product.this, "Successfully added new product: " + pdtName, Toast.LENGTH_SHORT).show();
