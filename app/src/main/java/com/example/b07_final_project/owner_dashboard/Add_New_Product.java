@@ -58,11 +58,6 @@ public class Add_New_Product extends AppCompatActivity {
                     Toast.makeText(Add_New_Product.this, "Please enter brand", Toast.LENGTH_SHORT).show();
                     return;
                 }
-                // Check if price is too high
-                if(pdtPrice > 999.99) {
-                    Toast.makeText(Add_New_Product.this, "Price is wayyy too high...", Toast.LENGTH_SHORT).show();
-                    return;
-                }
 
                 addNewProduct(pdtName, pdtPrice, pdtBrand);
             }
